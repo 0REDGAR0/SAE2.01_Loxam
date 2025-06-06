@@ -20,10 +20,5 @@ namespace SAE2._01_Loxam
         {
             InitializeComponent();
         }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
