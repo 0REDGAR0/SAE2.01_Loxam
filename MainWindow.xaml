@@ -9,5 +9,11 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid />
+    <Grid>
+        <RadioButton
+            Margin="249,239,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="RadioButton" />
+    </Grid>
 </Window>
