@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
     Width="1280"
-    Height="832"
+    Height="830"
     mc:Ignorable="d">
     <Grid>
         <!--  Bandeau rouge haut  -->
