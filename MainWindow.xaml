@@ -41,7 +41,7 @@
                 <MenuItem
                     FontSize="22"
                     Foreground="White"
-                    Header="MAINTENANCE" />
+                    Header="MAINTENANCE"  />
             </Menu>
 
             <!--  Chistophe login  -->
