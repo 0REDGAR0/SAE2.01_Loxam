@@ -11,10 +11,14 @@
     mc:Ignorable="d">
     <Grid>
         <RadioButton
-            Margin="477,202,0,0"
+            Margin="525,153,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Content="RadioButton" />
-
+        <RadioButton
+            Margin="207,160,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="RadioButton" />
     </Grid>
 </Window>
