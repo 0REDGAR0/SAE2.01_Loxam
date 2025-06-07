@@ -99,9 +99,8 @@
                     FontWeight="Bold"
                     Text="Rechercher du matériel" />
 
-                <UserControls:UCFicheClients />
+                <UserControls:UCFicheClients Margin="30,0,30,0" />
 
-                <!--  Ajoute ici les ComboBox et boutons de recherche  -->
             </StackPanel>
         </Grid>
     </Grid>

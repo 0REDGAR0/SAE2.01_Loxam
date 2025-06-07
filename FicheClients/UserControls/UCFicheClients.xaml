@@ -5,12 +5,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="686"
+    d:DesignWidth="1040"
     mc:Ignorable="d">
 
     <!--  CONTENEUR PRINCIPAL  -->
-    <StackPanel>
+    <StackPanel >
 
         <!--  Première section  -->
         <Grid>
@@ -48,23 +48,23 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <Label x:Name="labNom" Content="Nom" />
-                <TextBox x:Name="txtNom" />
+                <TextBox x:Name="txtNom" Margin="5,0,242,0" Text="{Binding NomClient, ValidatesOnExceptions=True}"/>
                 <Label x:Name="labPrenom" Content="Prénom" />
-                <TextBox x:Name="txtPrenom" />
+                <TextBox x:Name="txtPrenom" Margin="5,0,242,0" />
                 <Label x:Name="labTelMail" Content="Tel/Mail" />
-                <TextBox x:Name="txtTelMail" />
+                <TextBox x:Name="txtTelMail" Margin="5,0,242,0" />
                 <Label x:Name="labAdresse" Content="Adresse" />
-                <TextBox x:Name="txtAdress" Height="16" />
+                <TextBox x:Name="txtAdress" Height="16" Margin="5,0,242,0" />
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Label x:Name="labNumReservation" Content="N° de Réservation" />
-                <TextBox x:Name="txtNumReservation" />
+                <TextBox x:Name="txtNumReservation" Width="252" Margin="0,0,277,0" />
                 <Label x:Name="labMateriel" Content="Matériel" />
-                <TextBox x:Name="txtMateriel" />
+                <TextBox x:Name="txtMateriel" Margin="0,0,277,0" Width="253" />
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8*" />
-                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="15*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="23" />
@@ -79,17 +79,36 @@
                         x:Name="txtDuDate"
                         Grid.Row="1"
                         Grid.Column="0"
-                        Height="17.96" />
+                        Height="17.96" Margin="5,0,60,0" />
                     <TextBox
                         x:Name="txtAuDate"
                         Grid.Row="1"
                         Grid.Column="1"
-                        Height="17.96" />
+                        Height="17.96" Margin="5,0,220,0" />
                 </Grid>
                 <Label Height="23" Content="Statut" />
-                <TextBox x:Name="txtStatut" />
+                <TextBox x:Name="txtStatut" Margin="5,0,311,0" />
+                <Grid>
+                    <Button FontSize="12" FontWeight="Bold" Width="62" Margin="0,20,468,0">
+                        <Button.Content>
+                            <TextBlock>
+                                <Run FontFamily="Segoe MDL2 Assets" Text="&#xE722;"/>
+                                <Run FontFamily="Segoe UI" Text="Voir"/>
+                            </TextBlock>
+                        </Button.Content>
+                    </Button>
+                    <Button FontSize="12" FontWeight="Bold" Width="62" Margin="100,20,138,0">
+                        <Button.Content>
+                            <TextBlock>
+                                <Run FontFamily="Segoe MDL2 Assets" Text="&#xE722;"/>
+                                <Run FontFamily="Segoe UI" Text="Voir"/>
+                            </TextBlock>
+                        </Button.Content>
+                    </Button>
+                </Grid>
             </StackPanel>
         </Grid>
+
 
     </StackPanel>
 </UserControl>
