@@ -1,0 +1,103 @@
+﻿<Window x:Class="SAE2._01_Loxam.MaterielEnReserve"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LOXAM - Rechercher une réservation" Height="900" Width="1400" Background="White">
+
+    <Grid>
+
+        <!-- Bandeau rouge en haut -->
+        <Grid Height="100" VerticalAlignment="Top" Background="Red">
+            <Label Content="LOXAM" FontSize="36" FontWeight="Bold" Foreground="White" Margin="20,20,0,0" HorizontalAlignment="Left"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="RETOUR" Foreground="White" FontSize="22" Margin="40,0"/>
+                <TextBlock Text="RESERVATION" Foreground="White" FontSize="22" FontWeight="Bold" Margin="40,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center">
+                <TextBlock Text="Christophe Colin " Foreground="White" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Menu vertical gauche -->
+        <StackPanel Width="200" Background="#F0F0F0" Margin="0,100,0,0" HorizontalAlignment="Left">
+            <Button Content="🔍 Recherche matériel" Margin="10" Height="50" FontSize="16"/>
+            <Button Content="👤 Fiche client" Margin="10" Height="50" FontSize="16"/>
+            <Button Content="🔧 Réparation" Margin="10" Height="50" FontSize="16"/>
+        </StackPanel>
+
+        <!-- Contenu principal -->
+        <StackPanel Margin="220,120,20,20">
+
+            <!-- Titre -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
+                <Button Content="⬅" Width="50" Height="50" FontSize="20" Margin="0,0,10,0"/>
+                <TextBlock Text="Rechercher une réservation" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Zone de recherche -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+
+                <!-- Champ recherche -->
+                <Border Background="#F5F5F5" CornerRadius="25" Width="400" Height="50" Margin="0,0,10,0">
+                    <DockPanel LastChildFill="True">
+                        <TextBlock Text="🔍" FontSize="22" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                        <TextBox Width="350" Background="Transparent" BorderThickness="0" FontSize="16" 
+                             VerticalContentAlignment="Center"
+                             Text="{Binding RechercheTexte}" 
+                             Foreground="#999999" 
+                             TextAlignment="Left" 
+                             TextWrapping="NoWrap"
+                             />
+                    </DockPanel>
+                </Border>
+
+
+                <!-- Bouton filtre -->
+                <Grid>
+                    <Button Content="⚙" Width="50" Height="50" FontSize="22"/>
+                    <Popup Placement="Bottom" IsOpen="{Binding IsFiltreOuvert}">
+                        <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Background="White">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="• trier par n° de client" Margin="5"/>
+                                <TextBlock Text="• trier par le nom du client" Margin="5"/>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </Grid>
+            </StackPanel>
+
+            <!-- Tableau -->
+            <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="10" Padding="10">
+                <DataGrid x:Name="DataGridReservations"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          RowHeight="50"
+                          HeadersVisibility="Column"
+                          ColumnHeaderHeight="50"
+                          FontSize="16"
+                          ItemsSource="{Binding ListeReservations}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Matériel" Binding="{Binding Materiel}" Width="200"/>
+                        <DataGridTextColumn Header="Lieu" Binding="{Binding Lieu}" Width="150"/>
+                        <DataGridTextColumn Header="Du" Binding="{Binding DateDebut}" Width="150"/>
+                        <DataGridTextColumn Header="Au" Binding="{Binding DateFin}" Width="150"/>
+                        <DataGridTextColumn Header="Statut" Binding="{Binding Statut}" Width="150"/>
+
+                        <DataGridTemplateColumn Header="" Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Valider location" Width="130" Height="35" Margin="5" Command="{Binding CommandValider}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Window>
