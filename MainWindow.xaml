@@ -9,6 +9,7 @@
     Title="MainWindow"
     Width="1280"
     Height="830"
+    Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -54,7 +55,7 @@
                     VerticalAlignment="Center"
                     FontSize="16"
                     Foreground="White"
-                    Text="Christophe Colin " />
+                    Text="Inconnu " />
                 <TextBlock
                     VerticalAlignment="Center"
                     FontFamily="Segoe MDL2 Assets"

@@ -21,6 +21,8 @@ namespace SAE2._01_Loxam
             InitializeComponent();
         }
 
+
+
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
             SPcentral.Children.Clear();
@@ -31,6 +33,12 @@ namespace SAE2._01_Loxam
         {
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new Bienvenue());
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Connexion connexion = new Connexion();
+            connexion.Show();
         }
     }
 }
