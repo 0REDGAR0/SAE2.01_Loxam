@@ -163,12 +163,13 @@
 
         <!--  Bouton final en dessous  -->
         <Button
+            x:Name="butCréerFicheClient"
             Width="300"
             Height="60"
             Margin="0,30,0,0"
             HorizontalAlignment="Right"
             Background="Red"
-            Command="{Binding CommandCreer}"
+            Click="butCréerFicheClient_Click"
             Content="Créer la fiche client"
             FontSize="16"
             FontWeight="Bold"

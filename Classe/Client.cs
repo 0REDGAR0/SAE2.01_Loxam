@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,15 @@ namespace SAE2._01_Loxam
         public Client(int numClient, string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
         {
             this.NumClient = numClient;
+            this.NomClient = nomClient;
+            this.PrenomClient = prenomClient;
+            this.AdresseClient = adresseClient;
+            this.MailClient = mailClient;
+            this.NumeroTelClient = numeroTelClient;
+        }
+
+        public Client(string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
+        {
             this.NomClient = nomClient;
             this.PrenomClient = prenomClient;
             this.AdresseClient = adresseClient;
@@ -124,17 +135,13 @@ namespace SAE2._01_Loxam
 
             set
             {
-                if (!(Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")))
+                if (value.Length > 60 || !(Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")))
                 {
                     throw new ArgumentException($"Le mail : {value} n'est pas une adresse valide");
                 }
                 if (String.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Le mail doit être renseigné");
-                }
-                if (value.Length > 60)
-                {
-                    throw new ArgumentException("doit avoir moins de 60 caractères");
                 }
                 this.mailClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MailClient)));
@@ -150,17 +157,13 @@ namespace SAE2._01_Loxam
 
             set
             {
-                if (!(Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")))
+                if (value.Length > 10 || !(Regex.IsMatch(value, @"^(0\d{9}|\+33\d{9})$")))
                 {
                     throw new ArgumentException($"Le numéro de téléphone : {value} n'est pas un numéro valide");
                 }
                 if (String.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Le numéro de téléphone doit être renseigné");
-                }
-                if (value.Length > 10)
-                {
-                    throw new ArgumentException("doit avoir moins de 10 caractères");
                 }
                 this.numeroTelClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NumeroTelClient)));
@@ -184,17 +187,40 @@ namespace SAE2._01_Loxam
 
         int ICrud<Client>.Create()
         {
-            throw new NotImplementedException();
+            int nb = 0;
+            using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient, prenomclient, adresseclient, mailclient, numerotelclient) values (@numClient, @nomClient, @prenomClient, @adresseClient, @mailClient, @numeroTelClient) RETURNING numClient"))
+            {
+                cmdInsert.Parameters.AddWithValue("nomclient", this.NomClient);
+                cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
+                cmdInsert.Parameters.AddWithValue("adresseclient", this.AdresseClient);
+                cmdInsert.Parameters.AddWithValue("mailclient", this.MailClient);
+                cmdInsert.Parameters.AddWithValue("numerotelclient", this.NumeroTelClient);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
+            }
+            this.NumClient = nb;
+            return nb;
         }
 
         int ICrud<Client>.Delete()
         {
-            throw new NotImplementedException();
+            using (var cmdUpdate = new NpgsqlCommand("delete from client  where numclient =@numClient;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("numclient", this.NumClient);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
         }
 
         List<Client> ICrud<Client>.FindAll()
         {
-            throw new NotImplementedException();
+            List<Client> lesClients = new List<Client>();
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from client ;"))
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                    lesClients.Add(new Client((Int32)dr["numClient"], (String)dr["nomclient"],
+                   (String)dr["prenomClient"], (String)dr["adresseClient"], (String)dr["mailClient"], (String)dr["numeroTelClient"]));
+            }
+            return lesClients;
         }
 
         List<Client> ICrud<Client>.FindBySelection(string criteres)
@@ -204,12 +230,31 @@ namespace SAE2._01_Loxam
 
         void ICrud<Client>.Read()
         {
-            throw new NotImplementedException();
+            using (var cmdSelect = new NpgsqlCommand("select * from  client  where numclient =@numClient;"))
+            {
+                cmdSelect.Parameters.AddWithValue("numclient", this.NumClient);
+
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                this.NomClient = (String)dt.Rows[0]["nomclient"];
+                this.PrenomClient = (String)dt.Rows[0]["prenomclient"];
+                this.AdresseClient = (String)dt.Rows[0]["adresseclient"];
+                this.MailClient = (String)dt.Rows[0]["mailclient"];
+                this.NumeroTelClient = (String)dt.Rows[0]["numerotelclient"];
+            }
         }
 
         int ICrud<Client>.Update()
         {
-            throw new NotImplementedException();
+            using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomClient ,  prenomclient =@prenomClient, adresseclient =@adresseClient, mailclient =@mailClient, numerotelclient =@numeroTelClient where numclient =@numClient;"))
+            {
+                cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient);
+                cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient);
+                cmdUpdate.Parameters.AddWithValue("adresseclient", this.AdresseClient);
+                cmdUpdate.Parameters.AddWithValue("mailclient", this.MailClient);
+                cmdUpdate.Parameters.AddWithValue("numerotelclient", this.NumeroTelClient);
+                cmdUpdate.Parameters.AddWithValue("numclient", this.NumClient);
+                return DataAccess.Instance.ExecuteSet(cmdUpdate);
+            }
         }
 
         public static bool operator ==(Client? left, Client? right)

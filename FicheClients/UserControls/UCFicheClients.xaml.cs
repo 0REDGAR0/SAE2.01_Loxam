@@ -24,5 +24,10 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
         }
+
+        private void butCréerFicheClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
