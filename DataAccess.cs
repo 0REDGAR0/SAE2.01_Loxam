@@ -11,13 +11,13 @@ namespace SAE2._01_Loxam
     public class DataAccess
     {
         private static readonly DataAccess instance = new DataAccess();
-        private readonly string connectionString = "Host=srv-peda-new;" +
-            "Port=5433;" +
-            "Username=beduneye;" +
-            "Password=WVTvXG;" +
-            "Database=sae_loxam;" +
-            "Options='-c " +
-            "search_path=loxam'";
+        private readonly string connectionString = $"Host=srv-peda-new;" +
+            $"Port=5433;" +
+            $"Username=beduneye;" +
+            $"Password=WVTvXG;" +
+            $"Database=sae_loxam;" +
+            $"Options='-c " +
+            $"search_path=loxam'";
         private NpgsqlConnection connection;
 
         public static DataAccess Instance

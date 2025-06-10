@@ -60,7 +60,8 @@ namespace SAE2._01_Loxam
 
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {
-
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new UCEffectuerRetour());
         }
 
         private void butReservation_Click(object sender, RoutedEventArgs e)
