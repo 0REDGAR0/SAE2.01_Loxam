@@ -1,6 +1,4 @@
-﻿using SAE2._01_Loxam.Classe;
-using SAE2._01_Loxam.FicheClients.UserControls;
-using System.Text;
+﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,6 +23,8 @@ namespace SAE2._01_Loxam
             ChargeData();
             InitializeComponent();
         }
+
+        
 
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {

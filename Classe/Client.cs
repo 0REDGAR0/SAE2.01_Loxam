@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
@@ -19,12 +20,13 @@ namespace SAE2._01_Loxam
         private string adresseClient;
         private string mailClient;
         private string numeroTelClient;
+        private ObservableCollection<Client> lesClients;
 
         public Client()
         {
         }
 
-        public Client(int numClient, string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
+        public Client(int numClient, string nomClient, string prenomClient, string mailClient, string numeroTelClient, string adresseClient)
         {
             this.NumClient = numClient;
             this.NomClient = nomClient;
@@ -34,13 +36,19 @@ namespace SAE2._01_Loxam
             this.NumeroTelClient = numeroTelClient;
         }
 
-        public Client(string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
+        public Client(string nomClient, string prenomClient, string mailClient, string numeroTelClient, string adresseClient)
         {
             this.NomClient = nomClient;
             this.PrenomClient = prenomClient;
             this.AdresseClient = adresseClient;
             this.MailClient = mailClient;
             this.NumeroTelClient = numeroTelClient;
+        }
+
+        public Client(string nomClient)
+        {
+            this.NomClient = nomClient;
+            this.LesClients = new ObservableCollection<Client>(FindAll());
         }
 
         public int NumClient
@@ -170,6 +178,19 @@ namespace SAE2._01_Loxam
             }
         }
 
+        public ObservableCollection<Client> LesClients
+        {
+            get
+            {
+                return this.lesClients;
+            }
+
+            set
+            {
+                this.lesClients = value;
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public override bool Equals(object? obj)
@@ -210,7 +231,7 @@ namespace SAE2._01_Loxam
             }
         }
 
-        List<Client> ICrud<Client>.FindAll()
+        List<Client> FindAll()
         {
             List<Client> lesClients = new List<Client>();
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select * from client ;"))
@@ -255,6 +276,11 @@ namespace SAE2._01_Loxam
                 cmdUpdate.Parameters.AddWithValue("numclient", this.NumClient);
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }
+        }
+
+        List<Client> ICrud<Client>.FindAll()
+        {
+            throw new NotImplementedException();
         }
 
         public static bool operator ==(Client? left, Client? right)
