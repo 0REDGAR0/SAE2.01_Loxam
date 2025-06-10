@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="SAE2._01_Loxam.Bienvenue"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SAE2._01_Loxam"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="686"
+    d:DesignWidth="1040"
+    mc:Ignorable="d">
+    <Grid>
+        <Label
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Background="#00000000"
+            Content="Bienvenue sur l'application de LOXAM"
+            FontSize="48"
+            FontWeight="Bold"
+            Foreground="Red" />
+
+    </Grid>
+</UserControl>

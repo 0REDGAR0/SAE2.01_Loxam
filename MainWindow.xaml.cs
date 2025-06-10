@@ -26,5 +26,11 @@ namespace SAE2._01_Loxam
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new FicheClients.UserControls.UCFicheClients());
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new Bienvenue());
+        }
     }
 }
