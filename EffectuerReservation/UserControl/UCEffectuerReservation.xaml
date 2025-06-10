@@ -50,84 +50,17 @@
 
                 <!--  DataGrid  -->
                 <DataGrid
-                    x:Name="DataGridDisponibilites"
+                    x:Name="DataGridResa"
                     Margin="0,10,0,0"
-                    AutoGenerateColumns="False"
+                    AutoGenerateColumns="True"
                     CanUserAddRows="False"
                     ColumnHeaderHeight="50"
                     FontSize="16"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    ItemsSource="{Binding ListeDisponibilites}"
+                    ItemsSource="{Binding LesReservations}"
                     RowHeight="50">
 
-                    <DataGrid.Columns>
-
-                        <DataGridTextColumn
-                            Width="200"
-                            Binding="{Binding Materiel}"
-                            Header="Matériel" />
-                        <DataGridTextColumn
-                            Width="150"
-                            Binding="{Binding Lieu}"
-                            Header="Lieu" />
-                        <DataGridTextColumn
-                            Width="150"
-                            Binding="{Binding DateDebut}"
-                            Header="Du" />
-                        <DataGridTextColumn
-                            Width="150"
-                            Binding="{Binding DateFin}"
-                            Header="Au" />
-
-                        <!--  Etat avec bindings  -->
-                        <DataGridTemplateColumn Width="150" Header="État">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border
-                                        Padding="5"
-                                        Background="{Binding CouleurEtat}"
-                                        CornerRadius="5">
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            FontWeight="SemiBold"
-                                            Text="{Binding Etat}" />
-                                    </Border>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--  Voir détails  -->
-                        <DataGridTemplateColumn Width="120" Header="">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                        Width="100"
-                                        Height="30"
-                                        Margin="5"
-                                        Command="{Binding CommandVoirDetails}"
-                                        Content="👁 Voir détails" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <!--  Réserver  -->
-                        <DataGridTemplateColumn Width="120" Header="">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                        Width="100"
-                                        Height="30"
-                                        Margin="5"
-                                        Background="Red"
-                                        Command="{Binding CommandReserver}"
-                                        Content="RÉSERVER"
-                                        Foreground="White" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                    </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </Border>

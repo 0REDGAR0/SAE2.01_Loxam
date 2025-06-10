@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using SAE2._01_Loxam.Classe;
+using SAE2._01_Loxam.FicheClients.UserControls;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,20 +18,21 @@ namespace SAE2._01_Loxam
     /// </summary>
     public partial class MainWindow : Window
     {
+        public DataGridLists GestionResa { get; set; }
+        
         public MainWindow()
         {
+            ChargeData();
             InitializeComponent();
         }
-
-
 
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new FicheClients.UserControls.UCFicheClients());
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+       
+        private void butLoxam_Click(object sender, RoutedEventArgs e)
         {
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new Bienvenue());
@@ -39,6 +42,31 @@ namespace SAE2._01_Loxam
         {
             Connexion connexion = new Connexion();
             connexion.Show();
+        }
+
+        public void ChargeData()
+        {
+            try
+            {
+                GestionResa = new DataGridLists();
+                this.DataContext = GestionResa;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données, veuillez consulter votre admin");
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void butRetour_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void butReservation_Click(object sender, RoutedEventArgs e)
+        {
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new UCEffectuerReservation());
         }
     }
 }

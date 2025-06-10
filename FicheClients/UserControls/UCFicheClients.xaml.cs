@@ -29,5 +29,25 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
 
         }
+
+        private void butSupp_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void butEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void textMotClefChien_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void butAjout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
