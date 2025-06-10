@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SAE2._01_Loxam
@@ -13,16 +14,22 @@ namespace SAE2._01_Loxam
         private int numClient;
         private string nomClient;
         private string prenomClient;
+        private string adresseClient;
+        private string mailClient;
+        private string numeroTelClient;
 
         public Client()
         {
         }
 
-        public Client(int numClient, string nomClient, string prenomClient)
+        public Client(int numClient, string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
         {
             this.NumClient = numClient;
             this.NomClient = nomClient;
             this.PrenomClient = prenomClient;
+            this.AdresseClient = adresseClient;
+            this.MailClient = mailClient;
+            this.NumeroTelClient = numeroTelClient;
         }
 
         public int NumClient
@@ -83,6 +90,80 @@ namespace SAE2._01_Loxam
                 }
                 this.prenomClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrenomClient)));
+            }
+        }
+
+        public string AdresseClient
+        {
+            get
+            {
+                return this.adresseClient;
+            }
+
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("L'adresse doit être renseigné");
+                }
+                if (value.Length > 60)
+                {
+                    throw new ArgumentException("doit avoir moins de 60 caractères");
+                }
+                this.adresseClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AdresseClient)));
+            }
+        }
+
+        public string MailClient
+        {
+            get
+            {
+                return this.mailClient;
+            }
+
+            set
+            {
+                if (!(Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")))
+                {
+                    throw new ArgumentException($"Le mail : {value} n'est pas une adresse valide");
+                }
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Le mail doit être renseigné");
+                }
+                if (value.Length > 60)
+                {
+                    throw new ArgumentException("doit avoir moins de 60 caractères");
+                }
+                this.mailClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MailClient)));
+            }
+        }
+
+        public string NumeroTelClient
+        {
+            get
+            {
+                return this.numeroTelClient;
+            }
+
+            set
+            {
+                if (!(Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")))
+                {
+                    throw new ArgumentException($"Le numéro de téléphone : {value} n'est pas un numéro valide");
+                }
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Le numéro de téléphone doit être renseigné");
+                }
+                if (value.Length > 10)
+                {
+                    throw new ArgumentException("doit avoir moins de 10 caractères");
+                }
+                this.numeroTelClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NumeroTelClient)));
             }
         }
 

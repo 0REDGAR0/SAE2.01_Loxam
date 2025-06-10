@@ -10,105 +10,169 @@
     mc:Ignorable="d">
 
     <!--  CONTENEUR PRINCIPAL  -->
-    <StackPanel >
+    <StackPanel Margin="20">
 
-        <!--  Première section  -->
+        <!--  Grille principale à deux colonnes  -->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="500" />
-                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Content="&#xF0D5;"
-                FontFamily="Segoe MDL2 Assets"
-                FontSize="20" />
-            <TextBlock
-                Margin="40,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Text="Infos Client"
-                TextWrapping="Wrap" />
-            <TextBlock
-                Grid.Column="1"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                FontWeight="Bold"
-                Text="Réservation en cours/à venir " />
+
+            <!--  Infos Client  -->
+            <StackPanel Grid.Column="0" Margin="0,0,20,0">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Text="Infos Client" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Nom" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding NomClient}" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Prénom" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding PrenomClient}" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Mail" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding MailClient}" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Numéro" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding NumeroTelClient}" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Adresse" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding AdresseClient}" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="N° Client" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding NumeroTelClient}" />
+            </StackPanel>
+
+            <!--  Réservations  -->
+            <StackPanel Grid.Column="1" Margin="20,0,0,0">
+
+                <TextBlock
+                    Margin="0,0,0,10"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Text="Réservations en cours/à venir" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="N° de réservation" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding NumeroReservation}" />
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Matériel" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding Materiel}" />
+
+                <StackPanel Margin="0,0,0,15" Orientation="Horizontal">
+                    <StackPanel Width="100">
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="Du" />
+                        <TextBox
+                            Height="35"
+                            Margin="0,5,0,0"
+                            Text="{Binding DateDebut}" />
+                    </StackPanel>
+                    <StackPanel Width="100" Margin="20,0,0,0">
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="Au" />
+                        <TextBox
+                            Height="35"
+                            Margin="0,5,0,0"
+                            Text="{Binding DateFin}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <TextBlock
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Text="Statut" />
+                <TextBox
+                    Height="35"
+                    Margin="0,5,0,15"
+                    Text="{Binding Statut}" />
+
+                <!--  Boutons  -->
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <Button
+                        Width="80"
+                        Height="35"
+                        Margin="0,0,10,0"
+                        Command="{Binding CommandVoir}"
+                        Content="👁 Voir" />
+                    <Button
+                        Width="100"
+                        Height="35"
+                        Background="Red"
+                        Command="{Binding CommandSupprimer}"
+                        Content="🗑 Supprimer"
+                        Foreground="White" />
+                </StackPanel>
+            </StackPanel>
         </Grid>
 
-        <!--  Deuxième section  -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="500" />
-                <ColumnDefinition Width="8*" />
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <Label x:Name="labNom" Content="Nom" />
-                <TextBox x:Name="txtNom" Margin="5,0,242,0" Text="{Binding NomClient, ValidatesOnExceptions=True}"/>
-                <Label x:Name="labPrenom" Content="Prénom" />
-                <TextBox x:Name="txtPrenom" Margin="5,0,242,0" />
-                <Label x:Name="labTelMail" Content="Tel/Mail" />
-                <TextBox x:Name="txtTelMail" Margin="5,0,242,0" />
-                <Label x:Name="labAdresse" Content="Adresse" />
-                <TextBox x:Name="txtAdress" Height="16" Margin="5,0,242,0" />
-            </StackPanel>
-            <StackPanel Grid.Column="1">
-                <Label x:Name="labNumReservation" Content="N° de Réservation" />
-                <TextBox x:Name="txtNumReservation" Width="252" Margin="0,0,277,0" />
-                <Label x:Name="labMateriel" Content="Matériel" />
-                <TextBox x:Name="txtMateriel" Margin="0,0,277,0" Width="253" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="8*" />
-                        <ColumnDefinition Width="15*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="23" />
-                        <RowDefinition Height="23" />
-                    </Grid.RowDefinitions>
-                    <Label x:Name="labDu" Content="Du" />
-                    <Label
-                        x:Name="labAu"
-                        Grid.Column="1"
-                        Content="Au" />
-                    <TextBox
-                        x:Name="txtDuDate"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Height="17.96" Margin="5,0,60,0" />
-                    <TextBox
-                        x:Name="txtAuDate"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Height="17.96" Margin="5,0,220,0" />
-                </Grid>
-                <Label Height="23" Content="Statut" />
-                <TextBox x:Name="txtStatut" Margin="5,0,311,0" />
-                <Grid>
-                    <Button FontSize="12" FontWeight="Bold" Width="62" Margin="0,20,468,0">
-                        <Button.Content>
-                            <TextBlock>
-                                <Run FontFamily="Segoe MDL2 Assets" Text="&#xE722;"/>
-                                <Run FontFamily="Segoe UI" Text="Voir"/>
-                            </TextBlock>
-                        </Button.Content>
-                    </Button>
-                    <Button FontSize="12" FontWeight="Bold" Width="62" Margin="100,20,138,0">
-                        <Button.Content>
-                            <TextBlock>
-                                <Run FontFamily="Segoe MDL2 Assets" Text="&#xE722;"/>
-                                <Run FontFamily="Segoe UI" Text="Voir"/>
-                            </TextBlock>
-                        </Button.Content>
-                    </Button>
-                </Grid>
-            </StackPanel>
-        </Grid>
-
+        <!--  Bouton final en dessous  -->
+        <Button
+            Width="300"
+            Height="60"
+            Margin="0,30,0,0"
+            HorizontalAlignment="Right"
+            Background="Red"
+            Command="{Binding CommandCreer}"
+            Content="Créer la fiche client"
+            FontSize="16"
+            FontWeight="Bold"
+            Foreground="White" />
 
     </StackPanel>
 </UserControl>

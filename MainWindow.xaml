@@ -100,7 +100,7 @@
                     Text="Rechercher du matériel" />
 
                 <!-- <UserControls:UCFicheClients Margin="30,0,30,0" /> -->
-
+                <UserControls:UCFicheClients/>
             </StackPanel>
         </Grid>
     </Grid>

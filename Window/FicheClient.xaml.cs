@@ -23,5 +23,10 @@ namespace SAE2._01_Loxam.Windows
         {
             InitializeComponent();
         }
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
