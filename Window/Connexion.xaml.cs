@@ -19,33 +19,62 @@ namespace SAE2._01_Loxam
     /// </summary>
     public partial class Connexion : Window
     {
+        private string login;
+        private string mdp;
+
         public Connexion()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public Connexion(string login, string mdp)
         {
-            string login = txtLogin.Text;
-            string mdp = txtPassword.Password;
+            this.Login = login;
+            this.Mdp = mdp;
+        }
 
-            Employe emp = Employe.VerifierConnexion(login, mdp);
-
-            if (emp != null && emp.Numrole == "1")
+        public string Login
+        {
+            get
             {
-                // Créer et afficher la MainWindow
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-
-                // Fermer la fenêtre de connexion
-                this.Close();
+                return this.login;
             }
-            else
+
+            set
             {
-                MessageBox.Show("Identifiants incorrects ou rôle non autorisé.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.login = value;
             }
         }
 
+        public string Mdp
+        {
+            get
+            {
+                return this.mdp;
+            }
 
+            set
+            {
+                this.mdp = value;
+            }
+        }
+
+        public void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string login = txtLogin.Text;
+            string mdp = txtPassword.Text;
+
+            Connexion connect = new Connexion(login, mdp);
+
+            /*if ((txtLogin.Text != DataAccess.login) && (txtPassword.Password != DataAccess.password))
+            {
+                MessageBox.Show("CA MARCHE PAS");
+            }else
+            {
+                MainWindow main = new MainWindow();
+                main.Show();
+                this.Close(); 
+            }*/
+        }
     }
 }
