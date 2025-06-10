@@ -206,16 +206,16 @@ namespace SAE2._01_Loxam
             return base.ToString();
         }
 
-        int ICrud<Client>.Create()
+        public int Create()
         {
             int nb = 0;
-            using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient, prenomclient, adresseclient, mailclient, numerotelclient) values (@numClient, @nomClient, @prenomClient, @adresseClient, @mailClient, @numeroTelClient) RETURNING numClient"))
+            using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient, prenomclient, adresseclient, mailclient, numerotelclient) values (@nomClient, @prenomClient, @adresseClient, @mailClient, @numeroTelClient) RETURNING numClient"))
             {
-                cmdInsert.Parameters.AddWithValue("nomclient", this.NomClient);
-                cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-                cmdInsert.Parameters.AddWithValue("adresseclient", this.AdresseClient);
-                cmdInsert.Parameters.AddWithValue("mailclient", this.MailClient);
-                cmdInsert.Parameters.AddWithValue("numerotelclient", this.NumeroTelClient);
+                cmdInsert.Parameters.AddWithValue("nomclient", (object ?)this.NomClient ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("prenomclient", (object?)this.PrenomClient ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("adresseclient", (object?)this.AdresseClient ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("mailclient", (object?)this.MailClient ?? DBNull.Value);
+                cmdInsert.Parameters.AddWithValue("numerotelclient", (object?)this.NumeroTelClient ?? DBNull.Value);
                 nb = DataAccess.Instance.ExecuteInsert(cmdInsert);
             }
             this.NumClient = nb;
@@ -239,7 +239,7 @@ namespace SAE2._01_Loxam
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                     lesClients.Add(new Client((Int32)dr["numClient"], (String)dr["nomclient"],
-                   (String)dr["prenomClient"], (String)dr["adresseClient"], (String)dr["mailClient"], (String)dr["numeroTelClient"]));
+                   (String)dr["prenomClient"], (String)dr["mailClient"], (String)dr["numeroTelClient"], (String)dr["adresseClient"]));
             }
             return lesClients;
         }

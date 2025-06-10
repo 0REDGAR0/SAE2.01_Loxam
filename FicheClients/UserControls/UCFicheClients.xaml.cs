@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAE2._01_Loxam.FicheClients.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,8 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         public Client LeClient { get; set; }
         public UCFicheClients()
         {
-            ChargeData();
             InitializeComponent();
+            ChargeData();
         }
 
         public void ChargeData()
@@ -44,7 +45,21 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void butCréerFicheClient_Click(object sender, RoutedEventArgs e)
         {
-
+            Client unClient = new Client();
+            WindowFicheClient wClient = new WindowFicheClient(unClient, WindowFicheClient.Action.Créer);
+            bool? result = wClient.ShowDialog();
+            if (result == true)
+            {
+                try
+                {
+                    unClient.NumClient = unClient.Create();
+                    LeClient.LesClients.Add(unClient);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le client n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void butEdit_Click(object sender, RoutedEventArgs e)

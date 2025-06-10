@@ -88,8 +88,8 @@
                 <!--  Remplace par ton DataGrid réel si besoin  -->
                 <Grid Margin="0,0,0,-105" Background="#FFE5E5E5">
                     <DataGrid
-                        x:Name="dgChiens"
-                        Margin="209,50,209,0"
+                        x:Name="dgClients"
+                        Margin="138,50,138,0"
                         AutoGenerateColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding LesClients}">

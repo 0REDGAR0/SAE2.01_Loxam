@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using SAE2._01_Loxam.Classe;
+using SAE2._01_Loxam.FicheClients.UserControls;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;

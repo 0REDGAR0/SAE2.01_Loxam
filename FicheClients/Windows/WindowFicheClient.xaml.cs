@@ -19,14 +19,39 @@ namespace SAE2._01_Loxam.FicheClients.Windows
     /// </summary>
     public partial class WindowFicheClient : Window
     {
-        public WindowFicheClient()
+        public enum Action { Modifier, Créer, Supprimer };
+        public WindowFicheClient(Client client, Action uneAction)
         {
             InitializeComponent();
+            if (uneAction == Action.Modifier)
+            {
+                butValider.Content = Action.Modifier.ToString();
+            }
+            else if (uneAction == Action.Créer)
+            {
+                butValider.Content = Action.Créer.ToString();
+            }
+            else if (uneAction == Action.Supprimer)
+            {
+                butValider.Content = Action.Supprimer.ToString();
+            }
         }
 
-        private void butCréerFicheClient_Click(object sender, RoutedEventArgs e)
+        private void butValider_Click(object sender, RoutedEventArgs e)
         {
+            bool ok = true;
+            foreach (UIElement uie in panelFormClient.Children)
+            {
+                if (uie is TextBox)
+                {
+                    TextBox txt = (TextBox)uie;
+                    txt.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+                }
 
+                if (Validation.GetHasError(uie))
+                    ok = false;
+            }
+            DialogResult = true;
         }
     }
 }
