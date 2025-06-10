@@ -41,7 +41,7 @@
                         <TextBox x:Name="txtLogin" Height="30" />
 
                         <TextBlock Margin="0,10,0,5" Text="Mot de passe" />
-                        <PasswordBox x:Name="txtPassword" Height="30" />
+                        <TextBox x:Name="txtPassword" Height="30" />
 
                         <TextBlock
                             Margin="0,10,0,5"
@@ -50,6 +50,7 @@
                             Text="Mot de passe oublié ?" />
 
                         <Button
+                            x:Name="bt_Valider"
                             Width="120"
                             Margin="0,10,0,0"
                             Padding="10,5"

@@ -18,15 +18,38 @@ namespace SAE2._01_Loxam
     /// </summary>
     public partial class MainWindow : Window
     {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         public DataGridLists GestionResa { get; set; }
         
+=======
+        private DataAccess dataAccess;
+
+>>>>>>> Stashed changes
+=======
+        private DataAccess dataAccess;
+
+>>>>>>> Stashed changes
         public MainWindow()
         {
             ChargeData();
             InitializeComponent();
         }
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         
+=======
+=======
+>>>>>>> Stashed changes
+        public MainWindow(DataAccess dataAccess)
+        {
+            this.dataAccess = dataAccess;
+        }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
@@ -45,6 +68,27 @@ namespace SAE2._01_Loxam
             Connexion connexion = new Connexion();
             connexion.Show();
         }
+        private void butRetour_Click(object sender, RoutedEventArgs e)
+        {
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new UCEffectuerRetour());
+
+            butRetour.FontWeight = FontWeights.Bold;
+            butRetour.FontSize = 36;
+            butReservation.FontWeight = FontWeights.Normal;
+            butReservation.FontSize = 22;
+        }
+
+        private void butReservation_Click(object sender, RoutedEventArgs e)
+        {
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new UCEffectuerReservation());
+
+            butReservation.FontWeight = FontWeights.Bold;
+            butReservation.FontSize = 36;
+            butRetour.FontWeight = FontWeights.Normal;
+            butRetour.FontSize = 22;
+        }
 
         public void ChargeData()
         {
@@ -60,15 +104,10 @@ namespace SAE2._01_Loxam
             }
         }
 
-        private void butRetour_Click(object sender, RoutedEventArgs e)
+        private void SPcentral_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
-        private void butReservation_Click(object sender, RoutedEventArgs e)
-        {
-            SPcentral.Children.Clear();
-            SPcentral.Children.Add(new UCEffectuerReservation());
-        }
     }
 }

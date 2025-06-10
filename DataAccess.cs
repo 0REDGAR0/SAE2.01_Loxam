@@ -10,15 +10,36 @@ namespace SAE2._01_Loxam
 {
     public class DataAccess
     {
+        private string log = "" ;
+        private string pass = "" ;
+
         private static readonly DataAccess instance = new DataAccess();
-        private readonly string connectionString = "Host=srv-peda-new;" +
-            "Port=5433;" +
-            "Username=beduneye;" +
-            "Password=WVTvXG;" +
-            "Database=sae_loxam;" +
-            "Options='-c " +
-            "search_path=loxam'";
+        private readonly string connectionString = $"Host=srv-peda-new;" +
+            $"Port=5433;" +
+            $"Username=beduneye;" +
+            $"Password=WVTvXG;" +
+            $"Database=sae_loxam;" +
+            $"Options='-c " +
+            $"search_path=loxam'";
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         private NpgsqlConnection connection;
+=======
+=======
+>>>>>>> Stashed changes
+
+        public NpgsqlConnection connection;
+        private string mdp;
+
+
+
+        public DataAccess()
+        {
+        }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
         public static DataAccess Instance
         {
@@ -28,8 +49,9 @@ namespace SAE2._01_Loxam
             }
         }
 
+
         //  Constructeur privé pour empêcher l'instanciation multiple
-        private DataAccess()
+        public DataAccess(string login)
         {
             try
             {
@@ -41,7 +63,6 @@ namespace SAE2._01_Loxam
                 throw;
             }
         }
-
 
         // pour récupérer la connexion (et l'ouvrir si nécessaire)
         public NpgsqlConnection GetConnection()
@@ -63,7 +84,7 @@ namespace SAE2._01_Loxam
             return connection;
         }
 
-        //  pour requêtes SELECT et retourne un DataTable ( table de données en mémoire)
+        //  pour requêtes SELECT et retourne un DataTable (table de données en mémoire)
         public DataTable ExecuteSelect(NpgsqlCommand cmd)
         {
             DataTable dataTable = new DataTable();
@@ -149,10 +170,5 @@ namespace SAE2._01_Loxam
                 connection.Close();
             }
         }
-
-
-
-
-
     }
 }
