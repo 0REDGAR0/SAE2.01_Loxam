@@ -124,7 +124,7 @@ namespace SAE2._01_Loxam
             {
                 return null; // Aucun résultat → mauvais identifiants OU pas un employé (peut-être un responsable atelier)
             }
-            
+
             DataRow row = table.Rows[0];
             Employe emp = new Employe
             {
@@ -135,12 +135,7 @@ namespace SAE2._01_Loxam
                 mdp = row["mdp"].ToString(),
                 numrole = row["numrole"].ToString()
             };
-
-            return emp;
-
-        }
-
-    
-        
+            return emp; 
+        }   
     }
 }
