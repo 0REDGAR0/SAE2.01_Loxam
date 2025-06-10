@@ -5,72 +5,133 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="686"
+    d:DesignHeight="665"
     d:DesignWidth="1040"
     mc:Ignorable="d">
 
-    <!--  CONTENEUR PRINCIPAL  -->
-    <Grid Background="#FFE5E5E5">
-        <DataGrid
-            x:Name="dgChiens"
-            Width="300"
-            Margin="247,80,247,0"
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            ItemsSource="{Binding LesChiens}">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Nom, ValidatesOnExceptions=true}"
-                    Header="Nom" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Maitre, ValidatesOnExceptions=true}"
-                    Header="Maître" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Poids, ValidatesOnExceptions=true}"
-                    Header="Poids (kg)" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBox
-            x:Name="textMotClefChien"
-            Height="20"
-            Margin="312,33,312,0"
+    <Grid Background="White">
+
+        <!--  Barre d’en-tête  -->
+        <Grid Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Titre + flèche  -->
+            <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
+                <TextBlock
+                    Margin="0,0,10,0"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Text="←" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Text="Infos clients" />
+            </StackPanel>
+
+            <!--  Zone de recherche  -->
+        </Grid>
+
+        <!--  Section boutons + tableau  -->
+        <StackPanel
+            Margin="0,60,0,0"
             VerticalAlignment="Top"
-            Text=""
-            TextChanged="textMotClefChien_TextChanged"
-            TextWrapping="Wrap" />
-        <Button
-            x:Name="butSupp"
-            Width="30"
-            Height="30"
-            Margin="592,126,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="butSupp_Click"
-            Content="&#xE74D;"
-            FontFamily="Segoe MDL2 Assets"
-            ToolTip="Supprimer" />
-        <Button
-            x:Name="butAjout"
-            Width="30"
-            Height="30"
-            Margin="592,183,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="butAjout_Click"
-            Content="&#xE109;"
-            FontFamily="Segoe MDL2 Assets" />
-        <Button
-            x:Name="butEdit"
-            Width="30"
-            Height="30"
-            Margin="592,253,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="butEdit_Click"
-            Content="&#xE104;"
-            FontFamily="Segoe MDL2 Assets" />
+            Orientation="Vertical">
+
+            <!--  Boutons d'action  -->
+            <StackPanel
+                Margin="0,0,0,20"
+                HorizontalAlignment="Left"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="butAjout"
+                    Width="180"
+                    Height="40"
+                    Margin="0,0,10,0"
+                    Background="Red"
+                    Click="butCréerFicheClient_Click"
+                    Content="Créer la fiche client"
+                    FontWeight="Bold"
+                    Foreground="White" />
+
+                <Button
+                    x:Name="butEdit"
+                    Width="180"
+                    Height="40"
+                    Margin="200,0,10,0"
+                    Background="Red"
+                    Click="butEdit_Click"
+                    Content="Modifier la fiche client"
+                    FontWeight="Bold"
+                    Foreground="White" />
+                <Button
+                    x:Name="butSupp"
+                    Width="180"
+                    Height="40"
+                    Margin="200,0,0,0"
+                    Background="Red"
+                    Click="butSupp_Click"
+                    Content="🗑 Supprimer fiche client"
+                    FontWeight="Bold"
+                    Foreground="White" />
+            </StackPanel>
+
+            <!--  Tableau (DataGrid ou placeholder)  -->
+            <Border
+                Height="400"
+                Margin="0,0,0,0"
+                Background="#FFE5E5E5"
+                CornerRadius="5">
+                <!--  Remplace par ton DataGrid réel si besoin  -->
+                <Grid Margin="0,0,0,-105" Background="#FFE5E5E5">
+                    <DataGrid
+                        x:Name="dgChiens"
+                        Margin="209,50,209,0"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding LesClients}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NumClient, ValidatesOnExceptions=true}"
+                                Header="NumClient" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NomClient, ValidatesOnExceptions=true}"
+                                Header="Nom" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding PrenomClient, ValidatesOnExceptions=true}"
+                                Header="Prénom" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding MailClient, ValidatesOnExceptions=true}"
+                                Header="Mail" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding NumeroTelClient, ValidatesOnExceptions=true}"
+                                Header="Numéro" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding AdresseClient, ValidatesOnExceptions=true}"
+                                Header="Adresse" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <TextBox
+                        x:Name="textMotClefChien"
+                        Height="20"
+                        Margin="420,-100,420,0"
+                        VerticalAlignment="Top"
+                        Text=""
+                        TextChanged="textMotClefChien_TextChanged"
+                        TextWrapping="Wrap" />
+                </Grid>
+            </Border>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

@@ -20,12 +20,45 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
     /// </summary>
     public partial class UCFicheClients : UserControl
     {
+        public Client LeClient { get; set; }
         public UCFicheClients()
         {
+            ChargeData();
             InitializeComponent();
         }
 
+        public void ChargeData()
+        {
+            try
+            {
+                LeClient = new Client("Client n1");
+                this.DataContext = LeClient;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
+
+                Application.Current.Shutdown();
+            }
+        }
+
         private void butCréerFicheClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void butEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void textMotClefChien_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void butSupp_Click(object sender, RoutedEventArgs e)
         {
 
         }

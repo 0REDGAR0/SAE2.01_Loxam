@@ -91,9 +91,6 @@
         </StackPanel>
 
         <!--  Zone centrale  -->
-        <StackPanel x:Name="SPcentral" Margin="226,108,20,20">
-            <local:Bienvenue />
-
-        </StackPanel>
+        <StackPanel x:Name="SPcentral" Margin="226,108,20,20" />
     </Grid>
 </Window>

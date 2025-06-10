@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,7 +22,7 @@ namespace SAE2._01_Loxam
             InitializeComponent();
         }
 
-
+        
 
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
