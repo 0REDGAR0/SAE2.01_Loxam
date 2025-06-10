@@ -23,5 +23,29 @@ namespace SAE2._01_Loxam
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string login = txtLogin.Text;
+            string mdp = txtPassword.Password;
+
+            Employe emp = Employe.VerifierConnexion(login, mdp);
+
+            if (emp != null && emp.Numrole == "1")
+            {
+                // Créer et afficher la MainWindow
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+
+                // Fermer la fenêtre de connexion
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Identifiants incorrects ou rôle non autorisé.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
     }
 }

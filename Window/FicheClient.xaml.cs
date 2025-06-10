@@ -21,7 +21,7 @@ namespace SAE2._01_Loxam.Windows
     {
         public FicheClient()
         {
-            InitializeComponent();
+     
         }
     }
 }
