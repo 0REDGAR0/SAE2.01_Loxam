@@ -11,98 +11,86 @@
     Height="830"
     mc:Ignorable="d">
     <Grid>
-        <!--  Bandeau rouge haut  -->
+        <!--  Bandeau rouge en haut  -->
         <Grid
-            Grid.Row="0"
-            Margin="0,0,0,707"
+            Height="100"
+            VerticalAlignment="Top"
             Background="Red">
             <Label
-                Margin="10,20,0,0"
-                VerticalAlignment="Top"
+                Margin="20,20,0,0"
+                HorizontalAlignment="Left"
                 Content="LOXAM"
                 FontSize="36"
                 FontWeight="Bold"
                 Foreground="White" />
-            <Menu Margin="261,49,271,0" Background="Red">
-                <MenuItem
-                    Width="140"
-                    FontSize="22"
-                    Foreground="White"
-                    Header="LOCATION" />
-                <MenuItem
-                    Width="150"
-                    FontSize="22"
-                    Foreground="White"
-                    Header="RESERVATION" />
-                <MenuItem
-                    Width="100"
-                    FontSize="22"
-                    Foreground="White"
-                    Header="RETOUR" />
-                <MenuItem
-                    FontSize="22"
-                    Foreground="White"
-                    Header="MAINTENANCE" />
-            </Menu>
 
-            <!--  Chistophe login  -->
-            <Label
-                Margin="0,0,30,0"
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="40,0"
+                    FontSize="22"
+                    Foreground="White"
+                    Text="RETOUR" />
+                <TextBlock
+                    Margin="40,0"
+                    FontSize="22"
+                    Foreground="White"
+                    Text="RESERVATION" />
+            </StackPanel>
+
+            <StackPanel
+                Margin="0,0,20,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                FontFamily="Segoe MDL2 Assets"
-                Foreground="White">
-                <Label.Content>
-                    <TextBlock>
-                        <Run FontFamily="Segoe UI" Text="Christophe Colin " />
-                        <Run FontFamily="Segoe MDL2 Assets" Text="&#xE77B;" />
-                    </TextBlock>
-                </Label.Content>
-            </Label>
-        </Grid>
-
-        <!--  Contenu principal  -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <!--  Menu vertical  -->
-            <StackPanel
-                Grid.Column="0"
-                Margin="0,108,0,0"
-                Background="#F0F0F0">
-                <Button
-                    Margin="10"
-                    HorizontalAlignment="Left"
-                    Content="🔍 Recherche matériel" />
-                <Button
-                    x:Name="but"
-                    Margin="10"
-                    HorizontalAlignment="Left"
-                    Content="👤 Créer fiche client" />
-                <Button
-                    Margin="10"
-                    HorizontalAlignment="Left"
-                    Content="📥 Enregistrer retour" />
-                <Button
-                    Margin="10"
-                    HorizontalAlignment="Left"
-                    Content="🔧 Réparation" />
-            </StackPanel>
-
-            <!--  Zone centrale  -->
-            <StackPanel Grid.Column="1" Margin="20,108,20,20">
+                Orientation="Horizontal">
                 <TextBlock
-                    Margin="0,10"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="White"
+                    Text="Christophe Colin " />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe MDL2 Assets"
                     FontSize="20"
-                    FontWeight="Bold"
-                    Text="Rechercher du matériel" />
-
-                <!-- <UserControls:UCFicheClients Margin="30,0,30,0" /> -->
-                <UserControls:UCFicheClients />
+                    Foreground="White"
+                    Text="&#xE77B;" />
             </StackPanel>
         </Grid>
+
+        <!--  Menu vertical gauche  -->
+        <StackPanel
+            Width="200"
+            Margin="0,100,0,0"
+            HorizontalAlignment="Left"
+            Background="#F0F0F0">
+            <Button
+                Height="50"
+                Margin="10"
+                Content="🔍 Recherche matériel"
+                FontSize="16" />
+            <Button
+                Height="50"
+                Margin="10"
+                Content="👤 Fiche client"
+                FontSize="16" />
+            <Button
+                Height="50"
+                Margin="10"
+                Content="🔧 Réparation"
+                FontSize="16" />
+        </StackPanel>
+
+        <!--  Zone centrale  -->
+        <StackPanel Margin="226,108,20,20">
+            <TextBlock
+                Margin="0,10"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="Rechercher du matériel" />
+
+            <!-- <UserControls:UCFicheClients Margin="30,0,30,0" /> -->
+            <UserControls:UCFicheClients />
+        </StackPanel>
     </Grid>
-</Window>
