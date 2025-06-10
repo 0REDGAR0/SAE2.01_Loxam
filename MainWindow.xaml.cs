@@ -17,8 +17,13 @@ namespace SAE2._01_Loxam
     public partial class MainWindow : Window
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         public DataGridLists GestionResa { get; set; }
         
+=======
+        private DataAccess dataAccess;
+
+>>>>>>> Stashed changes
 =======
         private DataAccess dataAccess;
 
@@ -30,12 +35,18 @@ namespace SAE2._01_Loxam
         }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         
 =======
+=======
+>>>>>>> Stashed changes
         public MainWindow(DataAccess dataAccess)
         {
             this.dataAccess = dataAccess;
         }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
         private void butFicheClient_Click(object sender, RoutedEventArgs e)

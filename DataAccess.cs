@@ -22,8 +22,11 @@ namespace SAE2._01_Loxam
             $"Options='-c " +
             $"search_path=loxam'";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         private NpgsqlConnection connection;
 =======
+=======
+>>>>>>> Stashed changes
 
         public NpgsqlConnection connection;
         private string mdp;
@@ -33,6 +36,9 @@ namespace SAE2._01_Loxam
         public DataAccess()
         {
         }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
         public static DataAccess Instance
