@@ -32,20 +32,19 @@
                 Foreground="White" />
 
             <StackPanel
+                x:Name="SPRetourResa"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
                 <Button
                     x:Name="butRetour"
-                    Width="141"
                     Margin="40,0"
                     HorizontalAlignment="Left"
                     Background="Red"
                     BorderBrush="Red"
                     Click="butRetour_Click"
                     Content="RETOUR"
-                    FontSize="36"
-                    FontWeight="Bold"
+                    FontSize="22"
                     Foreground="White" />
                 <Button
                     x:Name="butReservation"
@@ -54,8 +53,7 @@
                     Background="Red"
                     BorderBrush="Red"
                     Content="RESERVATION"
-                    FontSize="36"
-                    FontWeight="Bold"
+                    FontSize="22"
                     Foreground="White" Click="butReservation_Click" />
             </StackPanel>
 
@@ -104,6 +102,6 @@
         </StackPanel>
 
         <!--  Zone centrale  -->
-        <StackPanel x:Name="SPcentral" Margin="226,108,20,20" />
+        <StackPanel x:Name="SPcentral" Margin="226,108,20,20" Loaded="SPcentral_Loaded" />
     </Grid>
 </Window>
