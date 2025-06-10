@@ -9,6 +9,7 @@
     Title="MainWindow"
     Width="1280"
     Height="830"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <!--  Bandeau rouge en haut  -->
