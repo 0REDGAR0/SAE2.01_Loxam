@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SAE2._01_Loxam
+namespace SAE2._01_Loxam.FicheClients.UserControls
 {
     /// <summary>
-    /// Interaction logic for ReservationMateriel.xaml
+    /// Logique d'interaction pour UCEffectuerRetour.xaml
     /// </summary>
-    public partial class ReservationMateriel : Window
+    public partial class UCEffectuerRetour : UserControl
     {
-        public ReservationMateriel()
+        public UCEffectuerRetour()
         {
             InitializeComponent();
         }

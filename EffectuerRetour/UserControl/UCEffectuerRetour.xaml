@@ -1,0 +1,178 @@
+﻿<UserControl
+    x:Class="SAE2._01_Loxam.FicheClients.UserControls.UCEffectuerRetour"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="686"
+    d:DesignWidth="1040"
+    mc:Ignorable="d">
+    <StackPanel>
+
+        <!--  Titre  -->
+        <StackPanel
+        Margin="0,0,0,20"
+        HorizontalAlignment="Left"
+        Orientation="Horizontal">
+            <Button
+            Width="50"
+            Height="50"
+            Margin="0,0,10,0"
+            Content="⬅"
+            FontSize="20" />
+            <TextBlock
+            VerticalAlignment="Center"
+            FontSize="22"
+            FontWeight="Bold"
+            Text="Faire un retour" />
+        </StackPanel>
+
+        <!--  Tableau informations matériel  -->
+        <Border
+        Margin="0,0,0,20"
+        Padding="20"
+        BorderBrush="LightGray"
+        BorderThickness="1"
+        CornerRadius="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                Grid.Column="0"
+                FontWeight="Bold"
+                Text="Matériel" />
+                <TextBlock
+                Grid.Column="1"
+                FontWeight="Bold"
+                Text="Lieu" />
+                <TextBlock
+                Grid.Column="2"
+                FontWeight="Bold"
+                Text="Du" />
+                <TextBlock
+                Grid.Column="3"
+                FontWeight="Bold"
+                Text="Au" />
+                <TextBlock
+                Grid.Column="4"
+                FontWeight="Bold"
+                Text="Etat" />
+
+                <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,30,0,0"
+                Text="{Binding Materiel}" />
+                <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,30,0,0"
+                Text="{Binding Lieu}" />
+                <TextBlock
+                Grid.Row="1"
+                Grid.Column="2"
+                Margin="0,30,0,0"
+                Text="{Binding DateDebut}" />
+                <TextBlock
+                Grid.Row="1"
+                Grid.Column="3"
+                Margin="0,30,0,0"
+                Text="{Binding DateFin}" />
+
+                <Border
+                Grid.Row="1"
+                Grid.Column="4"
+                Margin="0,30,0,0"
+                Padding="5"
+                Background="{Binding CouleurEtat}"
+                CornerRadius="5">
+                    <TextBlock
+                    HorizontalAlignment="Center"
+                    FontWeight="SemiBold"
+                    Text="{Binding Etat}" />
+                </Border>
+            </Grid>
+        </Border>
+
+        <!--  Commentaire  -->
+        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+            <TextBlock
+            VerticalAlignment="Center"
+            FontSize="16"
+            FontWeight="Bold"
+            Text="Commentaire :" />
+            <TextBlock
+            Margin="10,0,0,0"
+            VerticalAlignment="Center"
+            FontSize="16"
+            Text="{Binding Commentaire}" />
+        </StackPanel>
+
+        <!--  Choix retour  -->
+        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+            <GroupBox
+            Width="200"
+            Margin="0,0,20,0"
+            Header="Matériel rendu :">
+                <StackPanel>
+                    <RadioButton
+                    Content="Oui"
+                    GroupName="Rendu"
+                    IsChecked="{Binding RenduOui}" />
+                    <RadioButton
+                    Content="Non"
+                    GroupName="Rendu"
+                    IsChecked="{Binding RenduNon}" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Width="300" Header="État matériel :">
+                <StackPanel>
+                    <RadioButton
+                    Content="Bon"
+                    GroupName="Etat"
+                    IsChecked="{Binding EtatBon}" />
+                    <RadioButton
+                    Content="Endommagé"
+                    GroupName="Etat"
+                    IsChecked="{Binding EtatEndommage}" />
+                    <RadioButton
+                    Content="Hors service"
+                    GroupName="Etat"
+                    IsChecked="{Binding EtatHS}" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <!--  Image illustration  -->
+        <Border
+        Width="300"
+        Height="200"
+        Margin="0,0,0,20"
+        Padding="5"
+        BorderBrush="LightGray"
+        BorderThickness="1"
+        CornerRadius="10">
+            <Image Source="{Binding ImageRetour}" Stretch="Uniform" />
+        </Border>
+
+        <!--  Bouton final  -->
+        <Button
+        Width="300"
+        Height="60"
+        Margin="0,20,0,0"
+        HorizontalAlignment="Right"
+        Background="Red"
+        Content="ENREGISTRER RETOUR"
+        FontSize="16"
+        FontWeight="Bold"
+        Foreground="White" />
+    </StackPanel>
+</UserControl>

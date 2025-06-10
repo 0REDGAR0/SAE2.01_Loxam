@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="FicheClients\Windows\" />
+    <Folder Include="Views\" />
     <Folder Include="Retours\UserControls\" />
   </ItemGroup>
 
