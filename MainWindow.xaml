@@ -78,6 +78,7 @@
                     HorizontalAlignment="Left"
                     Content="🔍 Recherche matériel" />
                 <Button
+                    x:Name="but"
                     Margin="10"
                     HorizontalAlignment="Left"
                     Content="👤 Créer fiche client" />
@@ -100,7 +101,7 @@
                     Text="Rechercher du matériel" />
 
                 <!-- <UserControls:UCFicheClients Margin="30,0,30,0" /> -->
-                <UserControls:UCFicheClients/>
+                <UserControls:UCFicheClients />
             </StackPanel>
         </Grid>
     </Grid>
