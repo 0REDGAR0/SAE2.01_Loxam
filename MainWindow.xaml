@@ -92,7 +92,69 @@
                 FontSize="20"
                 FontWeight="Bold"
                 Text="Rechercher du matériel" />
-
+            <Grid Height="639" Background="#FFE5E5E5">
+                <DataGrid
+                    x:Name="dgClients"
+                    Width="300"
+                    Margin="247,80,247,0"
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding LesChiens}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Nom, ValidatesOnExceptions=true}"
+                            Header="Nom" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Maitre, ValidatesOnExceptions=true}"
+                            Header="Maître" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Poids, ValidatesOnExceptions=true}"
+                            Header="Poids (kg)" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBox
+                    x:Name="textMotClefChien"
+                    Height="20"
+                    Margin="312,33,312,0"
+                    VerticalAlignment="Top"
+                    Text=""
+                    TextChanged="textMotClefChien_TextChanged"
+                    TextWrapping="Wrap" />
+                <Button
+                    x:Name="butSupp"
+                    Width="30"
+                    Height="30"
+                    Margin="592,126,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="butSupp_Click"
+                    Content="&#xE74D;"
+                    FontFamily="Segoe MDL2 Assets"
+                    ToolTip="Supprimer" />
+                <Button
+                    x:Name="butAjout"
+                    Width="30"
+                    Height="30"
+                    Margin="592,183,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="butAjout_Click"
+                    Content="&#xE109;"
+                    FontFamily="Segoe MDL2 Assets" />
+                <Button
+                    x:Name="butEdit"
+                    Width="30"
+                    Height="30"
+                    Margin="592,253,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="butEdit_Click"
+                    Content="&#xE104;"
+                    FontFamily="Segoe MDL2 Assets" />
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>
