@@ -15,9 +15,9 @@ namespace SAE2._01_Loxam
             "Port=5433;" +
             "Username=beduneye;" +
             "Password=WVTvXG;" +
-            "Database=SAE201_Loxam;" +
+            "Database=sae_loxam;" +
             "Options='-c " +
-            "search_path=Loxam'";
+            "search_path=loxam'";
         private NpgsqlConnection connection;
 
         public static DataAccess Instance
