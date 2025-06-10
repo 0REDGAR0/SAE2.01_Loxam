@@ -10,8 +10,6 @@ namespace SAE2._01_Loxam
 {
     public class DataAccess
     {
-        private string log = "" ;
-        private string pass = "" ;
 
         private static readonly DataAccess instance = new DataAccess();
         private readonly string connectionString = $"Host=srv-peda-new;" +
@@ -21,25 +19,15 @@ namespace SAE2._01_Loxam
             $"Database=sae_loxam;" +
             $"Options='-c " +
             $"search_path=loxam'";
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        private NpgsqlConnection connection;
-=======
-=======
->>>>>>> Stashed changes
 
-        public NpgsqlConnection connection;
-        private string mdp;
+        private NpgsqlConnection connection;
 
 
 
         public DataAccess()
         {
         }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 
         public static DataAccess Instance
         {
@@ -67,7 +55,7 @@ namespace SAE2._01_Loxam
         // pour récupérer la connexion (et l'ouvrir si nécessaire)
         public NpgsqlConnection GetConnection()
         {
-            if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
+            if (connection.State == ConnectionState.Closed || this.connection.State == ConnectionState.Broken)
             {
                 try
                 {
