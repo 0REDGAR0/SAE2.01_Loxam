@@ -24,6 +24,5 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
         }
-
     }
 }
