@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,7 +65,31 @@ namespace SAE2._01_Loxam
             string login = txtLogin.Text;
             string mdp = txtPassword.Text;
 
-            Connexion connect = new Connexion(login, mdp);
+
+            string connexionString = $"Host=srv-peda-new;" +
+            $"Port=5433;" +
+            $"Username={login};" +
+            $"Password={mdp};" +
+            $"Database=sae_loxam;" +
+            $"Options='-c " +
+            $"search_path=loxam'";
+
+            using (NpgsqlConnection connexion = new NpgsqlConnection(connexionString))
+            {
+                try
+                {
+                    connexion.Open();
+
+                    MainWindow mainWindow = new MainWindow();
+                    this.Hide();
+                    mainWindow.Show();
+                }catch (Exception ex)
+                {
+                    MessageBox.Show("Identifiant ou mot de passe incorrect","Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+    }
 
             /*if ((txtLogin.Text != DataAccess.login) && (txtPassword.Password != DataAccess.password))
             {
@@ -75,6 +100,6 @@ namespace SAE2._01_Loxam
                 main.Show();
                 this.Close(); 
             }*/
-        }
+        
     }
 }
