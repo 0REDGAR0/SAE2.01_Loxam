@@ -52,18 +52,26 @@
                 <DataGrid
                     x:Name="DataGridResa"
                     Margin="0,10,0,0"
-                    AutoGenerateColumns="True"
+                    AutoGenerateColumns="False"
                     CanUserAddRows="False"
                     ColumnHeaderHeight="50"
                     FontSize="16"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    ItemsSource="{Binding LesReservations}"
                     RowHeight="50">
 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Reservation" Binding="{Binding NumeroReservation}" Width="*" />
+                        <DataGridTextColumn Header="Client" Binding="{Binding Client}" Width="*" />
+                        <DataGridTextColumn Header="Materiel" Binding="{Binding Materiel}" Width="*" />
+                        <DataGridTextColumn Header="Date Reservation" Binding="{Binding DateReservation, StringFormat=d}" Width="*" />
+                        <DataGridTextColumn Header="Debut Location" Binding="{Binding DateDebutLocation, StringFormat=d}" Width="*" />
+                        <DataGridTextColumn Header="Retour Effective" Binding="{Binding DateRetourEffective, StringFormat=d}" Width="*" />
+                        <DataGridTextColumn Header="Retour Reelle" Binding="{Binding DateRetourReelle, StringFormat=d}" Width="*" />
+                        <DataGridTextColumn Header="Prix Total" Binding="{Binding PrixTotal}" Width="*" />
+                    </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
         </Border>
-
     </StackPanel>
 </UserControl>
