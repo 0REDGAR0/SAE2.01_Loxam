@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAE2._01_Loxam.Classe.Reservation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SAE2._01_Loxam.Classe.Reservation;
+
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
@@ -23,6 +26,14 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         public UCEffectuerReservation()
         {
             InitializeComponent();
+            ChargerReservations();
+        }
+
+        private void ChargerReservations()
+        {
+            ReservationDAO reservationDAO = new ReservationDAO();
+            DataGridResa.ItemsSource = reservationDAO.GetReservationsAffichage();
         }
     }
+
 }

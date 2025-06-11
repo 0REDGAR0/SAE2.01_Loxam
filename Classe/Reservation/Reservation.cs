@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAE2._01_Loxam.Classe
+namespace SAE2._01_Loxam.Classe.Reservation
 {
     public class Reservation
     {
@@ -187,7 +187,7 @@ namespace SAE2._01_Loxam.Classe
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                     list.Add(new Reservation(
-                        (int)dr["numreservation"], 
+                        (int)dr["numreservation"],
                         (int)dr["nummateriel"],
                         (int)dr["numemploye"],
                         (int)dr["numclient"],
@@ -198,7 +198,7 @@ namespace SAE2._01_Loxam.Classe
                         double.Parse(dr["prixtotal"].ToString())
                         ));
             }
-            return list; 
+            return list;
         }
     }
 
