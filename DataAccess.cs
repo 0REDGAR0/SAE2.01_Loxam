@@ -26,6 +26,7 @@ namespace SAE2._01_Loxam
 
         public DataAccess()
         {
+            connection = new NpgsqlConnection(connectionString);
         }
 
 
