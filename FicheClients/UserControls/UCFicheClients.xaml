@@ -108,16 +108,16 @@
                                 Header="Prénom" />
                             <DataGridTextColumn
                                 Width="*"
+                                Binding="{Binding AdresseClient, ValidatesOnExceptions=true}"
+                                Header="Adresse" />
+                            <DataGridTextColumn
+                                Width="*"
                                 Binding="{Binding MailClient, ValidatesOnExceptions=true}"
                                 Header="Mail" />
                             <DataGridTextColumn
                                 Width="*"
                                 Binding="{Binding NumeroTelClient, ValidatesOnExceptions=true}"
                                 Header="Numéro" />
-                            <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding AdresseClient, ValidatesOnExceptions=true}"
-                                Header="Adresse" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBox

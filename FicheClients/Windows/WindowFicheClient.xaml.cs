@@ -35,6 +35,8 @@ namespace SAE2._01_Loxam.FicheClients.Windows
             {
                 butValider.Content = Action.Supprimer.ToString();
             }
+
+            this.DataContext = client;
         }
 
         private void butValider_Click(object sender, RoutedEventArgs e)

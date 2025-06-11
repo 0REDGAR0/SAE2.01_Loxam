@@ -26,7 +26,7 @@ namespace SAE2._01_Loxam
         {
         }
 
-        public Client(int numClient, string nomClient, string prenomClient, string mailClient, string numeroTelClient, string adresseClient)
+        public Client(int numClient, string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
         {
             this.NumClient = numClient;
             this.NomClient = nomClient;
@@ -36,7 +36,7 @@ namespace SAE2._01_Loxam
             this.NumeroTelClient = numeroTelClient;
         }
 
-        public Client(string nomClient, string prenomClient, string mailClient, string numeroTelClient, string adresseClient)
+        public Client(string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
         {
             this.NomClient = nomClient;
             this.PrenomClient = prenomClient;
@@ -211,7 +211,13 @@ namespace SAE2._01_Loxam
             int nb = 0;
             using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient, prenomclient, adresseclient, mailclient, numerotelclient) values (@nomClient, @prenomClient, @adresseClient, @mailClient, @numeroTelClient) RETURNING numClient"))
             {
-                cmdInsert.Parameters.AddWithValue("nomclient", (object ?)this.NomClient ?? DBNull.Value);
+                /*
+                cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
+                cmdInsert.Parameters.AddWithValue("adresseclient", this.AdresseClient);
+                cmdInsert.Parameters.AddWithValue("mailclient", this.MailClient);
+                cmdInsert.Parameters.AddWithValue("numerotelclient", this.NumeroTelClient);
+                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);*/
+                cmdInsert.Parameters.AddWithValue("nomclient", (object?)this.NomClient ?? DBNull.Value);
                 cmdInsert.Parameters.AddWithValue("prenomclient", (object?)this.PrenomClient ?? DBNull.Value);
                 cmdInsert.Parameters.AddWithValue("adresseclient", (object?)this.AdresseClient ?? DBNull.Value);
                 cmdInsert.Parameters.AddWithValue("mailclient", (object?)this.MailClient ?? DBNull.Value);
@@ -239,7 +245,7 @@ namespace SAE2._01_Loxam
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                     lesClients.Add(new Client((Int32)dr["numClient"], (String)dr["nomclient"],
-                   (String)dr["prenomClient"], (String)dr["mailClient"], (String)dr["numeroTelClient"], (String)dr["adresseClient"]));
+                   (String)dr["prenomClient"], (String)dr["adresseClient"], (String)dr["mailClient"], (String)dr["numeroTelClient"]));
             }
             return lesClients;
         }

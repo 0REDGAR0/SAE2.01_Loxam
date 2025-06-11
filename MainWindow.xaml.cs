@@ -94,10 +94,7 @@ namespace SAE2._01_Loxam
             }
         }
 
-        private void SPcentral_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
 
     }
 }

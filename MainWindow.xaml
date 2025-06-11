@@ -102,6 +102,6 @@
         </StackPanel>
 
         <!--  Zone centrale  -->
-        <StackPanel x:Name="SPcentral" Margin="226,108,20,20" Loaded="SPcentral_Loaded" />
+        <StackPanel x:Name="SPcentral" Margin="226,108,20,20" />
     </Grid>
 </Window>
