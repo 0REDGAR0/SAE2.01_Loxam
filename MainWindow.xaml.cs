@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -127,18 +128,24 @@ namespace SAE2._01_Loxam
 
         private void SetButtonState(Button button, bool isSelected)
         {
-            if (isSelected)
-            {
-                button.FontWeight = FontWeights.Bold;
-                button.FontSize = 36;
-            }
-            else
-            {
-                button.FontWeight = FontWeights.Normal;
-                button.FontSize = 22;
-            }
+            double targetSize = isSelected ? 36 : 22;
+            AnimateFontSize(button, targetSize);
+
+            button.FontWeight = isSelected ? FontWeights.Bold : FontWeights.Normal;
         }
 
+
+        private void AnimateFontSize(Button button, double toSize)
+        {
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                To = toSize,
+                Duration = TimeSpan.FromMilliseconds(300),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            button.BeginAnimation(Button.FontSizeProperty, animation);
+        }
 
     }
 }
