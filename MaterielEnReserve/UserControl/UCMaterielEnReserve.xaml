@@ -15,70 +15,26 @@
             Margin="0,0,0,20"
             HorizontalAlignment="Left"
             Orientation="Horizontal">
-            <Button
-                Width="50"
-                Height="50"
-                Margin="0,0,10,0"
-                Content="⬅"
-                FontSize="20" />
             <TextBlock
                 VerticalAlignment="Center"
                 FontSize="22"
                 FontWeight="Bold"
-                Text="Rechercher une réservation" />
+                Text="Rechercher une réservation             " />
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="20"
+                Text="🔍" />
+            <TextBox
+                x:Name="txtRecherche"
+                Width="300"
+                Height="30"
+                FontSize="20"
+                Text=""
+                TextChanged="TextBox_TextChanged"
+                TextWrapping="Wrap" />
         </StackPanel>
 
         <!--  Zone de recherche  -->
-        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
-
-            <!--  Champ recherche  -->
-            <Border
-                Width="400"
-                Height="50"
-                Margin="0,0,10,0"
-                Background="#F5F5F5"
-                CornerRadius="25">
-                <DockPanel LastChildFill="True">
-                    <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        FontSize="22"
-                        Text="🔍" />
-                    <TextBox
-                        Width="350"
-                        VerticalContentAlignment="Center"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        FontSize="16"
-                        Foreground="#999999"
-                        Text="{Binding RechercheTexte}"
-                        TextAlignment="Left"
-                        TextWrapping="NoWrap" />
-                </DockPanel>
-            </Border>
-
-
-            <!--  Bouton filtre  -->
-            <Grid>
-                <Button
-                    Width="50"
-                    Height="50"
-                    Content="⚙"
-                    FontSize="22" />
-                <Popup IsOpen="{Binding IsFiltreOuvert}" Placement="Bottom">
-                    <Border
-                        Background="White"
-                        BorderBrush="Gray"
-                        BorderThickness="1"
-                        CornerRadius="5">
-                        <StackPanel Margin="10">
-                            <TextBlock Margin="5" Text="• trier par n° de client" />
-                            <TextBlock Margin="5" Text="• trier par le nom du client" />
-                        </StackPanel>
-                    </Border>
-                </Popup>
-            </Grid>
-        </StackPanel>
 
         <!--  Tableau  -->
         <Border
@@ -87,52 +43,39 @@
             BorderThickness="1"
             CornerRadius="10">
             <DataGrid
-                x:Name="DataGridReservations"
+                x:Name="DataGridMateriel"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
                 ColumnHeaderHeight="50"
                 FontSize="16"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding ListeReservations}"
-                RowHeight="50">
+                RowHeight="50" MouseDoubleClick="DataGridMateriel_MouseDoubleClick">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
+                        Width="150"
+                        Binding="{Binding NumMateriel}"
+                        Header="Num." />
+                    <DataGridTextColumn
                         Width="200"
-                        Binding="{Binding Materiel}"
-                        Header="Matériel" />
+                        Binding="{Binding Reference}"
+                        Header="Référence" />
+                    <DataGridTextColumn
+                        Width="200"
+                        Binding="{Binding NomMateriel}"
+                        Header="Nom" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Descriptif}"
+                        Header="Descriptif" />
                     <DataGridTextColumn
                         Width="150"
-                        Binding="{Binding Lieu}"
-                        Header="Lieu" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding DateDebut}"
-                        Header="Du" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding DateFin}"
-                        Header="Au" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding Statut}"
-                        Header="Statut" />
-
-                    <DataGridTemplateColumn Width="150" Header="">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                                    Width="130"
-                                    Height="35"
-                                    Margin="5"
-                                    Command="{Binding CommandValider}"
-                                    Content="Valider location" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        Binding="{Binding PrixJournee, StringFormat={}{0} €}"
+                        Header="Prix/Jour" />
                 </DataGrid.Columns>
             </DataGrid>
+
         </Border>
     </StackPanel>
 </UserControl>

@@ -5,14 +5,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     d:DesignHeight="686"
-    d:DesignWidth="1040"
-    mc:Ignorable="d">
+    d:DesignWidth="1040">
 
-    <StackPanel>
+    <StackPanel Margin="20" Background="White">
 
-        <!--  Titre  -->
-        <TextBlock
+        <!-- Titre -->
+        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
+            <TextBlock Margin="0,0,10,0" FontSize="24" FontWeight="Bold" Text="←" />
+            <TextBlock FontSize="24" FontWeight="Bold" Text="Faire un retour" />
+        </StackPanel>
+
+        <!-- Nom de l'article -->
+        <Label
+            x:Name="txt_nom"
+            Width="122"
+            Margin="100.2,0,0,0"
+            HorizontalAlignment="Left"
+            Content="[nom article]"
+            FontSize="20" />
+
+        <!-- DataGrid -->
+        <DataGrid
+            x:Name="DataGridRetour"
+            Width="782"
+            Height="70"
             Margin="0,0,0,20"
             FontSize="22"
             FontWeight="Bold"
@@ -37,9 +55,21 @@
             Padding="20"
             BorderBrush="LightGray"
             BorderThickness="1"
-            CornerRadius="10">
+            CornerRadius="10"
+            Margin="0,0,0,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <StackPanel>
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Matériel :" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Materiel}" />
 
                 <StackPanel
                     Margin="0,0,0,10"
@@ -134,5 +164,46 @@
                 </DataGrid>
             </StackPanel>
         </Border>
+
+        <!-- Choix de retour -->
+        <StackPanel Width="395" Height="164" Margin="400,0,0,0" Orientation="Horizontal">
+            <GroupBox Width="200" BorderBrush="#FFB9BFC3" FontSize="20" Header="Matériel rendu :">
+                <StackPanel Margin="10">
+                    <RadioButton Content="Oui" GroupName="Rendu" IsChecked="True" />
+                    <RadioButton Content="Non" GroupName="Rendu" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Width="183" Height="165" BorderBrush="#FFB9BFC3" FontSize="20" Header="État du matériel :">
+                <StackPanel Margin="10">
+                    <RadioButton Content="Bon" GroupName="Etat" IsChecked="True" />
+                    <RadioButton Content="Endommagé" GroupName="Etat" />
+                    <RadioButton Content="Hors service" GroupName="Etat" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <!-- Bouton enregistrer -->
+        <Button
+            x:Name="btn_enregistrer_retour"
+            Width="296"
+            Height="60"
+            Margin="300,28,0,0"
+            Background="Red"
+            Content="ENREGISTRER RETOUR"
+            FontWeight="Bold"
+            Foreground="White" />
+
+        <!-- Bouton voir détails -->
+        <Button
+            x:Name="btn_voir_details"
+            Margin="0,20,0,0"
+            Width="150"
+            Height="40"
+            HorizontalAlignment="Right"
+            Background="#FFFF3636"
+            Click="Button_Click"
+            Content="voir détails"
+            Foreground="White" />
     </StackPanel>
 </UserControl>

@@ -83,10 +83,11 @@
             HorizontalAlignment="Left"
             Background="#F0F0F0">
             <Button
+                x:Name="butRechercheMat"
                 Height="50"
                 Margin="10"
                 Content="🔍 Recherche matériel"
-                FontSize="16" />
+                FontSize="16" Click="butRechercheMat_Click" />
             <Button
                 x:Name="butFicheClient"
                 Height="50"
