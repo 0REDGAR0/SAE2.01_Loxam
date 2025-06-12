@@ -21,6 +21,7 @@ namespace SAE2._01_Loxam
         private void App_Exit(object sender, ExitEventArgs e)
         {
             DataAccess.Instance.CloseConnection();
+            Environment.Exit(0);
         }
 
     }

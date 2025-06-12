@@ -72,8 +72,8 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                 Client clientSelectionne = (Client)dgClients.SelectedItem;
                 Client copie = new Client(clientSelectionne.NumClient, clientSelectionne.NomClient,
                 clientSelectionne.PrenomClient, clientSelectionne.AdresseClient, clientSelectionne.MailClient, clientSelectionne.NumeroTelClient);
-                WindowFicheClient wClient = new WindowFicheClient(copie, WindowFicheClient.Action.Modifier);
-                bool? result = wClient.ShowDialog();
+                WindowModificationClient wClientModif = new WindowModificationClient(copie, WindowModificationClient.Action.Modifier);
+                bool? result = wClientModif.ShowDialog();
                 if (result == true)
                 {
                     try
@@ -88,7 +88,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Le chien n'a pas pu être modifié.", "Attention",
+                        MessageBox.Show("Le client n'a pas pu être modifié.", "Attention",
                         MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
@@ -105,29 +105,43 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         private void butSupp_Click(object sender, RoutedEventArgs e)
         {
             if (dgClients.SelectedItem == null)
-                MessageBox.Show("Veuillez sélectionner un chien", "Attention",
+                MessageBox.Show("Veuillez sélectionner un client", "Attention",
                 MessageBoxButton.OK, MessageBoxImage.Information);
             else
             {
                 Client clientSellectionner = (Client)dgClients.SelectedItem;
                 Client clientASupprimer = new Client(clientSellectionner.NumClient, clientSellectionner.NomClient,
                 clientSellectionner.PrenomClient, clientSellectionner.AdresseClient, clientSellectionner.MailClient, clientSellectionner.NumeroTelClient);
-                /*if (chienAsupprimer.FindNbSejours() > 0)
+                /*if (clientASupprimer.FindNbDispose() > 0)
                 {
-                    MessageBox.Show(this, $"Attention, ce chien est lié à {chienAsupprimer.FindNbSejours()} séjours. Désirez-vous tout de même supprimer ce chien et ces {chienAsupprimer.FindNbSejours()} séjours", "Attention",
+                    MessageBox.Show($"Attention, ce client est lié à {clientASupprimer.FindNbDispose()} certification. Désirez-vous tout de même supprimer ce client et ces {clientASupprimer.FindNbDispose()} certifications", "Attention",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                }*/
-                WindowFicheClient wClient = new WindowFicheClient(clientASupprimer, WindowFicheClient.Action.Supprimer);
-                bool? result = wClient.ShowDialog();
-                try
-                {
-                    clientASupprimer.Delete();
-                    LeClient.LesClients.Remove(clientASupprimer);
                 }
-                catch (Exception ex)
+                //WindowFicheClient wClient = new WindowFicheClient(clientASupprimer, WindowFicheClient.Action.Supprimer);
+                //bool? result = wClient.ShowDialog();*/
+                int nbCertif = clientASupprimer.FindNbDispose();
+
+                // Message de confirmation
+                MessageBoxResult result = MessageBox.Show(
+                    nbCertif > 0
+                        ? $"Ce client est lié à {nbCertif} certification(s).\nVoulez-vous tout de même le supprimer ?"
+                        : "Êtes-vous sûr de vouloir supprimer ce client ?",
+                    "Confirmation de suppression",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Le chien n'a pas pu être supprimé.", "Attention",
-                   MessageBoxButton.OK, MessageBoxImage.Error);
+                    try
+                    {
+                        clientASupprimer.Delete();
+                        LeClient.LesClients.Remove(clientASupprimer);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Le client n'a pas pu être supprimé.", "Attention",
+                       MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }

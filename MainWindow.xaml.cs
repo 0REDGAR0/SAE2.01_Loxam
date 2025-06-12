@@ -49,7 +49,7 @@ namespace SAE2._01_Loxam
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Connexion connexion = new Connexion();
-            // connexion.Show();
+            connexion.Show();
         }
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {
@@ -86,8 +86,5 @@ namespace SAE2._01_Loxam
                 Application.Current.Shutdown();
             }
         }
-
-
-
     }
 }

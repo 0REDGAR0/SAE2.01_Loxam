@@ -299,5 +299,16 @@ namespace SAE2._01_Loxam
         {
             return !(left == right);
         }
+
+        public int FindNbDispose()
+        {
+            int nb = 0;
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select count(*) from dispose where numclient = @numClient; "))
+            {
+                cmdSelect.Parameters.AddWithValue("numclient", this.NumClient);
+                return (int)(Int64)DataAccess.Instance.ExecuteSelectUneValeur(cmdSelect);
+            }
+            return nb;
+        }
     }
 }
