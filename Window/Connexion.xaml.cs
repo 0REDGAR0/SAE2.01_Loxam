@@ -65,41 +65,30 @@ namespace SAE2._01_Loxam
             string login = txtLogin.Text;
             string mdp = txtPassword.Text;
 
-
             string connexionString = $"Host=srv-peda-new;" +
-            $"Port=5433;" +
-            $"Username={login};" +
-            $"Password={mdp};" +
-            $"Database=sae_loxam;" +
-            $"Options='-c " +
-            $"search_path=loxam'";
+                $"Port=5433;" +
+                $"Username={login};" +
+                $"Password={mdp};" +
+                $"Database=sae_loxam;" +
+                $"Options='-c search_path=loxam'";
 
-            using (NpgsqlConnection connexion = new NpgsqlConnection(connexionString))
+            try
             {
-                try
+                using (NpgsqlConnection connexion = new NpgsqlConnection(connexionString))
                 {
-                    connexion.Open();
+                    connexion.Open(); // si échec → catch
 
+                    // Connexion réussie → ouvrir fenêtre principale
                     MainWindow mainWindow = new MainWindow();
-                    this.Hide();
                     mainWindow.Show();
-                }catch (Exception ex)
-                {
-                    MessageBox.Show("Identifiant ou mot de passe incorrect","Login error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.Close();
                 }
             }
-
-    }
-
-            /*if ((txtLogin.Text != DataAccess.login) && (txtPassword.Password != DataAccess.password))
+            catch (Exception)
             {
-                MessageBox.Show("CA MARCHE PAS");
-            }else
-            {
-                MainWindow main = new MainWindow();
-                main.Show();
-                this.Close(); 
-            }*/
-        
+                // Échec de la connexion PostgreSQL
+                MessageBox.Show("Identifiant ou mot de passe incorrect", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
