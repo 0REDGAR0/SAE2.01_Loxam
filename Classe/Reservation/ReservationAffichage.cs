@@ -21,7 +21,7 @@ namespace SAE2._01_Loxam.Classe.Reservation
         {
             get
             {
-                if (DateRetourReelle == DateTime.MinValue)
+                if (DateRetourReelle > DateTime.Now)
                 {
                     if (DateDebutLocation > DateTime.Now)
                         return "Prévue";
