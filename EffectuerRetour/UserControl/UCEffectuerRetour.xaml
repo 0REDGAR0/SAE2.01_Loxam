@@ -28,6 +28,7 @@
                 Text="Faire un retour" />
         </StackPanel>
 
+
         <!--  Tableau informations matériel  -->
 
         <!--  Commentaire  -->
@@ -70,82 +71,82 @@
             Height="100"
             HorizontalAlignment="Left"
             Orientation="Horizontal" />
+        <DataGrid x:Name="DataGridRetour" Height="70" Width="782">
 
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+
+            <!--  Boutons  -->
+            <StackPanel
+                Grid.Row="1"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Left"
+                Orientation="Horizontal">
+                <Button
+                    Width="150"
+                    Height="40"
+                    Margin="20,0,10,0"
+                    Background="Red"
+                    Content="FAIRE UN RETOUR"
+                    FontWeight="Bold"
+                    Foreground="White" />
+                <Button
+                    Width="150"
+                    Height="40"
+                    Background="Red"
+                    Content="RECHERCHER"
+                    FontWeight="Bold"
+                    Foreground="White" />
+            </StackPanel>
+
+            <!--  Tableau  -->
+            <DataGrid
+                x:Name="dataGridReservations"
+                Grid.Row="2"
+                Margin="0,10,177,0"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                HeadersVisibility="Column"
+                IsReadOnly="True">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding NomMateriel}"
+                        Header="Matériel" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Lieu}"
+                        Header="Lieu" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding DateDebut}"
+                        Header="Du" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding DateFin}"
+                        Header="Au" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding EtatRetour}"
+                        Header="État" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button
+                x:Name="btn_voir_details"
+                Grid.Row="2"
+                Margin="877,46,3,-38"
+                Background="#FFFF3636"
+                Click="Button_Click"
+                Content="voir détails"
+                Foreground="White"
+                RenderTransformOrigin="3.275,-0.356" />
+        </DataGrid>
         <!--  Choix retour  -->
         <StackPanel Margin="0,0,0,20" Orientation="Horizontal" />
-        <Border
-            Padding="20"
-            BorderBrush="LightGray"
-            BorderThickness="1"
-            CornerRadius="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="200" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    Grid.Column="0"
-                    FontWeight="Bold"
-                    Text="Matériel" />
-                <TextBlock
-                    Grid.Column="1"
-                    FontWeight="Bold"
-                    Text="Lieu" />
-                <TextBlock
-                    Grid.Column="2"
-                    FontWeight="Bold"
-                    Text="Du" />
-                <TextBlock
-                    Grid.Column="3"
-                    FontWeight="Bold"
-                    Text="Au" />
-                <TextBlock
-                    Grid.Column="4"
-                    FontWeight="Bold"
-                    Text="Etat" />
-
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="0,30,0,0"
-                    Text="{Binding Materiel}" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Margin="0,30,0,0"
-                    Text="{Binding Lieu}" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="0,30,0,0"
-                    Text="{Binding DateDebut}" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Margin="0,30,0,0"
-                    Text="{Binding DateFin}" />
-
-                <Border
-                    Grid.Row="1"
-                    Grid.Column="4"
-                    Margin="0,30,0,0"
-                    Padding="5"
-                    Background="{Binding CouleurEtat}"
-                    CornerRadius="5">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        FontWeight="SemiBold"
-                        Text="{Binding Etat}" />
-                </Border>
-            </Grid>
-        </Border>
-
-        <!--  Image illustration  -->
-
-        <!--  Bouton final  -->
+        <Button Content="Button" Click="Button_Click_1"/>
     </StackPanel>
+
 </UserControl>
