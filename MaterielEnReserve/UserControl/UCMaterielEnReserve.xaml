@@ -35,71 +35,72 @@
                 TextWrapping="Wrap" />
         </StackPanel>
 
-        <!--  Tableau  -->
+        <!--  Tableau avec scroll  -->
         <Border
             Padding="10"
             BorderBrush="LightGray"
             BorderThickness="1"
             CornerRadius="10">
-            <DataGrid
-                x:Name="DataGridMateriel"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                ColumnHeaderHeight="50"
-                FontSize="16"
-                HeadersVisibility="Column"
-                IsReadOnly="True"
-                MouseDoubleClick="DataGridMateriel_MouseDoubleClick"
-                RowHeight="25">
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding NumMateriel}"
-                        Header="Num." />
-                    <DataGridTextColumn
-                        Width="200"
-                        Binding="{Binding Reference}"
-                        Header="Référence" />
-                    <DataGridTextColumn
-                        Width="200"
-                        Binding="{Binding NomMateriel}"
-                        Header="Nom" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Descriptif}"
-                        Header="Descriptif" />
+            <!--  On ajoute ici le scroll uniquement autour du DataGrid  -->
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <DataGrid
+                    x:Name="DataGridMateriel"
+                    MaxHeight="550"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    ColumnHeaderHeight="50"
+                    FontSize="16"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    MouseDoubleClick="DataGridMateriel_MouseDoubleClick"
+                    RowHeight="25">
 
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding PrixJournee, StringFormat={}{0} €}"
-                        Header="Prix/Jour" />
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding NumMateriel}"
+                            Header="Num." />
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding Reference}"
+                            Header="Référence" />
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding NomMateriel}"
+                            Header="Nom" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Descriptif}"
+                            Header="Descriptif" />
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding PrixJournee, StringFormat={}{0} €}"
+                            Header="Prix/Jour" />
+                        <DataGridTemplateColumn
+                            Width="150"
+                            Header="État"
+                            SortMemberPath="StatutReservation">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Margin="1"
+                                        Padding="2"
+                                        Background="{Binding CouleurEtat}"
+                                        CornerRadius="2">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontSize="10"
+                                            Foreground="White"
+                                            Text="{Binding StatutReservation}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
 
-                    <!--  Nouvelle colonne État avec couleurs  -->
-                    <DataGridTemplateColumn
-                        Width="150"
-                        Header="État"
-                        SortMemberPath="StatutReservation">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border
-                                    Margin="1"
-                                    Padding="2"
-                                    Background="{Binding CouleurEtat}"
-                                    CornerRadius="2">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontSize="10"
-                                        Foreground="White"
-                                        Text="{Binding StatutReservation}" />
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-
-                </DataGrid.Columns>
-            </DataGrid>
         </Border>
     </StackPanel>
 </UserControl>

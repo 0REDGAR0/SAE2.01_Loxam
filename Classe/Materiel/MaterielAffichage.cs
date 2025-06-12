@@ -13,7 +13,7 @@ namespace SAE2._01_Loxam.Classe.Materiel
         public string NomMateriel { get; set; }
         public string Descriptif { get; set; }
         public decimal PrixJournee { get; set; }
-        public int NumEtat { get; set; }  // récupéré depuis ta base
+        public int NumEtat { get; set; }
 
         public string StatutReservation
         {
@@ -24,7 +24,8 @@ namespace SAE2._01_Loxam.Classe.Materiel
                     2 => "Prévue",
                     3 => "En cours",
                     4 => "Terminée",
-                    5 or 6 => "En réparation",
+                    5 => "En attente de réparation", 
+                    6 => "En réparation",
                     7 => "HS",
                     _ => "Disponible"
                 };
