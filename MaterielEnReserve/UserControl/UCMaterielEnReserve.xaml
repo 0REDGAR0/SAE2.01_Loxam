@@ -50,45 +50,32 @@
                 FontSize="16"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                ItemsSource="{Binding ListeReservations}"
-                RowHeight="50">
+                RowHeight="50" MouseDoubleClick="DataGridMateriel_MouseDoubleClick">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
+                        Width="150"
+                        Binding="{Binding NumMateriel}"
+                        Header="Num." />
+                    <DataGridTextColumn
                         Width="200"
-                        Binding="{Binding Materiel}"
-                        Header="Matériel" />
+                        Binding="{Binding Reference}"
+                        Header="Référence" />
+                    <DataGridTextColumn
+                        Width="200"
+                        Binding="{Binding NomMateriel}"
+                        Header="Nom" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Descriptif}"
+                        Header="Descriptif" />
                     <DataGridTextColumn
                         Width="150"
-                        Binding="{Binding Lieu}"
-                        Header="Lieu" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding DateDebut}"
-                        Header="Du" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding DateFin}"
-                        Header="Au" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding Statut}"
-                        Header="Statut" />
-
-                    <DataGridTemplateColumn Width="150" Header="">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                                    Width="130"
-                                    Height="35"
-                                    Margin="5"
-                                    Command="{Binding CommandValider}"
-                                    Content="Valider location" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        Binding="{Binding PrixJournee, StringFormat={}{0} €}"
+                        Header="Prix/Jour" />
                 </DataGrid.Columns>
             </DataGrid>
+
         </Border>
     </StackPanel>
 </UserControl>
