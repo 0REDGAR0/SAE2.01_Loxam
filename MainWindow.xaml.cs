@@ -59,7 +59,7 @@ namespace SAE2._01_Loxam
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Connexion connexion = new Connexion();
-            // connexion.Show();
+            connexion.Show();
         }
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {
@@ -140,7 +140,7 @@ namespace SAE2._01_Loxam
             DoubleAnimation animation = new DoubleAnimation
             {
                 To = toSize,
-                Duration = TimeSpan.FromMilliseconds(300),
+                Duration = TimeSpan.FromMilliseconds(600),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
