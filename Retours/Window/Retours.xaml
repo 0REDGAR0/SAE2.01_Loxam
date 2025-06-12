@@ -1,94 +1,210 @@
-﻿<Window x:Class="SAE2._01_Loxam.Retours"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LOXAM - Retours" Height="900" Width="1400" Background="White">
+﻿<Window
+    x:Class="SAE2._01_Loxam.Retours"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="LOXAM - Retours"
+    Width="1400"
+    Height="900"
+    Background="White">
 
     <Grid>
 
-        <!-- Bandeau rouge en haut -->
-        <Grid Height="100" VerticalAlignment="Top" Background="Red">
-            <Label Content="LOXAM" FontSize="36" FontWeight="Bold" Foreground="White" Margin="20,20,0,0" HorizontalAlignment="Left"/>
+        <!--  Bandeau rouge en haut  -->
+        <Grid
+            Height="100"
+            VerticalAlignment="Top"
+            Background="Red">
+            <Label
+                Margin="20,20,0,0"
+                HorizontalAlignment="Left"
+                Content="LOXAM"
+                FontSize="36"
+                FontWeight="Bold"
+                Foreground="White" />
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="RETOUR" Foreground="White" FontSize="22" FontWeight="Bold" Margin="40,0"/>
-                <TextBlock Text="RESERVATION" Foreground="White" FontSize="22" Margin="40,0"/>
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    Margin="40,0"
+                    FontSize="22"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="RETOUR" />
+                <TextBlock
+                    Margin="40,0"
+                    FontSize="22"
+                    Foreground="White"
+                    Text="RESERVATION" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center">
-                <TextBlock Text="Christophe Colin " Foreground="White" FontSize="16" VerticalAlignment="Center"/>
-                <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="White" VerticalAlignment="Center"/>
+            <StackPanel
+                Margin="0,0,20,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="White"
+                    Text="Christophe Colin " />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="20"
+                    Foreground="White"
+                    Text="&#xE77B;" />
             </StackPanel>
         </Grid>
 
-        <!-- Menu vertical gauche -->
-        <StackPanel Width="200" Background="#F0F0F0" Margin="0,100,0,0" HorizontalAlignment="Left">
-            <Button Content="🔍 Recherche matériel" Margin="10" Height="50" FontSize="16"/>
-            <Button Content="👤 Fiche client" Margin="10" Height="50" FontSize="16"/>
-            <Button Content="🔧 Réparation" Margin="10" Height="50" FontSize="16"/>
+        <!--  Menu vertical gauche  -->
+        <StackPanel
+            Width="200"
+            Margin="0,100,0,0"
+            HorizontalAlignment="Left"
+            Background="#F0F0F0">
+            <Button
+                Height="50"
+                Margin="10"
+                Content="🔍 Recherche matériel"
+                FontSize="16" />
+            <Button
+                Height="50"
+                Margin="10"
+                Content="👤 Fiche client"
+                FontSize="16" />
+            <Button
+                Height="50"
+                Margin="10"
+                Content="🔧 Réparation"
+                FontSize="16" />
         </StackPanel>
 
-        <!-- Contenu principal -->
+        <!--  Contenu principal  -->
         <StackPanel Margin="220,120,20,20">
 
-            <!-- Titre -->
-            <TextBlock Text="Effectuer un retour" FontSize="22" FontWeight="Bold" Margin="0,0,0,20"/>
+            <!--  Titre  -->
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="22"
+                FontWeight="Bold"
+                Text="Effectuer un retour" />
 
-            <!-- Bloc Indisponibilités -->
-            <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="10" Padding="20">
+            <!--  Bloc Indisponibilités  -->
+            <Border
+                Padding="20"
+                BorderBrush="LightGray"
+                BorderThickness="1"
+                CornerRadius="10">
 
                 <StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10" HorizontalAlignment="Right">
-                        <Button Content="RECHERCHER" Background="Red" Foreground="White" FontWeight="Bold"
-                                Width="150" Height="40"/>
+                    <StackPanel
+                        Margin="0,0,0,10"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                        <Button
+                            x:Name="btn_effectuer_retour"
+                            Width="194"
+                            Height="40"
+                            Background="Red"
+                            Click="btn_effectuer_retour_Click"
+                            Content="EFFECTUER UN RETOUR"
+                            FontWeight="Bold"
+                            Foreground="White" />
+                        <Button
+                            x:Name="btn_rechercher"
+                            Width="150"
+                            Height="40"
+                            Margin="90,0,0,0"
+                            Background="Red"
+                            Content="RECHERCHER"
+                            FontWeight="Bold"
+                            Foreground="White" />
                     </StackPanel>
 
-                    <TextBlock Text="Indisponibilités" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <TextBlock
+                        Margin="0,0,0,10"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Text="Indisponibilités" />
 
-                    <!-- DataGrid -->
-                    <DataGrid x:Name="DataGridIndisponibilites"
-                              AutoGenerateColumns="False"
-                              CanUserAddRows="False"
-                              IsReadOnly="True"
-                              RowHeight="50"
-                              HeadersVisibility="Column"
-                              ColumnHeaderHeight="50"
-                              FontSize="16"
-                              ItemsSource="{Binding ListeIndisponibilites}">
+                    <!--  DataGrid  -->
+                    <DataGrid
+                        x:Name="DataGridIndisponibilites"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        ColumnHeaderHeight="50"
+                        FontSize="16"
+                        HeadersVisibility="Column"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding ListeIndisponibilites}"
+                        MouseDoubleClick="DataGridIndisponibilites_MouseDoubleClick"
+                        RowHeight="50">
 
                         <DataGrid.Columns>
 
-                            <DataGridTextColumn Header="Matériel" Binding="{Binding Materiel}" Width="200"/>
-                            <DataGridTextColumn Header="Lieu" Binding="{Binding Lieu}" Width="150"/>
-                            <DataGridTextColumn Header="Du" Binding="{Binding DateDebut}" Width="150"/>
-                            <DataGridTextColumn Header="Au" Binding="{Binding DateFin}" Width="150"/>
+                            <DataGridTextColumn
+                                Width="200"
+                                Binding="{Binding Materiel}"
+                                Header="Matériel" />
+                            <DataGridTextColumn
+                                Width="150"
+                                Binding="{Binding Lieu}"
+                                Header="Lieu" />
+                            <DataGridTextColumn
+                                Width="150"
+                                Binding="{Binding DateDebut}"
+                                Header="Du" />
+                            <DataGridTextColumn
+                                Width="150"
+                                Binding="{Binding DateFin}"
+                                Header="Au" />
 
-                            <!-- Etat -->
-                            <DataGridTemplateColumn Header="État" Width="150">
+                            <!--  Etat  -->
+                            <DataGridTemplateColumn Width="150" Header="État">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border CornerRadius="5" Padding="5" Background="{Binding CouleurEtat}">
-                                            <TextBlock Text="{Binding Etat}" HorizontalAlignment="Center" FontWeight="SemiBold"/>
+                                        <Border
+                                            Padding="5"
+                                            Background="{Binding CouleurEtat}"
+                                            CornerRadius="5">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                FontWeight="SemiBold"
+                                                Text="{Binding Etat}" />
                                         </Border>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Voir détails -->
-                            <DataGridTemplateColumn Header="" Width="120">
+                            <!--  Voir détails  -->
+                            <DataGridTemplateColumn Width="120" Header="">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="👁 Voir détails" Width="100" Height="30" Margin="5" Command="{Binding CommandVoirDetails}"/>
+                                        <Button
+                                            Width="100"
+                                            Height="30"
+                                            Margin="5"
+                                            Command="{Binding CommandVoirDetails}"
+                                            Content="👁 Voir détails" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Faire un retour -->
-                            <DataGridTemplateColumn Header="" Width="150">
+                            <!--  Faire un retour  -->
+                            <DataGridTemplateColumn Width="150" Header="">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="FAIRE UN RETOUR" Background="Red" Foreground="White"
-                                                Width="130" Height="30" Margin="5" Command="{Binding CommandFaireRetour}"/>
+                                        <Button
+                                            Width="130"
+                                            Height="30"
+                                            Margin="5"
+                                            Background="Red"
+                                            Command="{Binding CommandFaireRetour}"
+                                            Content="FAIRE UN RETOUR"
+                                            Foreground="White" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

@@ -20,9 +20,30 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
     /// </summary>
     public partial class UCEffectuerRetour : UserControl
     {
+        private List<RetourAffichage> listeRetours;
         public UCEffectuerRetour()
         {
             InitializeComponent();
+            ChargerRetours();
+        }
+
+        private void ChargerRetours()
+        {
+            RetourDAO retourDAO = new RetourDAO();
+            listeRetours = retourDAO.GetRetoursAffichage();
+            //DataGridRetour.ItemsSource = listeRetours;
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            int idReservation = (int)btn.Tag;
+
+            // On pourrait aller chercher le materiel associé ici
+            // Exemple : ouvrir une fenêtre de détail avec les infos de ce matériel
+            //DetailMaterielWindow detailWindow = new DetailMaterielWindow();
+            //detailWindow.ShowDialog();
         }
     }
 }

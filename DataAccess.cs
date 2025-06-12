@@ -4,7 +4,10 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Media3D;
 using Npgsql;
+using SAE2._01_Loxam.Classe.Materiel;
+using SAE2._01_Loxam.Classe.Reservation;
 
 namespace SAE2._01_Loxam
 {
@@ -150,6 +153,66 @@ namespace SAE2._01_Loxam
             return res;
 
         }
+
+        public void MettreAJourReservation(Reservation reservation)
+        {
+            using (var connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE RESERVATION SET dateretourreellelocation = @dateretourreellelocation WHERE numreservation = @numreservation";
+                using (var cmd = new NpgsqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@dateretourreellelocation", reservation.DateRetourReelleLocation);
+                    cmd.Parameters.AddWithValue("@numreservation", reservation.NumReservation);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void MettreAJourMateriel(Materiel materiel)
+        {
+            using (var connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "UPDATE MATERIEL SET numetat = @numetat WHERE nummateriel = @nummateriel";
+                using (var cmd = new NpgsqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@numetat", materiel.NumEtat);
+                    cmd.Parameters.AddWithValue("@nummateriel", materiel.NumMateriel);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public Materiel GetMaterielById(int numMateriel)
+        {
+            using (var connection = new NpgsqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM MATERIEL WHERE nummateriel = @nummateriel";
+                using (var cmd = new NpgsqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@nummateriel", numMateriel);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new Materiel
+                            {
+                                NumMateriel = reader.GetInt32(reader.GetOrdinal("nummateriel")),
+                                NumEtat = reader.GetInt32(reader.GetOrdinal("numetat")),
+                                NumType = reader.GetInt32(reader.GetOrdinal("numtype")),
+                                Reference = reader["reference"].ToString(),
+                                NomMateriel = reader["nommateriel"].ToString(),
+                                Descriptif = reader["descriptif"].ToString(),
+                                PrixJournee = reader.GetDecimal(reader.GetOrdinal("prixjournee"))
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
 
         //  Fermer la connexion 
         public void CloseConnection()

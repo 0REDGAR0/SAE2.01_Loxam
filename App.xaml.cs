@@ -12,11 +12,11 @@ namespace SAE2._01_Loxam
     {
         public App()
         {
-            this.Exit += App_Exit;
-
             CultureInfo culture = new CultureInfo("fr-FR");
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
+
+            this.Exit += App_Exit;
         }
         private void App_Exit(object sender, ExitEventArgs e)
         {
