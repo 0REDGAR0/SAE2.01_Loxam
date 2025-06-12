@@ -92,7 +92,7 @@
                 <TextBox
                     Height="35"
                     Margin="0,5,0,15"
-                    Text="{Binding NumeroReservation}" />
+                    Text="{Binding NumReservation}" />
 
                 <TextBlock
                     FontSize="16"
@@ -101,7 +101,7 @@
                 <TextBox
                     Height="35"
                     Margin="0,5,0,15"
-                    Text="{Binding Materiel}" />
+                    Text="{Binding NumMateriel}" />
 
                 <StackPanel Margin="0,0,0,15" Orientation="Horizontal">
                     <StackPanel Width="100">
@@ -112,7 +112,7 @@
                         <TextBox
                             Height="35"
                             Margin="0,5,0,0"
-                            Text="{Binding DateDebut}" />
+                            Text="{Binding DateDebutLocation}" />
                     </StackPanel>
                     <StackPanel Width="100" Margin="20,0,0,0">
                         <TextBlock
@@ -122,7 +122,7 @@
                         <TextBox
                             Height="35"
                             Margin="0,5,0,0"
-                            Text="{Binding DateFin}" />
+                            Text="{Binding DateRetourEffectiveLocation}" />
                     </StackPanel>
                 </StackPanel>
 
