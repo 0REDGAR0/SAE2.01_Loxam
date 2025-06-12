@@ -16,7 +16,9 @@ namespace SAE2._01_Loxam.Classe.Reservation
         public DateTime DateRetourEffective { get; set; }
         public DateTime DateRetourReelle { get; set; }
         public decimal PrixTotal { get; set; }
+        public string Categorie { get; set; }
         public int NumEtat { get; set; }
+
 
         public string StatutReservation
         {
@@ -26,7 +28,7 @@ namespace SAE2._01_Loxam.Classe.Reservation
                 {
                     2 => "Prévue",
                     3 => "En cours",
-                    4 => "Terminée",
+                    4 => "Terminée/Retourne",
                     5 => "En attente de réparation",
                     6 => "En réparation",
                     7 => "HS",

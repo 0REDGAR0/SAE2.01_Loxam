@@ -1,26 +1,14 @@
-﻿using SAE2._01_Loxam.Classe.Materiel;
-using SAE2._01_Loxam.Classe.Reservation;
+﻿using SAE2._01_Loxam.Classe;
+using SAE2._01_Loxam.Classe.Materiel;
 using SAE2._01_Loxam.MaterielEnReserve;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
-    /// <summary>
-    /// Logique d'interaction pour UCMaterielEnReserve.xaml
-    /// </summary>
     public partial class UCMaterielEnReserve : UserControl
     {
         private List<MaterielAffichage> listeMateriels;
@@ -30,6 +18,8 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
             ChargerMateriels();
+            RemplirComboCategorie();
+            RemplirComboEtat();
             DataGridMateriel.Items.Filter = RechercheMotClefMateriel;
         }
 
@@ -39,9 +29,34 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             DataGridMateriel.ItemsSource = listeMateriels;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void RemplirComboCategorie()
         {
-            CollectionViewSource.GetDefaultView(DataGridMateriel.ItemsSource).Refresh();
+            cmbCategorie.Items.Clear();
+            cmbCategorie.Items.Add("Toutes");
+
+            CategorieDAO categorieDAO = new CategorieDAO();
+            List<string> categories = categorieDAO.GetToutesCategories();
+
+            foreach (var cat in categories)
+            {
+                cmbCategorie.Items.Add(cat);
+            }
+
+            cmbCategorie.SelectedIndex = 0;
+        }
+
+        private void RemplirComboEtat()
+        {
+            cmbEtat.Items.Clear();
+            cmbEtat.Items.Add("Tous");
+            cmbEtat.Items.Add("Disponible");
+            cmbEtat.Items.Add("Prévue");
+            cmbEtat.Items.Add("En cours");
+            cmbEtat.Items.Add("Terminée");
+            cmbEtat.Items.Add("En attente de réparation");
+            cmbEtat.Items.Add("En réparation");
+            cmbEtat.Items.Add("HS");
+            cmbEtat.SelectedIndex = 0;
         }
 
         private bool RechercheMotClefMateriel(object obj)
@@ -49,21 +64,50 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             if (obj is MaterielAffichage materiel)
             {
                 string texteRecherche = txtRecherche.Text?.ToLower() ?? "";
-                return materiel.NomMateriel.ToLower().Contains(texteRecherche)
+
+                bool filtreTexte = materiel.NomMateriel.ToLower().Contains(texteRecherche)
                     || materiel.Reference.ToLower().Contains(texteRecherche);
+
+                bool filtreCategorie = true;
+                if (cmbCategorie.SelectedItem != null && cmbCategorie.SelectedItem.ToString() != "Toutes")
+                {
+                    filtreCategorie = materiel.Categorie == cmbCategorie.SelectedItem.ToString();
+                }
+
+                bool filtreEtat = true;
+                if (cmbEtat.SelectedItem != null && cmbEtat.SelectedItem.ToString() != "Tous")
+                {
+                    filtreEtat = materiel.StatutReservation == cmbEtat.SelectedItem.ToString();
+                }
+
+                return filtreTexte && filtreCategorie && filtreEtat;
             }
+
             return false;
         }
 
-
-        private void DataGridMateriel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (DataGridMateriel.SelectedItem is MaterielAffichage materiel)
+            CollectionViewSource.GetDefaultView(DataGridMateriel.ItemsSource).Refresh();
+        }
+
+        private void DataGridMateriel_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (DataGridMateriel.SelectedItem is MaterielAffichage materielSelectionne)
             {
-                DetailMaterielWindow detailWindow = new DetailMaterielWindow(materiel);
+                DetailMaterielWindow detailWindow = new DetailMaterielWindow(materielSelectionne);
                 detailWindow.ShowDialog();
             }
         }
-    }
 
+        private void cmbCategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridMateriel.ItemsSource).Refresh();
+        }
+
+        private void cmbEtat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridMateriel.ItemsSource).Refresh();
+        }
+    }
 }

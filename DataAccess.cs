@@ -15,10 +15,17 @@ namespace SAE2._01_Loxam
     {
 
         private static readonly DataAccess instance = new DataAccess();
-        private readonly string connectionString = $"Host=srv-peda-new;" +
+        private readonly string connectionString = /*$"Host=srv-peda-new;" +
             $"Port=5433;" +
             $"Username=beduneye;" +
             $"Password=WVTvXG;" +
+            $"Database=sae_loxam;" +
+            $"Options='-c " +
+            $"search_path=loxam'";*/
+            $"Host=192.168.1.32;" +
+            $"Port=5432;" +
+            $"Username=postgres;" +
+            $"Password=postgres;" +
             $"Database=sae_loxam;" +
             $"Options='-c " +
             $"search_path=loxam'";

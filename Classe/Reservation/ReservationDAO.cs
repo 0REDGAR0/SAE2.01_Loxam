@@ -11,19 +11,24 @@ namespace SAE2._01_Loxam.Classe.Reservation
             List<ReservationAffichage> list = new List<ReservationAffichage>();
 
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand(@"
-                SELECT 
-                    r.numreservation,
-                    c.nomclient || ' ' || c.prenomclient AS client,
-                    m.nommateriel AS materiel,
-                    r.datereservation,
-                    r.datedebutlocation,
-                    r.dateretoureffectivelocation,
-                    r.dateretourreellelocation,
-                    r.prixtotal,
-                    m.numetat
-                FROM reservation r
-                JOIN client c ON r.numclient = c.numclient
-                JOIN materiel m ON r.nummateriel = m.nummateriel;
+               SELECT 
+                   r.numreservation,
+                   c.nomclient || ' ' || c.prenomclient AS client,
+                   m.nommateriel AS materiel,
+                   cat.libellecategorie AS categorie,
+                   m.numetat,
+                   r.datereservation,
+                   r.datedebutlocation,
+                   r.dateretoureffectivelocation,
+                   r.dateretourreellelocation,
+                   r.prixtotal
+               FROM reservation r
+               JOIN client c ON r.numclient = c.numclient
+               JOIN materiel m ON r.nummateriel = m.nummateriel
+               JOIN type t ON m.numtype = t.numtype
+               JOIN categorie cat ON t.numcategorie = cat.numcategorie
+               WHERE m.numetat IN (1,2,3,4)
+
             "))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);

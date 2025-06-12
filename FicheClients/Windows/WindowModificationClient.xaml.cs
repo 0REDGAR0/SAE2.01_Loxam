@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SAE2._01_Loxam.Classe.Client;
+
 
 namespace SAE2._01_Loxam.FicheClients.Windows
 {

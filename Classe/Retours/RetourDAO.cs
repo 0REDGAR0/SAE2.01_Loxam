@@ -1,42 +1,102 @@
 ﻿using Npgsql;
-using SAE2._01_Loxam.Classe.Reservation;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SAE2._01_Loxam.Classe.Retours
+namespace SAE2._01_Loxam.Classe.Retour
 {
     public class RetourDAO
     {
         public List<RetourAffichage> GetRetourAffichage()
         {
-            List<RetourAffichage> list = new List<RetourAffichage>();
+            List<RetourAffichage> liste = new List<RetourAffichage>();
+
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand(@"
-                    SELECT m.numMateriel, m.nomMateriel, r.numReservation, e.numEtat
-                    FROM materiel m
-                    JOIN Reservation r ON m.numMateriel = r.numMateriel
-                    JOIN Etat e ON m.numEtat = e.numEtat;"))
+                SELECT 
+                    r.numreservation,
+                    c.nomclient || ' ' || c.prenomclient AS client,
+                    m.nommateriel AS materiel,
+                    m.nummateriel,  -- ✅ ici on récupère le NumMateriel
+                    cat.libellecategorie AS categorie,
+                    m.numetat,
+                    r.datereservation,
+                    r.datedebutlocation,
+                    r.dateretoureffectivelocation,
+                    r.dateretourreellelocation,
+                    r.prixtotal
+                FROM reservation r
+                JOIN client c ON r.numclient = c.numclient
+                JOIN materiel m ON r.nummateriel = m.nummateriel
+                JOIN type t ON m.numtype = t.numtype
+                JOIN categorie cat ON t.numcategorie = cat.numcategorie
+                WHERE m.numetat = 4;
+            "))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
                 {
-                    list.Add(new RetourAffichage
+                    liste.Add(new RetourAffichage
                     {
-                        NumMateriel = (int)dr["m.numMateriel"],
-                        NomMateriel = (int)dr["m.numMateriel"],
-                        NumReservation = (int)dr["m.numMateriel"],
-                        NumEtat = (int)dr["numetat"]
+                        NumeroReservation = (int)dr["numreservation"],
+                        Client = dr["client"].ToString(),
+                        Materiel = dr["materiel"].ToString(),
+                        NumMateriel = (int)dr["nummateriel"],
+                        Categorie = dr["categorie"].ToString(),
+                        NumEtat = (int)dr["numetat"],
+                        DateReservation = DateTime.Parse(dr["datereservation"].ToString()),
+                        DateDebutLocation = DateTime.Parse(dr["datedebutlocation"].ToString()),
+                        DateRetourEffective = DateTime.Parse(dr["dateretoureffectivelocation"].ToString()),
+                        DateRetourReelle = DateTime.Parse(dr["dateretourreellelocation"].ToString()),
+                        PrixTotal = decimal.Parse(dr["prixtotal"].ToString())
                     });
                 }
 
+            }
+            return liste;
+        }
 
-
-
-                return list;
+        public bool MettreMaterielEnReparation(int numMateriel)
+        {
+            try
+            {
+                using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(@"
+                    UPDATE materiel
+                    SET numetat = 5
+                    WHERE nummateriel = @NumMateriel;
+                "))
+                {
+                    cmdUpdate.Parameters.AddWithValue("@NumMateriel", numMateriel);
+                    DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
+
+
+        public bool MettreMaterielDisponible(int numMateriel)
+        {
+            try
+            {
+                using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(@"
+                    UPDATE materiel
+                    SET numetat = 1
+                    WHERE nummateriel = @NumMateriel;
+                "))
+                {
+                    cmdUpdate.Parameters.AddWithValue("@NumMateriel", numMateriel);
+                    DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

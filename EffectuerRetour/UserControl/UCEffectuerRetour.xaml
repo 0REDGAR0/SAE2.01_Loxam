@@ -9,153 +9,62 @@
     d:DesignWidth="1040"
     mc:Ignorable="d">
 
-    <StackPanel Margin="20" Background="White">
+    <StackPanel>
 
-        <!--  Titre  -->
-        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
-            <TextBlock
-                FontSize="24"
-                FontWeight="Bold"
-                Text="Gestion d'un retour" Margin="10,0,0,0" />
+        <!-- Titre -->
+        <StackPanel Margin="0,0,0,20" HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" FontSize="22" FontWeight="Bold" Text="Effectuer un retour" />
         </StackPanel>
 
-        <!--  Nom de l'article  -->
+        <Border Padding="20" BorderBrush="LightGray" BorderThickness="1" CornerRadius="10">
 
-        <!--  DataGrid  -->
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel>
 
-            <TextBlock
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                FontSize="20"
-                Text="🔍" />
-            <TextBox
-                x:Name="txtRecherche"
-                Width="300"
-                Height="30"
-                FontSize="20"
-                Text=""
-                TextWrapping="Wrap" />
-        </StackPanel>
+                <!-- Recherche -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock FontSize="20" FontWeight="Bold" Text="Filtres" Margin="0,0,10,0"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="20" Text="🔍" />
+                    <TextBox x:Name="txtRecherche" Margin="0,0,10,0" Width="300" Height="30" FontSize="20" Text="" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" />
+                    <!-- Filtres Combo -->
+                    <TextBlock VerticalAlignment="Center" FontSize="16" Text="Catégorie : " />
+                    <ComboBox x:Name="cmbCategorie" Width="200" Margin="0,0,10,0" SelectionChanged="cmbCategorie_SelectionChanged" FontSize="20"/>
+                </StackPanel>
 
-        <!--  Bloc Indisponibilités  -->
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-        </Grid>
+                <!-- DataGrid -->
+                <DataGrid
+                    x:Name="DataGridRetour"
+                    MaxHeight="550"
+                    Margin="0,10,0,0"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    ColumnHeaderHeight="50"
+                    FontSize="16"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    MouseDoubleClick="DataGridRetour_MouseDoubleClick"
+                    RowHeight="25">
 
-        <StackPanel>
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="1"
-                Text="{Binding Materiel}" />
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding NumeroReservation}" Header="Reservation" />
+                        <DataGridTextColumn Width="*" Binding="{Binding Client}" Header="Client" />
+                        <DataGridTextColumn Width="*" Binding="{Binding Materiel}" Header="Materiel" />
+                        <DataGridTextColumn Width="*" Binding="{Binding Categorie}" Header="Catégorie" />
+                        <DataGridTemplateColumn Width="*" Header="Statut" SortMemberPath="StatutReservation">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Margin="1" Padding="2" Background="{Binding CouleurStatut}" CornerRadius="2">
+                                        <TextBlock HorizontalAlignment="Center" FontSize="10" Foreground="White" Text="{Binding StatutReservation}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Width="*" Binding="{Binding PrixTotal}" Header="Prix Total" />
+                    </DataGrid.Columns>
 
-            <StackPanel
-                Margin="0,0,0,10"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal" />
+                </DataGrid>
 
-            <TextBlock
-                Margin="10,0,0,10"
-                FontSize="20"
-                FontWeight="Bold"
-                Text="Indisponibilités" />
+            </StackPanel>
 
-            <!--  DataGrid  -->
-            <DataGrid
-                x:Name="DataGridIndisponibilites"
-                AutoGenerateColumns="False"
-                BorderBrush="#FF688CAF"
-                CanUserAddRows="False"
-                ColumnHeaderHeight="50"
-                FontSize="16"
-                HeadersVisibility="Column"
-                IsReadOnly="True"
-                ItemsSource="{Binding ListeIndisponibilites}"
-                RowHeight="50">
-
-                <DataGrid.Columns>
-
-                    <DataGridTextColumn
-                        Width="200"
-                        Binding="{Binding Materiel}"
-                        Header="Matériel" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding Lieu}"
-                        Header="Lieu" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding DateDebut}"
-                        Header="Du" />
-                    <DataGridTextColumn
-                        Width="150"
-                        Binding="{Binding DateFin}"
-                        Header="Au" />
-
-                    <!--  Etat  -->
-                    <DataGridTemplateColumn Width="150" Header="État">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border
-                                    Padding="5"
-                                    Background="{Binding CouleurEtat}"
-                                    CornerRadius="5">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        FontWeight="SemiBold"
-                                        Text="{Binding Etat}" />
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <!--  Voir détails  -->
-
-
-                    <!--  Faire un retour  -->
-                    <DataGridTemplateColumn Width="150" Header="">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button
-                                    Width="130"
-                                    Height="30"
-                                    Margin="5"
-                                    Background="Red"
-                                    Command="{Binding CommandFaireRetour}"
-                                    Content="FAIRE UN RETOUR"
-                                    Foreground="White" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                </DataGrid.Columns>
-            </DataGrid>
-
-        </StackPanel>
-        <Button
-            x:Name="btn_effectuer_retour"
-            Width="194"
-            Height="40"
-            Margin="0,20,20,0"
-            HorizontalAlignment="Right"
-            Background="Red"
-            Click="btn_effectuer_retour_Click"
-            Content="EFFECTUER UN RETOUR"
-            FontWeight="Bold"
-            Foreground="White" />
-
-        <!--  Choix de retour  -->
-
-        <!--  Bouton enregistrer  -->
-
-        <!--  Bouton voir détails  -->
+        </Border>
     </StackPanel>
 </UserControl>

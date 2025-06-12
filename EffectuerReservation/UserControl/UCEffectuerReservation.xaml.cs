@@ -1,4 +1,6 @@
-﻿using SAE2._01_Loxam.Classe.Reservation;
+﻿using SAE2._01_Loxam.Classe;
+using SAE2._01_Loxam.Classe.Reservation;
+using SAE2._01_Loxam.Classe.Reservation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SAE2._01_Loxam.Classe.Reservation;
 
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
@@ -27,6 +28,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
             ChargerReservations();
+            RemplirComboEtat();
             DataGridResa.Items.Filter = RechercheMotClefResa;
         }
 
@@ -36,6 +38,17 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             DataGridResa.ItemsSource = reservationDAO.GetReservationsAffichage();
         }
 
+        private void RemplirComboEtat()
+        {
+            cmbEtat.Items.Clear();
+            cmbEtat.Items.Add("Tous");
+            cmbEtat.Items.Add("Disponible");
+            cmbEtat.Items.Add("Prévue");
+            cmbEtat.Items.Add("En cours");
+            cmbEtat.SelectedIndex = 0;
+        }
+
+        
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
@@ -47,11 +60,22 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             {
                 string texteRecherche = txtRecherche.Text?.ToLower() ?? "";
 
-                return reservation.Client.ToLower().Contains(texteRecherche)
+                bool filtreTexte = reservation.Client.ToLower().Contains(texteRecherche)
                     || reservation.Materiel.ToLower().Contains(texteRecherche);
+
+                bool filtreEtat = true;
+                if (cmbEtat.SelectedItem != null && cmbEtat.SelectedItem.ToString() != "Tous")
+                {
+                    filtreEtat = reservation.StatutReservation == cmbEtat.SelectedItem.ToString();
+                }
+
+                return filtreTexte && filtreEtat;
             }
+
             return false;
         }
+
+
 
         private void DataGridResa_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -62,6 +86,15 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             }
         }
 
+        private void cmbCategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
+        }
+
+        private void cmbEtat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
+        }
 
     }
 }

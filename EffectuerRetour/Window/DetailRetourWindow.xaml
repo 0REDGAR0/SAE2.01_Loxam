@@ -1,0 +1,105 @@
+﻿<Window x:Class="SAE2._01_Loxam.EffectuerRetour.Window.DetailRetourWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SAE2._01_Loxam.EffectuerRetour.Window"
+        mc:Ignorable="d"
+        Width="650"
+        Height="510"
+        Background="#FAFAFA"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Border
+    Margin="20"
+    Padding="20"
+    Background="White"
+    BorderBrush="Gray"
+    BorderThickness="1"
+    CornerRadius="10">
+
+        <StackPanel>
+
+            <TextBlock
+            Margin="0,0,0,20"
+            FontSize="26"
+            FontWeight="Bold"
+            Foreground="#2C3E50"
+            Text="Détail du retour"
+            TextAlignment="Center" />
+
+            <!-- Bloc Statut avec couleur dynamique -->
+            <Border
+            Margin="0,0,0,20"
+            Padding="10"
+            Background="{Binding CouleurStatut}"
+            CornerRadius="5">
+                <TextBlock
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="{Binding StatutReservation}"
+                TextAlignment="Center" />
+            </Border>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Numéro de réservation : " />
+                <TextBlock Text="{Binding NumeroReservation}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Client : " />
+                <TextBlock Text="{Binding Client}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Matériel : " />
+                <TextBlock Text="{Binding Materiel}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Date de réservation : " />
+                <TextBlock Text="{Binding DateReservation, StringFormat={}{0:dddd dd MMMM yyyy}}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Début de location : " />
+                <TextBlock Text="{Binding DateDebutLocation, StringFormat={}{0:dddd dd MMMM yyyy}}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Retour effectif : " />
+                <TextBlock Text="{Binding DateRetourEffective, StringFormat={}{0:dddd dd MMMM yyyy}}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Retour réel : " />
+                <TextBlock Text="{Binding DateRetourReelle, StringFormat={}{0:dddd dd MMMM yyyy}}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,10" Orientation="Horizontal">
+                <TextBlock Width="220" FontWeight="SemiBold" Text="Prix total : " />
+                <TextBlock Text="{Binding PrixTotal, StringFormat={}{0} €}" />
+            </StackPanel>
+
+            <!-- Les deux boutons d'action -->
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,0">
+
+                <Button
+                x:Name="butEnvoyerReparation"
+                Margin="10"
+                Click="butEnvoyerReparation_Click"
+                Content="🔧"
+                FontSize="24" />
+
+                <Button
+                x:Name="butDisponible"
+                Margin="10"
+                Click="butDisponible_Click"
+                Content="✅"
+                FontSize="24" />
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,50 +1,90 @@
-﻿using System;
+﻿using SAE2._01_Loxam.Classe;
+using SAE2._01_Loxam.Classe.Reservation;
+using SAE2._01_Loxam.EffectuerRetour.Window;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SAE2._01_Loxam;
+using SAE2._01_Loxam.Classe.Retour;
+
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
-    /// <summary>
-    /// Logique d'interaction pour UCEffectuerRetour.xaml
-    /// </summary>
     public partial class UCEffectuerRetour : UserControl
     {
+        private List<RetourAffichage> listeReservationsRetour;
+        private RetourDAO retourDAO = new RetourDAO();
 
         public UCEffectuerRetour()
         {
             InitializeComponent();
+            ChargerReservationsRetour();
+            RemplirComboCategorie();
+            DataGridRetour.Items.Filter = RechercheMotClefRetour;
+        }
+
+        private void ChargerReservationsRetour()
+        {
+            listeReservationsRetour = retourDAO.GetRetourAffichage();
+            DataGridRetour.ItemsSource = listeReservationsRetour;
+        }
+
+        private void RemplirComboCategorie()
+        {
+            cmbCategorie.Items.Clear();
+            cmbCategorie.Items.Add("Toutes");
+
+            CategorieDAO categorieDAO = new CategorieDAO();
+            List<string> categories = categorieDAO.GetToutesCategories();
+
+            foreach (var cat in categories)
+            {
+                cmbCategorie.Items.Add(cat);
+            }
+
+            cmbCategorie.SelectedIndex = 0;
+        }
+
+        private bool RechercheMotClefRetour(object obj)
+        {
+            if (obj is RetourAffichage retour)
+            {
+                string texteRecherche = txtRecherche.Text?.ToLower() ?? "";
+
+                bool filtreTexte = retour.Client.ToLower().Contains(texteRecherche)
+                        || retour.Materiel.ToLower().Contains(texteRecherche);
+
+                bool filtreCategorie = true;
+                if (cmbCategorie.SelectedItem != null && cmbCategorie.SelectedItem.ToString() != "Toutes")
+                {
+                    filtreCategorie = retour.Categorie == cmbCategorie.SelectedItem.ToString();
+                }
+
+                return filtreTexte && filtreCategorie;
+            }
+            return false;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridRetour.ItemsSource).Refresh();
+        }
+
+        private void DataGridRetour_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (DataGridRetour.SelectedItem is RetourAffichage retour)
+            {
+                DetailRetourWindow detailWindow = new DetailRetourWindow();
+                detailWindow.DataContext = retour;
+                detailWindow.ShowDialog();
+            }
         }
 
 
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void cmbCategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Button btn = sender as Button;
-            int idReservation = (int)btn.Tag;
-
-            // On pourrait aller chercher le materiel associé ici
-            // Exemple : ouvrir une fenêtre de détail avec les infos de ce matériel
-            //DetailMaterielWindow detailWindow = new DetailMaterielWindow();
-            //detailWindow.ShowDialog();
-        }
-
-        private void btn_effectuer_retour_Click(object sender, RoutedEventArgs e)
-        {
-            FaireRetour retourWindow = new FaireRetour();
-            retourWindow.ShowDialog();
+            CollectionViewSource.GetDefaultView(DataGridRetour.ItemsSource).Refresh();
         }
     }
 }

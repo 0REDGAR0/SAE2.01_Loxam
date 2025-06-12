@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SAE2._01_Loxam.Classe.Client;
+
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
@@ -37,7 +39,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin");
+                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin" + ex);
 
                 Application.Current.Shutdown();
             }
