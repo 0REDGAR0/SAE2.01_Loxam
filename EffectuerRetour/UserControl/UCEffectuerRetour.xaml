@@ -25,22 +25,8 @@
         </StackPanel>
 
         <!--  Nom de l'article  -->
-        <Label
-            x:Name="txt_nom"
-            Width="122"
-            Margin="100.2,0,0,0"
-            HorizontalAlignment="Left"
-            Content="[nom article]"
-            FontSize="20" />
 
         <!--  DataGrid  -->
-        <DataGrid
-            x:Name="DataGridRetour"
-            Width="782"
-            Height="70"
-            Margin="0,0,0,20"
-            FontSize="22"
-            FontWeight="Bold" />
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
             <TextBlock
@@ -58,12 +44,6 @@
         </StackPanel>
 
         <!--  Bloc Indisponibilités  -->
-        <Border
-            Margin="0,0,0,20"
-            Padding="20"
-            BorderBrush="LightGray"
-            BorderThickness="1"
-            CornerRadius="10" />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -79,29 +59,13 @@
         <StackPanel>
             <TextBlock
                 Grid.Row="0"
-                Grid.Column="0"
-                FontSize="20"
-                FontWeight="Bold"
-                Text="Matériel :" />
-            <TextBlock
-                Grid.Row="0"
                 Grid.Column="1"
                 Text="{Binding Materiel}" />
 
             <StackPanel
                 Margin="0,0,0,10"
                 HorizontalAlignment="Right"
-                Orientation="Horizontal">
-                <Button
-                    x:Name="btn_effectuer_retour"
-                    Width="194"
-                    Height="40"
-                    Background="Red"
-                    Click="btn_effectuer_retour_Click"
-                    Content="EFFECTUER UN RETOUR"
-                    FontWeight="Bold"
-                    Foreground="White" />
-            </StackPanel>
+                Orientation="Horizontal" />
 
             <TextBlock
                 Margin="0,0,0,10"
@@ -181,65 +145,22 @@
             </DataGrid>
 
         </StackPanel>
-
-        <!--  Choix de retour  -->
-        <StackPanel
-            Width="395"
-            Height="164"
-            Margin="400,0,0,0"
-            Orientation="Horizontal">
-            <GroupBox
-                Width="200"
-                BorderBrush="#FFB9BFC3"
-                FontSize="20"
-                Header="Matériel rendu :">
-                <StackPanel Margin="10">
-                    <RadioButton
-                        Content="Oui"
-                        GroupName="Rendu"
-                        IsChecked="True" />
-                    <RadioButton Content="Non" GroupName="Rendu" />
-                </StackPanel>
-            </GroupBox>
-
-            <GroupBox
-                Width="183"
-                Height="165"
-                BorderBrush="#FFB9BFC3"
-                FontSize="20"
-                Header="État du matériel :">
-                <StackPanel Margin="10">
-                    <RadioButton
-                        Content="Bon"
-                        GroupName="Etat"
-                        IsChecked="True" />
-                    <RadioButton Content="Endommagé" GroupName="Etat" />
-                    <RadioButton Content="Hors service" GroupName="Etat" />
-                </StackPanel>
-            </GroupBox>
-        </StackPanel>
-
-        <!--  Bouton enregistrer  -->
         <Button
-            x:Name="btn_enregistrer_retour"
-            Width="296"
-            Height="60"
-            Margin="300,28,0,0"
+            x:Name="btn_effectuer_retour"
+            Width="194"
+            Height="40"
+            Margin="0,20,20,0"
+            HorizontalAlignment="Right"
             Background="Red"
-            Content="ENREGISTRER RETOUR"
+            Click="btn_effectuer_retour_Click"
+            Content="EFFECTUER UN RETOUR"
             FontWeight="Bold"
             Foreground="White" />
 
+        <!--  Choix de retour  -->
+
+        <!--  Bouton enregistrer  -->
+
         <!--  Bouton voir détails  -->
-        <Button
-            x:Name="btn_voir_details"
-            Width="150"
-            Height="40"
-            Margin="0,20,0,0"
-            HorizontalAlignment="Right"
-            Background="#FFFF3636"
-            Click="Button_Click"
-            Content="voir détails"
-            Foreground="White" />
     </StackPanel>
 </UserControl>
