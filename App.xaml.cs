@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Windows;
 
 namespace SAE2._01_Loxam
@@ -12,6 +13,10 @@ namespace SAE2._01_Loxam
         public App()
         {
             this.Exit += App_Exit;
+
+            CultureInfo culture = new CultureInfo("fr-FR");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
         private void App_Exit(object sender, ExitEventArgs e)
         {
