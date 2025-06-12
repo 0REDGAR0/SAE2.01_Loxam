@@ -8,20 +8,16 @@
     d:DesignHeight="686"
     d:DesignWidth="1040"
     mc:Ignorable="d">
+
     <StackPanel Margin="20" Background="White">
 
-        <!--  Titre  -->
+        <!-- Titre -->
         <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
-            <TextBlock
-                Margin="0,0,10,0"
-                FontSize="24"
-                FontWeight="Bold"
-                Text="←" />
-            <TextBlock
-                FontSize="24"
-                FontWeight="Bold"
-                Text="Faire un retour" />
+            <TextBlock Margin="0,0,10,0" FontSize="24" FontWeight="Bold" Text="←" />
+            <TextBlock FontSize="24" FontWeight="Bold" Text="Faire un retour" />
         </StackPanel>
+
+        <!-- Nom de l'article -->
         <Label
             x:Name="txt_nom"
             Width="122"
@@ -29,12 +25,19 @@
             HorizontalAlignment="Left"
             Content="[nom article]"
             FontSize="20" />
+
+        <!-- DataGrid -->
         <DataGrid
             x:Name="DataGridRetour"
             Width="782"
-            Height="70">
+            Height="70"
+            Margin="0,0,0,20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Exemple" Binding="{Binding Exemple}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <!--  Informations sur la réservation  -->
+        <!-- Informations sur la réservation -->
         <Border
             Width="322"
             Margin="320,0,0,20"
@@ -54,92 +57,36 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock
-                    x:Name="txt_materiel"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,0,0,36"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="Matériel :" />
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="2"
-                    Margin="0,0,0,36"
-                    Text="{Binding Materiel}" />
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,36" FontSize="20" FontWeight="Bold" Text="Matériel :" />
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,0,0,36" Text="{Binding Materiel}" />
 
-                <TextBlock
-                    x:Name="txt_du"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,10,0,0"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="Du :" />
-                <TextBlock
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Margin="0,10,0,0"
-                    Text="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}" />
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" FontSize="20" FontWeight="Bold" Text="Du :" />
+                <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,10,0,0" Text="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}" />
 
-                <TextBlock
-                    x:Name="txt_au"
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,10,0,0"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Text="Au :" />
-                <TextBlock
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Margin="0,10,0,0"
-                    Text="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}" />
+                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,0,0" FontSize="20" FontWeight="Bold" Text="Au :" />
+                <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,10,0,0" Text="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}" />
             </Grid>
         </Border>
-        <StackPanel
-            Width="395"
-            Height="164"
-            Margin="400,0,0,0"
-            Orientation="Horizontal">
 
-            <!--  Matériel rendu  -->
-            <GroupBox
-                Width="200"
-                BorderBrush="#FFB9BFC3"
-                FontSize="20"
-                Header="Matériel rendu :">
+        <!-- Choix de retour -->
+        <StackPanel Width="395" Height="164" Margin="400,0,0,0" Orientation="Horizontal">
+            <GroupBox Width="200" BorderBrush="#FFB9BFC3" FontSize="20" Header="Matériel rendu :">
                 <StackPanel Margin="10">
-                    <RadioButton
-                        Content="Oui"
-                        GroupName="Rendu"
-                        IsChecked="True" />
+                    <RadioButton Content="Oui" GroupName="Rendu" IsChecked="True" />
                     <RadioButton Content="Non" GroupName="Rendu" />
                 </StackPanel>
             </GroupBox>
 
-            <!--  État du matériel  -->
-            <GroupBox
-                Width="183"
-                Height="165"
-                BorderBrush="#FFB9BFC3"
-                FontSize="20"
-                Header="État du matériel :">
+            <GroupBox Width="183" Height="165" BorderBrush="#FFB9BFC3" FontSize="20" Header="État du matériel :">
                 <StackPanel Margin="10">
-                    <RadioButton
-                        Content="Bon"
-                        GroupName="Etat"
-                        IsChecked="True" />
+                    <RadioButton Content="Bon" GroupName="Etat" IsChecked="True" />
                     <RadioButton Content="Endommagé" GroupName="Etat" />
                     <RadioButton Content="Hors service" GroupName="Etat" />
                 </StackPanel>
             </GroupBox>
         </StackPanel>
+
+        <!-- Bouton enregistrer -->
         <Button
             x:Name="btn_enregistrer_retour"
             Width="296"
@@ -150,26 +97,17 @@
             FontWeight="Bold"
             Foreground="White" />
 
-        <!--  Section choix rendu  -->
+        <!-- Bouton voir détails -->
+        <Button
+            x:Name="btn_voir_details"
+            Margin="0,20,0,0"
+            Width="150"
+            Height="40"
+            HorizontalAlignment="Right"
+            Background="#FFFF3636"
+            Click="Button_Click"
+            Content="voir détails"
+            Foreground="White" />
 
-        <!--  Photo  -->
-
-        <!--  Bouton enregistrer  -->
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button
-                x:Name="btn_voir_details"
-                Grid.Row="2"
-                Margin="877,46,3,-38"
-                Background="#FFFF3636"
-                Click="Button_Click"
-                Content="voir détails"
-                Foreground="White"
-                RenderTransformOrigin="3.275,-0.356" />
-        </DataGrid>
-        <!--  Choix retour  -->
-        <StackPanel Margin="0,0,0,20" Orientation="Horizontal" />
-        <Button Content="Button" />
     </StackPanel>
-
 </UserControl>
