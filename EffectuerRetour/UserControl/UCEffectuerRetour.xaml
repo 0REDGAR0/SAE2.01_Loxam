@@ -8,145 +8,149 @@
     d:DesignHeight="686"
     d:DesignWidth="1040"
     mc:Ignorable="d">
-    <StackPanel>
+    <StackPanel Margin="20" Background="White">
 
         <!--  Titre  -->
-        <StackPanel
-            Margin="0,0,0,20"
-            HorizontalAlignment="Left"
-            Orientation="Horizontal">
-            <Button
-                Width="50"
-                Height="50"
-                Margin="0,0,10,0"
-                Content="⬅"
-                FontSize="20" />
+        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
             <TextBlock
-                VerticalAlignment="Center"
-                FontSize="22"
+                Margin="0,0,10,0"
+                FontSize="24"
+                FontWeight="Bold"
+                Text="←" />
+            <TextBlock
+                FontSize="24"
                 FontWeight="Bold"
                 Text="Faire un retour" />
         </StackPanel>
-
-
-        <!--  Tableau informations matériel  -->
-
-        <!--  Commentaire  -->
-        <StackPanel
-            Width="458"
-            Height="60"
-            Margin="0,0,0,20"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <TextBlock
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                FontSize="16"
-                Text="{Binding Commentaire}" />
-            <!--<Button
-                x:Name="butEnregistrerRetour"
-                Width="210"
-                Height="60"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Background="Red"
-                Content="FAIRE UN RETOUR"
-                FontSize="16"
-                FontWeight="Bold"
-                Foreground="White" />
-            <Button
-                x:Name="butEnregistrerRetour_Copy"
-                Width="210"
-                Height="60"
-                Margin="20,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Background="Red"
-                Content="RECHERCHER"
-                FontSize="16"
-                FontWeight="Bold"
-                Foreground="White" />-->
-        </StackPanel>
-        <StackPanel
-            Height="100"
+        <Label
+            x:Name="txt_nom"
+            Width="122"
+            Margin="100.2,0,0,0"
             HorizontalAlignment="Left"
-            Orientation="Horizontal" />
-        <DataGrid x:Name="DataGridRetour" Height="70" Width="782">
+            Content="[nom article]"
+            FontSize="20" />
 
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+        <!--  Informations sur la réservation  -->
+        <Border
+            Width="322"
+            Margin="320,0,0,20"
+            Padding="20"
+            BorderBrush="LightGray"
+            BorderThickness="1"
+            CornerRadius="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4" />
+                    <ColumnDefinition Width="196" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!--  Boutons  -->
-            <StackPanel
-                Grid.Row="1"
-                Margin="0,0,0,10"
-                HorizontalAlignment="Left"
-                Orientation="Horizontal">
-                <Button
-                    Width="150"
-                    Height="40"
-                    Margin="20,0,10,0"
-                    Background="Red"
-                    Content="FAIRE UN RETOUR"
+                <TextBlock
+                    x:Name="txt_materiel"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,0,36"
+                    FontSize="20"
                     FontWeight="Bold"
-                    Foreground="White" />
-                <Button
-                    Width="150"
-                    Height="40"
-                    Background="Red"
-                    Content="RECHERCHER"
+                    Text="Matériel :" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    Margin="0,0,0,36"
+                    Text="{Binding Materiel}" />
+
+                <TextBlock
+                    x:Name="txt_du"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,10,0,0"
+                    FontSize="20"
                     FontWeight="Bold"
-                    Foreground="White" />
-            </StackPanel>
+                    Text="Du :" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="0,10,0,0"
+                    Text="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}" />
 
-            <!--  Tableau  -->
-            <DataGrid
-                x:Name="dataGridReservations"
-                Grid.Row="2"
-                Margin="0,10,177,0"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                HeadersVisibility="Column"
-                IsReadOnly="True">
+                <TextBlock
+                    x:Name="txt_au"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,10,0,0"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Text="Au :" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Margin="0,10,0,0"
+                    Text="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}" />
+            </Grid>
+        </Border>
+        <StackPanel
+            Width="395"
+            Height="164"
+            Margin="400,0,0,0"
+            Orientation="Horizontal">
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding NomMateriel}"
-                        Header="Matériel" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Lieu}"
-                        Header="Lieu" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding DateDebut}"
-                        Header="Du" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding DateFin}"
-                        Header="Au" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding EtatRetour}"
-                        Header="État" />
+            <!--  Matériel rendu  -->
+            <GroupBox
+                Width="200"
+                BorderBrush="#FFB9BFC3"
+                FontSize="20"
+                Header="Matériel rendu :">
+                <StackPanel Margin="10">
+                    <RadioButton
+                        Content="Oui"
+                        GroupName="Rendu"
+                        IsChecked="True" />
+                    <RadioButton Content="Non" GroupName="Rendu" />
+                </StackPanel>
+            </GroupBox>
 
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button
-                x:Name="btn_voir_details"
-                Grid.Row="2"
-                Margin="877,46,3,-38"
-                Background="#FFFF3636"
-                Click="Button_Click"
-                Content="voir détails"
-                Foreground="White"
-                RenderTransformOrigin="3.275,-0.356" />
-        </DataGrid>
-        <!--  Choix retour  -->
-        <StackPanel Margin="0,0,0,20" Orientation="Horizontal" />
-        <Button Content="Button" Click="Button_Click_1"/>
+            <!--  État du matériel  -->
+            <GroupBox
+                Width="183"
+                Height="165"
+                BorderBrush="#FFB9BFC3"
+                FontSize="20"
+                Header="État du matériel :">
+                <StackPanel Margin="10">
+                    <RadioButton
+                        Content="Bon"
+                        GroupName="Etat"
+                        IsChecked="True" />
+                    <RadioButton Content="Endommagé" GroupName="Etat" />
+                    <RadioButton Content="Hors service" GroupName="Etat" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+        <Button
+            x:Name="btn_enregistrer_retour"
+            Width="296"
+            Height="60"
+            Margin="300,28,0,0"
+            Background="Red"
+            Content="ENREGISTRER RETOUR"
+            FontWeight="Bold"
+            Foreground="White" />
+
+        <!--  Section choix rendu  -->
+
+        <!--  Photo  -->
+
+        <!--  Bouton enregistrer  -->
     </StackPanel>
 
 </UserControl>

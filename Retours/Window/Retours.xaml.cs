@@ -23,5 +23,29 @@ namespace SAE2._01_Loxam
         {
             InitializeComponent();
         }
+
+        private void DataGridIndisponibilites_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Button btn = sender as Button;
+            RetourAffichage retour = (RetourAffichage)btn.DataContext;
+
+            DetailMaterielWindow detailWindow = new DetailMaterielWindow(retour);
+            detailWindow.ShowDialog();
+        }
+
+        private void btn_effectuer_retour_Click(object sender, RoutedEventArgs e)
+        {
+            //// Vérifie bien qu’une ligne est sélectionnée
+            //if (DataGridRetour.SelectedItem is RetourAffichage retourSelectionne)
+            //{
+            //    // On ouvre la fenêtre de détail en lui passant l'objet complet
+            //    DetailRetourWindow detailRetour = new DetailRetourWindow(retourSelectionne);
+            //    detailRetour.ShowDialog();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Veuillez sélectionner une réservation à retourner.", "Aucune sélection", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //}
+        }
     }
 }
