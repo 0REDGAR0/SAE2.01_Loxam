@@ -71,7 +71,10 @@
             Height="100"
             HorizontalAlignment="Left"
             Orientation="Horizontal" />
-        <DataGrid x:Name="DataGridRetour" Height="70" Width="782">
+        <DataGrid
+            x:Name="DataGridRetour"
+            Width="782"
+            Height="70">
 
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -146,7 +149,7 @@
         </DataGrid>
         <!--  Choix retour  -->
         <StackPanel Margin="0,0,0,20" Orientation="Horizontal" />
-        <Button Content="Button" Click="Button_Click_1"/>
+        <Button Content="Button" />
     </StackPanel>
 
 </UserControl>

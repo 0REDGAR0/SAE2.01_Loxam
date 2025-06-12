@@ -45,14 +45,5 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             //DetailMaterielWindow detailWindow = new DetailMaterielWindow();
             //detailWindow.ShowDialog();
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
-            RetourAffichage retour = (RetourAffichage)btn.DataContext;
-
-            DetailMaterielWindow detailWindow = new DetailMaterielWindow(retour);
-            detailWindow.ShowDialog();
-        }
     }
 }
