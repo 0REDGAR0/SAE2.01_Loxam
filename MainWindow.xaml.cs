@@ -32,18 +32,17 @@ namespace SAE2._01_Loxam
             SPcentral.Children.Add(new Bienvenue());
             UpdateButtonStates();
         }
-
         public MainWindow(DataAccess dataAccess)
         {
             this.dataAccess = dataAccess;
         }
-
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Connexion connexion = new Connexion();
+            // connexion.Show();
+        }
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
-            SPcentral.Children.Clear();
-            SPcentral.Children.Add(new FicheClients.UserControls.UCFicheClients());
-
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new FicheClients.UserControls.UCFicheClients());
             UpdateButtonStates();
@@ -56,16 +55,8 @@ namespace SAE2._01_Loxam
             UpdateButtonStates();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Connexion connexion = new Connexion();
-            connexion.Show();
-        }
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {
-            SPcentral.Children.Clear();
-            SPcentral.Children.Add(new UCEffectuerRetour());
-
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new UCEffectuerRetour());
             UpdateButtonStates();
@@ -73,9 +64,6 @@ namespace SAE2._01_Loxam
 
         private void butReservation_Click(object sender, RoutedEventArgs e)
         {
-            SPcentral.Children.Clear();
-            SPcentral.Children.Add(new UCEffectuerReservation());
-
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new UCEffectuerReservation());
             UpdateButtonStates();
@@ -147,5 +135,11 @@ namespace SAE2._01_Loxam
             button.BeginAnimation(Button.FontSizeProperty, animation);
         }
 
+        private void butRechercheMat_Click(object sender, RoutedEventArgs e)
+        {
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new FicheClients.UserControls.UCMaterielEnReserve());
+            UpdateButtonStates();
+        }
     }
 }

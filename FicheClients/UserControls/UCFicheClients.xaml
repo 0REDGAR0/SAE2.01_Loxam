@@ -24,22 +24,34 @@
                 Text="Infos clients" />
         </StackPanel>
 
-        <!--  Zone de recherche  -->
-        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
-            <TextBlock
-                VerticalAlignment="Center"
-                FontSize="22"
-                Text="🔍" />
-            <TextBox
-                x:Name="textMotClefChien"
-                Width="300"
-                Height="50"
-                FontSize="33"
-                Text=""
-                TextChanged="textMotClefChien_TextChanged"
-                TextWrapping="Wrap" />
+        <!--  Barre de recherche et boutons à droite  -->
+        <Grid Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="400,0,0,0" Orientation="Horizontal">
+            <!--  Recherche  -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="22"
+                    Text="🔍" />
+                <TextBox
+                    x:Name="textMotClefChien"
+                    Width="300"
+                    Height="50"
+                    FontSize="33"
+                    Text=""
+                    TextChanged="textMotClefChien_TextChanged"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <!--  Boutons d'action à droite  -->
+            <StackPanel
+                Grid.Column="1"
+                Margin="8,0,0,0"
+                Orientation="Horizontal">
                 <Button
                     x:Name="butAjout"
                     Width="50"
@@ -73,13 +85,7 @@
                     FontWeight="Bold"
                     Foreground="White" />
             </StackPanel>
-        </StackPanel>
-
-        <!--  Boutons d'action  -->
-        <StackPanel
-            Margin="0,0,0,20"
-            HorizontalAlignment="Left"
-            Orientation="Horizontal" />
+        </Grid>
 
         <!--  Tableau DataGrid  -->
         <Border
@@ -87,7 +93,6 @@
             BorderBrush="LightGray"
             BorderThickness="1"
             CornerRadius="10">
-
             <DataGrid
                 x:Name="dgClients"
                 AutoGenerateColumns="False"
@@ -96,7 +101,7 @@
                 HeadersVisibility="Column"
                 IsReadOnly="True"
                 ItemsSource="{Binding LesClients}"
-                RowHeight="50">
+                RowHeight="25">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
