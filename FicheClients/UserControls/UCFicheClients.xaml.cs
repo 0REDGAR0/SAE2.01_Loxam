@@ -64,7 +64,36 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void butEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dgClients.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un client", "Attention",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Client clientSelectionne = (Client)dgClients.SelectedItem;
+                Client copie = new Client(clientSelectionne.NumClient, clientSelectionne.NomClient,
+                clientSelectionne.PrenomClient, clientSelectionne.AdresseClient, clientSelectionne.MailClient, clientSelectionne.NumeroTelClient);
+                WindowFicheClient wClient = new WindowFicheClient(copie, WindowFicheClient.Action.Modifier);
+                bool? result = wClient.ShowDialog();
+                if (result == true)
+                {
+                    try
+                    {
+                        copie.Update();
+                        clientSelectionne.NumClient = copie.NumClient;
+                        clientSelectionne.NomClient = copie.NomClient;
+                        clientSelectionne.PrenomClient = copie.PrenomClient;
+                        clientSelectionne.AdresseClient = copie.AdresseClient;
+                        clientSelectionne.MailClient = copie.MailClient;
+                        clientSelectionne.NumeroTelClient = copie.NumeroTelClient;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Le chien n'a pas pu être modifié.", "Attention",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                //CollectionViewSource.GetDefaultView(dgChiens.ItemsSource)?.Refresh();
+            }
         }
 
 
@@ -75,7 +104,32 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void butSupp_Click(object sender, RoutedEventArgs e)
         {
-
+            if (dgClients.SelectedItem == null)
+                MessageBox.Show("Veuillez sélectionner un chien", "Attention",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                Client clientSellectionner = (Client)dgClients.SelectedItem;
+                Client clientASupprimer = new Client(clientSellectionner.NumClient, clientSellectionner.NomClient,
+                clientSellectionner.PrenomClient, clientSellectionner.AdresseClient, clientSellectionner.MailClient, clientSellectionner.NumeroTelClient);
+                /*if (chienAsupprimer.FindNbSejours() > 0)
+                {
+                    MessageBox.Show(this, $"Attention, ce chien est lié à {chienAsupprimer.FindNbSejours()} séjours. Désirez-vous tout de même supprimer ce chien et ces {chienAsupprimer.FindNbSejours()} séjours", "Attention",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                }*/
+                WindowFicheClient wClient = new WindowFicheClient(clientASupprimer, WindowFicheClient.Action.Supprimer);
+                bool? result = wClient.ShowDialog();
+                try
+                {
+                    clientASupprimer.Delete();
+                    LeClient.LesClients.Remove(clientASupprimer);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Le chien n'a pas pu être supprimé.", "Attention",
+                   MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

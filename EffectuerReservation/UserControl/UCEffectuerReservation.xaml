@@ -21,16 +21,19 @@
                 VerticalAlignment="Center"
                 FontSize="22"
                 FontWeight="Bold"
-                Text="Effectuer une réservation" />
-            <Button
+                Text="Effectuer une réservation     " />
+            <TextBlock
+                VerticalAlignment="Center"
+                FontSize="22"
+                Text="🔍" />
+            <TextBox
+                x:Name="txtRecherche"
                 Width="300"
                 Height="50"
-                Margin="20,0,0,0"
-                HorizontalAlignment="Right"
-                Background="Red"
-                Content="RECHERCHER UNE RÉSERVATION"
-                FontWeight="Bold"
-                Foreground="White" />
+                FontSize="33"
+                Text=""
+                TextChanged="TextBox_TextChanged"
+                TextWrapping="Wrap" />
         </StackPanel>
 
         <!--  Bloc Disponibilités  -->
@@ -58,17 +61,42 @@
                     FontSize="16"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
+                    MouseDoubleClick="DataGridResa_MouseDoubleClick"
                     RowHeight="50">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Reservation" Binding="{Binding NumeroReservation}" Width="*" />
-                        <DataGridTextColumn Header="Client" Binding="{Binding Client}" Width="*" />
-                        <DataGridTextColumn Header="Materiel" Binding="{Binding Materiel}" Width="*" />
-                        <DataGridTextColumn Header="Date Reservation" Binding="{Binding DateReservation, StringFormat=d}" Width="*" />
-                        <DataGridTextColumn Header="Debut Location" Binding="{Binding DateDebutLocation, StringFormat=d}" Width="*" />
-                        <DataGridTextColumn Header="Retour Effective" Binding="{Binding DateRetourEffective, StringFormat=d}" Width="*" />
-                        <DataGridTextColumn Header="Retour Reelle" Binding="{Binding DateRetourReelle, StringFormat=d}" Width="*" />
-                        <DataGridTextColumn Header="Prix Total" Binding="{Binding PrixTotal}" Width="*" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding NumeroReservation}"
+                            Header="Reservation" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Client}"
+                            Header="Client" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Materiel}"
+                            Header="Materiel" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding DateReservation, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Date de réservation" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Début de location" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Retour effectif" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding DateRetourReelle, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Retour réel" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding PrixTotal}"
+                            Header="Prix Total" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

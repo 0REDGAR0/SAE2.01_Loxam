@@ -33,6 +33,41 @@
 
         <!--  Commentaire  -->
         <StackPanel
+            Width="458"
+            Height="60"
+            Margin="0,0,0,20"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <TextBlock
+                Margin="10,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="16"
+                Text="{Binding Commentaire}" />
+            <!--<Button
+                x:Name="butEnregistrerRetour"
+                Width="210"
+                Height="60"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Red"
+                Content="FAIRE UN RETOUR"
+                FontSize="16"
+                FontWeight="Bold"
+                Foreground="White" />
+            <Button
+                x:Name="butEnregistrerRetour_Copy"
+                Width="210"
+                Height="60"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="Red"
+                Content="RECHERCHER"
+                FontSize="16"
+                FontWeight="Bold"
+                Foreground="White" />-->
+        </StackPanel>
+        <StackPanel
             Height="100"
             HorizontalAlignment="Left"
             Orientation="Horizontal" />
