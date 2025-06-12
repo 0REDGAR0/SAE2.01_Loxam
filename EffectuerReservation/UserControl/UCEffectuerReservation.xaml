@@ -63,7 +63,7 @@
                     HeadersVisibility="Column"
                     IsReadOnly="True"
                     MouseDoubleClick="DataGridResa_MouseDoubleClick"
-                    RowHeight="50">
+                    RowHeight="25">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
@@ -90,10 +90,6 @@
                             Width="*"
                             Binding="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}"
                             Header="Retour effectif" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding DateRetourReelle, StringFormat={}{0:dd/MM/yyyy}}"
-                            Header="Retour réel" />
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding PrixTotal}"
