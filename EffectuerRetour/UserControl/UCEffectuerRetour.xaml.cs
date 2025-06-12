@@ -31,7 +31,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             RetourDAO retourDAO = new RetourDAO();
             listeRetours = retourDAO.GetRetoursAffichage();
-            DataGridRetour.ItemsSource = listeRetours;
+            //DataGridRetour.ItemsSource = listeRetours;
         }
 
 
