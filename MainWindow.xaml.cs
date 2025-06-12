@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -26,6 +27,10 @@ namespace SAE2._01_Loxam
         {
             ChargeData();
             InitializeComponent();
+
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new Bienvenue());
+            UpdateButtonStates();
         }
 
         public MainWindow(DataAccess dataAccess)
@@ -38,17 +43,22 @@ namespace SAE2._01_Loxam
         {
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new FicheClients.UserControls.UCFicheClients());
+
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new FicheClients.UserControls.UCFicheClients());
+            UpdateButtonStates();
         }
        
         private void butLoxam_Click(object sender, RoutedEventArgs e)
         {
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new Bienvenue());
+            UpdateButtonStates();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Connexion connexion = new Connexion();
+            // Connexion connexion = new Connexion();
             // connexion.Show();
         }
         private void butRetour_Click(object sender, RoutedEventArgs e)
@@ -56,10 +66,9 @@ namespace SAE2._01_Loxam
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new UCEffectuerRetour());
 
-            butRetour.FontWeight = FontWeights.Bold;
-            butRetour.FontSize = 36;
-            butReservation.FontWeight = FontWeights.Normal;
-            butReservation.FontSize = 22;
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new UCEffectuerRetour());
+            UpdateButtonStates();
         }
 
         private void butReservation_Click(object sender, RoutedEventArgs e)
@@ -67,10 +76,9 @@ namespace SAE2._01_Loxam
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new UCEffectuerReservation());
 
-            butReservation.FontWeight = FontWeights.Bold;
-            butReservation.FontSize = 36;
-            butRetour.FontWeight = FontWeights.Normal;
-            butRetour.FontSize = 22;
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new UCEffectuerReservation());
+            UpdateButtonStates();
         }
 
         public void ChargeData()
@@ -88,6 +96,56 @@ namespace SAE2._01_Loxam
         }
 
 
+        private void UpdateButtonStates()
+        {
+            // Aucun contrôle chargé, tout redevient "petit"
+            if (SPcentral.Children.Count == 0)
+            {
+                SetButtonState(butRetour, false);
+                SetButtonState(butReservation, false);
+                return;
+            }
+
+            var currentControl = SPcentral.Children[0];
+
+            if (currentControl is UCEffectuerRetour)
+            {
+                SetButtonState(butRetour, true);
+                SetButtonState(butReservation, false);
+            }
+            else if (currentControl is UCEffectuerReservation)
+            {
+                SetButtonState(butRetour, false);
+                SetButtonState(butReservation, true);
+            }
+            else
+            {
+                // Cas où un autre UserControl est chargé => tout petit
+                SetButtonState(butRetour, false);
+                SetButtonState(butReservation, false);
+            }
+        }
+
+        private void SetButtonState(Button button, bool isSelected)
+        {
+            double targetSize = isSelected ? 36 : 22;
+            AnimateFontSize(button, targetSize);
+
+            button.FontWeight = isSelected ? FontWeights.Bold : FontWeights.Normal;
+        }
+
+
+        private void AnimateFontSize(Button button, double toSize)
+        {
+            DoubleAnimation animation = new DoubleAnimation
+            {
+                To = toSize,
+                Duration = TimeSpan.FromMilliseconds(600),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            button.BeginAnimation(Button.FontSizeProperty, animation);
+        }
 
     }
 }

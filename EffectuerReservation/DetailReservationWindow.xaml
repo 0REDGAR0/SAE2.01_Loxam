@@ -104,6 +104,31 @@
                 <TextBlock Text="{Binding PrixTotal, StringFormat={}{0} €}" />
             </StackPanel>
 
+            <StackPanel
+                Margin="10"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    x:Name="butOK"
+                    Width="100"
+                    Margin="10"
+                    Click="butOK_Click"
+                    Content="OK" />
+                <Button
+                    x:Name="butRetourne"
+                    Width="100"
+                    Margin="10"
+                    Click="butRetourne_Click"
+                    Content="Retourné" />
+                <Button
+                    x:Name="butReparation"
+                    Width="150"
+                    Margin="10"
+                    Click="butReparation_Click"
+                    Content="Envoie en réparation" />
+            </StackPanel>
+
+
         </StackPanel>
     </Border>
 </Window>

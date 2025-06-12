@@ -29,6 +29,10 @@
             HorizontalAlignment="Left"
             Content="[nom article]"
             FontSize="20" />
+        <DataGrid
+            x:Name="DataGridRetour"
+            Width="782"
+            Height="70">
 
         <!--  Informations sur la réservation  -->
         <Border
@@ -151,6 +155,21 @@
         <!--  Photo  -->
 
         <!--  Bouton enregistrer  -->
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button
+                x:Name="btn_voir_details"
+                Grid.Row="2"
+                Margin="877,46,3,-38"
+                Background="#FFFF3636"
+                Click="Button_Click"
+                Content="voir détails"
+                Foreground="White"
+                RenderTransformOrigin="3.275,-0.356" />
+        </DataGrid>
+        <!--  Choix retour  -->
+        <StackPanel Margin="0,0,0,20" Orientation="Horizontal" />
+        <Button Content="Button" />
     </StackPanel>
 
 </UserControl>
