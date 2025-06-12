@@ -39,23 +39,10 @@
 
         <!-- Informations sur la réservation -->
         <Border
-            Width="322"
-            Margin="320,0,0,20"
             Padding="20"
             BorderBrush="LightGray"
             BorderThickness="1"
             CornerRadius="10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4" />
-                    <ColumnDefinition Width="196" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,36" FontSize="20" FontWeight="Bold" Text="Matériel :" />
                 <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,0,0,36" Text="{Binding Materiel}" />
