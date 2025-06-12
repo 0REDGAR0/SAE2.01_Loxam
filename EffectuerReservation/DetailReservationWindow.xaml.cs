@@ -24,6 +24,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void butRetourne_Click(object sender, RoutedEventArgs e)
         {
+            // Mise à jour de la réservation (date retour réelle)
             var reservationToUpdate = new Reservation
             {
                 NumReservation = reservationCourante.NumeroReservation,
@@ -31,9 +32,20 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             };
 
             dataAccess.MettreAJourReservation(reservationToUpdate);
-            MessageBox.Show("Matériel retourné aujourd'hui.");
-            this.Close();
+
+            /*// Mise à jour du matériel (passer à "En réparation")
+            var materiel = dataAccess.GetMaterielById(reservationCourante.NumMateriel);
+
+            if (materiel != null)
+            {
+                materiel.NumEtat = 3; // 3 = En réparation (attention : s'assurer que 3 correspond bien dans ta table ETAT)
+                dataAccess.MettreAJourMateriel(materiel);
+            }
+
+            MessageBox.Show("Retour effectué. Le matériel passe en réparation.");
+            this.Close();*/
         }
+
 
         private void butReparation_Click(object sender, RoutedEventArgs e)
         {
