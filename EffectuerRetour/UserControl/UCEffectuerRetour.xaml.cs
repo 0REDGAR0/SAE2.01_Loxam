@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TonNamespace;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
@@ -44,6 +45,12 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             // Exemple : ouvrir une fenêtre de détail avec les infos de ce matériel
             //DetailMaterielWindow detailWindow = new DetailMaterielWindow();
             //detailWindow.ShowDialog();
+        }
+
+        private void btn_effectuer_retour_Click(object sender, RoutedEventArgs e)
+        {
+            EffectuerRetourWindow retourWindow = new EffectuerRetourWindow();
+            retourWindow.ShowDialog();
         }
     }
 }
