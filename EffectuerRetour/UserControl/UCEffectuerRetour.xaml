@@ -32,15 +32,25 @@
             Width="782"
             Height="70"
             Margin="0,0,0,20"
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Exemple" Binding="{Binding Exemple}" Width="*" />
-            </DataGrid.Columns>
-        </DataGrid>
+            FontSize="22"
+            FontWeight="Bold"
+            Text="Effectuer un retour" />
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-        <!-- Informations sur la réservation -->
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                Text="🔍" />
+            <TextBox
+                x:Name="txtRecherche"
+                Width="300"
+                Height="30"
+                FontSize="20"
+                Text=""
+                TextWrapping="Wrap" />
+        </StackPanel>
+        <!--  Bloc Indisponibilités  -->
         <Border
             Padding="20"
             BorderBrush="LightGray"
@@ -61,12 +71,98 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Matériel :" />
                 <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Materiel}" />
 
-                <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Du :" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}" />
+                <StackPanel
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="btn_effectuer_retour"
+                        Width="194"
+                        Height="40"
+                        Background="Red"
+                        Click="btn_effectuer_retour_Click"
+                        Content="EFFECTUER UN RETOUR"
+                        FontWeight="Bold"
+                        Foreground="White" />
+                </StackPanel>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Au :" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}" />
-            </Grid>
+                <TextBlock
+                    Margin="0,0,0,10"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Text="Indisponibilités" />
+
+                <!--  DataGrid  -->
+                <DataGrid
+                    x:Name="DataGridIndisponibilites"
+                    AutoGenerateColumns="False"
+                    BorderBrush="#FF688CAF"
+                    CanUserAddRows="False"
+                    ColumnHeaderHeight="50"
+                    FontSize="16"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding ListeIndisponibilites}"
+                    RowHeight="50">
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn
+                            Width="200"
+                            Binding="{Binding Materiel}"
+                            Header="Matériel" />
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding Lieu}"
+                            Header="Lieu" />
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding DateDebut}"
+                            Header="Du" />
+                        <DataGridTextColumn
+                            Width="150"
+                            Binding="{Binding DateFin}"
+                            Header="Au" />
+
+                        <!--  Etat  -->
+                        <DataGridTemplateColumn Width="150" Header="État">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Padding="5"
+                                        Background="{Binding CouleurEtat}"
+                                        CornerRadius="5">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontWeight="SemiBold"
+                                            Text="{Binding Etat}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--  Voir détails  -->
+
+
+                        <!--  Faire un retour  -->
+                        <DataGridTemplateColumn Width="150" Header="">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Width="130"
+                                        Height="30"
+                                        Margin="5"
+                                        Background="Red"
+                                        Command="{Binding CommandFaireRetour}"
+                                        Content="FAIRE UN RETOUR"
+                                        Foreground="White" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
         </Border>
 
         <!-- Choix de retour -->

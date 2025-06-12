@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SAE2._01_Loxam
+namespace SAE2._01_Loxam.Classe.Materiel.UserControls
 {
     /// <summary>
-    /// Logique d'interaction pour FaireRetour.xaml
+    /// Logique d'interaction pour UCReparation.xaml
     /// </summary>
-    public partial class FaireRetour : Window
+    public partial class UCReparation : UserControl
     {
-        public FaireRetour()
+        public UCReparation()
         {
             InitializeComponent();
-        }
-
-        private void btn_annuler_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }
