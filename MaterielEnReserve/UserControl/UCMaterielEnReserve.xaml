@@ -8,6 +8,7 @@
     d:DesignHeight="686"
     d:DesignWidth="1040"
     mc:Ignorable="d">
+
     <StackPanel>
 
         <!--  Titre  -->
@@ -19,11 +20,11 @@
                 VerticalAlignment="Center"
                 FontSize="22"
                 FontWeight="Bold"
-                Text="Rechercher une réservation             " />
+                Text="Rechercher un matériel" />
             <TextBlock
                 VerticalAlignment="Center"
                 FontSize="20"
-                Text="🔍" />
+                Text=" 🔍 " />
             <TextBox
                 x:Name="txtRecherche"
                 Width="300"
@@ -33,8 +34,6 @@
                 TextChanged="TextBox_TextChanged"
                 TextWrapping="Wrap" />
         </StackPanel>
-
-        <!--  Zone de recherche  -->
 
         <!--  Tableau  -->
         <Border
@@ -50,7 +49,8 @@
                 FontSize="16"
                 HeadersVisibility="Column"
                 IsReadOnly="True"
-                RowHeight="50" MouseDoubleClick="DataGridMateriel_MouseDoubleClick">
+                MouseDoubleClick="DataGridMateriel_MouseDoubleClick"
+                RowHeight="25">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
@@ -69,13 +69,37 @@
                         Width="*"
                         Binding="{Binding Descriptif}"
                         Header="Descriptif" />
+
                     <DataGridTextColumn
                         Width="150"
                         Binding="{Binding PrixJournee, StringFormat={}{0} €}"
                         Header="Prix/Jour" />
+
+                    <!--  Nouvelle colonne État avec couleurs  -->
+                    <DataGridTemplateColumn
+                        Width="150"
+                        Header="État"
+                        SortMemberPath="StatutReservation">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="1"
+                                    Padding="2"
+                                    Background="{Binding CouleurEtat}"
+                                    CornerRadius="2">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        FontSize="10"
+                                        Foreground="White"
+                                        Text="{Binding StatutReservation}" />
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
                 </DataGrid.Columns>
             </DataGrid>
-
         </Border>
     </StackPanel>
 </UserControl>

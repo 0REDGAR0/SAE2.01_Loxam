@@ -52,6 +52,7 @@
                         TextChanged="TextBox_TextChanged"
                         TextWrapping="Wrap" />
                 </StackPanel>
+
                 <!--  DataGrid  -->
                 <DataGrid
                     x:Name="DataGridResa"
@@ -78,6 +79,30 @@
                             Width="*"
                             Binding="{Binding Materiel}"
                             Header="Materiel" />
+
+                        <!--  Colonne Statut colorée  -->
+                        <DataGridTemplateColumn
+                            Width="*"
+                            Header="Statut"
+                            SortMemberPath="StatutReservation">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Margin="1"
+                                        Padding="2"
+                                        Background="{Binding CouleurStatut}"
+                                        CornerRadius="2">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            FontSize="10"
+                                            Foreground="White"
+                                            Text="{Binding StatutReservation}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding DateReservation, StringFormat={}{0:dd/MM/yyyy}}"

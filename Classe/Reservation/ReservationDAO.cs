@@ -1,10 +1,6 @@
 ﻿using Npgsql;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SAE2._01_Loxam.Classe.Reservation
 {
@@ -23,7 +19,8 @@ namespace SAE2._01_Loxam.Classe.Reservation
                     r.datedebutlocation,
                     r.dateretoureffectivelocation,
                     r.dateretourreellelocation,
-                    r.prixtotal
+                    r.prixtotal,
+                    m.numetat
                 FROM reservation r
                 JOIN client c ON r.numclient = c.numclient
                 JOIN materiel m ON r.nummateriel = m.nummateriel;
@@ -41,12 +38,26 @@ namespace SAE2._01_Loxam.Classe.Reservation
                         DateDebutLocation = DateTime.Parse(dr["datedebutlocation"].ToString()),
                         DateRetourEffective = DateTime.Parse(dr["dateretoureffectivelocation"].ToString()),
                         DateRetourReelle = DateTime.Parse(dr["dateretourreellelocation"].ToString()),
-                        PrixTotal = decimal.Parse(dr["prixtotal"].ToString())
+                        PrixTotal = decimal.Parse(dr["prixtotal"].ToString()),
+                        NumEtat = (int)dr["numetat"]
                     });
                 }
             }
             return list;
         }
 
+        public void MettreAJourReservation(Reservation reservation)
+        {
+            using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(@"
+                    UPDATE reservation
+                    SET dateretourreellelocation = @DateRetourReelleLocation
+                    WHERE numreservation = @NumReservation;
+                "))
+            {
+                cmdUpdate.Parameters.AddWithValue("@DateRetourReelleLocation", reservation.DateRetourReelleLocation);
+                cmdUpdate.Parameters.AddWithValue("@NumReservation", reservation.NumReservation);
+                DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
+            }
+        }
     }
 }

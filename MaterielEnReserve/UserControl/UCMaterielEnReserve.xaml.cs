@@ -30,6 +30,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
             ChargerMateriels();
+            DataGridMateriel.Items.Filter = RechercheMotClefMateriel;
         }
 
         private void ChargerMateriels()
@@ -45,14 +46,15 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private bool RechercheMotClefMateriel(object obj)
         {
-            if (obj is Materiel materiel)
+            if (obj is MaterielAffichage materiel)
             {
                 string texteRecherche = txtRecherche.Text?.ToLower() ?? "";
                 return materiel.NomMateriel.ToLower().Contains(texteRecherche)
-                    || materiel.Descriptif.ToLower().Contains(texteRecherche);
+                    || materiel.Reference.ToLower().Contains(texteRecherche);
             }
             return false;
         }
+
 
         private void DataGridMateriel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

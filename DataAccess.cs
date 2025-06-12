@@ -212,6 +212,17 @@ namespace SAE2._01_Loxam
             }
             return null;
         }
+        public int ExecuteNonQuery(NpgsqlCommand cmd)
+        {
+            int affectedRows = 0;
+            using (NpgsqlConnection connection = new NpgsqlConnection(this.connectionString))
+            {
+                connection.Open();
+                cmd.Connection = connection;
+                affectedRows = cmd.ExecuteNonQuery();
+            }
+            return affectedRows;
+        }
 
 
         //  Fermer la connexion 

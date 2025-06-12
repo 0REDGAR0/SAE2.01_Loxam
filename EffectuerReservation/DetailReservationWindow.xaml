@@ -7,7 +7,7 @@
     Height="510"
     Background="#FAFAFA"
     ResizeMode="NoResize"
-    WindowStartupLocation="CenterOwner">
+    WindowStartupLocation="CenterScreen">
 
     <Border
         Margin="20"
@@ -104,26 +104,12 @@
                 <TextBlock Text="{Binding PrixTotal, StringFormat={}{0} €}" />
             </StackPanel>
 
-            <StackPanel
-                HorizontalAlignment="Center"
-                Orientation="Horizontal">
-                <Button
-                    x:Name="butOK"
-                    Margin="10"
-                    Click="butOK_Click"
-                    Content="✅"
-                    FontSize="24" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
                     x:Name="butRetourne"
                     Margin="10"
                     Click="butRetourne_Click"
                     Content="🔄"
-                    FontSize="24" />
-                <Button
-                    x:Name="butReparation"
-                    Margin="10"
-                    Click="butReparation_Click"
-                    Content="🛠️"
                     FontSize="24" />
             </StackPanel>
 

@@ -1,4 +1,5 @@
-﻿using SAE2._01_Loxam.Classe.Reservation;
+﻿using SAE2._01_Loxam.Classe.Materiel;
+using SAE2._01_Loxam.Classe.Reservation;
 using System.Windows;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
@@ -17,51 +18,29 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             reservationCourante = reservation;
             DataContext = reservationCourante;
         }
-        private void butOK_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
 
         private void butRetourne_Click(object sender, RoutedEventArgs e)
         {
-            // Mise à jour de la réservation (date retour réelle)
             var reservationToUpdate = new Reservation
             {
                 NumReservation = reservationCourante.NumeroReservation,
                 DateRetourReelleLocation = DateTime.Today
             };
 
-            dataAccess.MettreAJourReservation(reservationToUpdate);
+            ReservationDAO reservationDAO = new ReservationDAO();
+            reservationDAO.MettreAJourReservation(reservationToUpdate);
 
-            /*// Mise à jour du matériel (passer à "En réparation")
-            var materiel = dataAccess.GetMaterielById(reservationCourante.NumMateriel);
-
-            if (materiel != null)
-            {
-                materiel.NumEtat = 3; // 3 = En réparation (attention : s'assurer que 3 correspond bien dans ta table ETAT)
-                dataAccess.MettreAJourMateriel(materiel);
-            }
-
-            MessageBox.Show("Retour effectué. Le matériel passe en réparation.");
-            this.Close();*/
-        }
-
-
-        private void butReparation_Click(object sender, RoutedEventArgs e)
-        {
-            var materiel = dataAccess.GetMaterielById(reservationCourante.NumeroReservation);
+            MaterielDAO materielDAO = new MaterielDAO();
+            var materiel = materielDAO.GetMaterielByReservation(reservationCourante.NumeroReservation);
 
             if (materiel != null)
             {
-                materiel.NumEtat = idEtatReparation;
-                dataAccess.MettreAJourMateriel(materiel);
-                MessageBox.Show("Matériel envoyé en réparation.");
-                this.Close();
+                materiel.NumEtat = 4; // Retourné
+                materielDAO.MettreAJourMateriel(materiel);
             }
-            else
-            {
-                MessageBox.Show("Matériel non trouvé !");
-            }
+
+            MessageBox.Show("Retour effectué avec succès.");
+            this.Close();
         }
 
 
