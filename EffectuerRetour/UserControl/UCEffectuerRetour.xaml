@@ -14,14 +14,9 @@
         <!--  Titre  -->
         <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
             <TextBlock
-                Margin="0,0,10,0"
                 FontSize="24"
                 FontWeight="Bold"
-                Text="←" />
-            <TextBlock
-                FontSize="24"
-                FontWeight="Bold"
-                Text="Faire un retour" />
+                Text="Gestion d'un retour" Margin="10,0,0,0" />
         </StackPanel>
 
         <!--  Nom de l'article  -->
@@ -68,7 +63,7 @@
                 Orientation="Horizontal" />
 
             <TextBlock
-                Margin="0,0,0,10"
+                Margin="10,0,0,10"
                 FontSize="20"
                 FontWeight="Bold"
                 Text="Indisponibilités" />
