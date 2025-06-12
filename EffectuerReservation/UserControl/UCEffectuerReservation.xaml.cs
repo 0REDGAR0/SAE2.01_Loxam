@@ -27,6 +27,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
             ChargerReservations();
+            DataGridResa.Items.Filter = RechercheMotClefResa;
         }
 
         private void ChargerReservations()
@@ -34,6 +35,25 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             ReservationDAO reservationDAO = new ReservationDAO();
             DataGridResa.ItemsSource = reservationDAO.GetReservationsAffichage();
         }
-    }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
+        }
+
+        private bool RechercheMotClefResa(object obj)
+        {
+            if (obj is ReservationAffichage reservation)
+            {
+                string texteRecherche = txtRecherche.Text?.ToLower() ?? "";
+
+                return reservation.Client.ToLower().Contains(texteRecherche)
+                    || reservation.Materiel.ToLower().Contains(texteRecherche);
+            }
+            return false;
+        }
+
+
+
+    }
 }
