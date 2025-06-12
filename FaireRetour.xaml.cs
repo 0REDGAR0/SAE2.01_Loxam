@@ -24,9 +24,9 @@ namespace SAE2._01_Loxam
             InitializeComponent();
         }
 
-        private void InitializeComponent()
+        private void btn_annuler_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
     }
 }

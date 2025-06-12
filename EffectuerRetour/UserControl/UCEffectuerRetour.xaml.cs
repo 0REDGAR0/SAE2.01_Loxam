@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TonNamespace;
+using SAE2._01_Loxam;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
@@ -21,19 +21,13 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
     /// </summary>
     public partial class UCEffectuerRetour : UserControl
     {
-        private List<RetourAffichage> listeRetours;
+
         public UCEffectuerRetour()
         {
             InitializeComponent();
-            ChargerRetours();
         }
 
-        private void ChargerRetours()
-        {
-            RetourDAO retourDAO = new RetourDAO();
-            listeRetours = retourDAO.GetRetoursAffichage();
-            //DataGridRetour.ItemsSource = listeRetours;
-        }
+
 
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,7 +43,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void btn_effectuer_retour_Click(object sender, RoutedEventArgs e)
         {
-            EffectuerRetourWindow retourWindow = new EffectuerRetourWindow();
+            FaireRetour retourWindow = new FaireRetour();
             retourWindow.ShowDialog();
         }
     }

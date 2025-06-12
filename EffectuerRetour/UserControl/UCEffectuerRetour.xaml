@@ -17,7 +17,21 @@
             FontSize="22"
             FontWeight="Bold"
             Text="Effectuer un retour" />
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
+            <TextBlock
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="20"
+                Text="🔍" />
+            <TextBox
+                x:Name="txtRecherche"
+                Width="300"
+                Height="30"
+                FontSize="20"
+                Text=""
+                TextWrapping="Wrap" />
+        </StackPanel>
         <!--  Bloc Indisponibilités  -->
         <Border
             Padding="20"
@@ -36,16 +50,8 @@
                         Width="194"
                         Height="40"
                         Background="Red"
+                        Click="btn_effectuer_retour_Click"
                         Content="EFFECTUER UN RETOUR"
-                        FontWeight="Bold"
-                        Foreground="White" Click="btn_effectuer_retour_Click" />
-                    <Button
-                        x:Name="btn_rechercher"
-                        Width="150"
-                        Height="40"
-                        Margin="90,0,0,0"
-                        Background="Red"
-                        Content="RECHERCHER"
                         FontWeight="Bold"
                         Foreground="White" />
                 </StackPanel>
@@ -60,13 +66,14 @@
                 <DataGrid
                     x:Name="DataGridIndisponibilites"
                     AutoGenerateColumns="False"
+                    BorderBrush="#FF688CAF"
                     CanUserAddRows="False"
                     ColumnHeaderHeight="50"
                     FontSize="16"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
                     ItemsSource="{Binding ListeIndisponibilites}"
-                    RowHeight="50" BorderBrush="#FF688CAF">
+                    RowHeight="50">
 
                     <DataGrid.Columns>
 
@@ -105,18 +112,7 @@
                         </DataGridTemplateColumn>
 
                         <!--  Voir détails  -->
-                        <DataGridTemplateColumn Width="120" Header="">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button
-                                        Width="100"
-                                        Height="30"
-                                        Margin="5"
-                                        Command="{Binding CommandVoirDetails}"
-                                        Content="👁 Voir détails" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+
 
                         <!--  Faire un retour  -->
                         <DataGridTemplateColumn Width="150" Header="">
