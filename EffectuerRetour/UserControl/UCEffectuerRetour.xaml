@@ -5,9 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
     d:DesignHeight="686"
-    d:DesignWidth="1040"
-    mc:Ignorable="d">
+    d:DesignWidth="1040">
 
     <StackPanel Margin="20" Background="White">
 
@@ -31,7 +31,10 @@
             x:Name="DataGridRetour"
             Width="782"
             Height="70"
-            Margin="0,0,0,20">
+            Margin="0,0,0,20"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Exemple" Binding="{Binding Exemple}" Width="*" />
             </DataGrid.Columns>
@@ -42,16 +45,27 @@
             Padding="20"
             BorderBrush="LightGray"
             BorderThickness="1"
-            CornerRadius="10">
+            CornerRadius="10"
+            Margin="0,0,0,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,36" FontSize="20" FontWeight="Bold" Text="Matériel :" />
-                <TextBlock Grid.Row="0" Grid.Column="2" Margin="0,0,0,36" Text="{Binding Materiel}" />
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Matériel :" />
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Materiel}" />
 
-                <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0" FontSize="20" FontWeight="Bold" Text="Du :" />
-                <TextBlock Grid.Row="1" Grid.Column="2" Margin="0,10,0,0" Text="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}" />
+                <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Du :" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}" />
 
-                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="0,10,0,0" FontSize="20" FontWeight="Bold" Text="Au :" />
-                <TextBlock Grid.Row="2" Grid.Column="2" Margin="0,10,0,0" Text="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}" />
+                <TextBlock Grid.Row="2" Grid.Column="0" FontSize="20" FontWeight="Bold" Text="Au :" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}" />
             </Grid>
         </Border>
 
@@ -95,6 +109,5 @@
             Click="Button_Click"
             Content="voir détails"
             Foreground="White" />
-
     </StackPanel>
 </UserControl>
