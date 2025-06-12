@@ -18,22 +18,15 @@ namespace SAE2._01_Loxam
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public DataGridLists GestionResa { get; set; }
-        
 
         private DataAccess dataAccess;
-
-
 
         public MainWindow()
         {
             ChargeData();
             InitializeComponent();
         }
-
-
-        
 
         public MainWindow(DataAccess dataAccess)
         {
@@ -56,7 +49,7 @@ namespace SAE2._01_Loxam
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Connexion connexion = new Connexion();
-            connexion.Show();
+            // connexion.Show();
         }
         private void butRetour_Click(object sender, RoutedEventArgs e)
         {

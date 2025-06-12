@@ -61,6 +61,7 @@
                     FontSize="16"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
+                    MouseDoubleClick="DataGridResa_MouseDoubleClick"
                     RowHeight="50">
 
                     <DataGrid.Columns>
@@ -78,20 +79,20 @@
                             Header="Materiel" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DateReservation, StringFormat=d}"
-                            Header="Date Reservation" />
+                            Binding="{Binding DateReservation, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Date de réservation" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DateDebutLocation, StringFormat=d}"
-                            Header="Debut Location" />
+                            Binding="{Binding DateDebutLocation, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Début de location" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DateRetourEffective, StringFormat=d}"
-                            Header="Retour Effective" />
+                            Binding="{Binding DateRetourEffective, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Retour effectif" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding DateRetourReelle, StringFormat=d}"
-                            Header="Retour Reelle" />
+                            Binding="{Binding DateRetourReelle, StringFormat={}{0:dd/MM/yyyy}}"
+                            Header="Retour réel" />
                         <DataGridTextColumn
                             Width="*"
                             Binding="{Binding PrixTotal}"
