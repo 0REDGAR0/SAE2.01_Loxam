@@ -30,8 +30,8 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
 
         private void ChargerReparations()
         {
-            ReservationDAO reservationDAO = new ReservationDAO();
-            DataGridReparation.ItemsSource = reservationDAO.GetReservationsAffichage();
+            ReparationDAO reparationDAO = new ReparationDAO();
+            DataGridReparation.ItemsSource = reparationDAO.GetReparationAffichage();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,7 +44,7 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
             throw new NotImplementedException();  
         }
 
-        private bool RechercheMotClefResa(object obj)
+        private bool RechercheMotClefReparation(object obj)
         {
             if (obj is ReparationAffichage reparation)
             {

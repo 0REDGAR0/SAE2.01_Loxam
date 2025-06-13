@@ -22,7 +22,7 @@ namespace SAE2._01_Loxam.Reparation
                     m.nommateriel,
                     t.libelletype,
                     c.libellecategorie,
-                    e.libelleetat,
+                    e.libelleetat
                 FROM materiel m
                 JOIN etat e ON m.numetat = e.numetat
                 JOIN type t ON m.numtype = t.numtype

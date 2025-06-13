@@ -148,5 +148,11 @@ namespace SAE2._01_Loxam
             Application.Current.Shutdown(); 
         }
 
+        private void butReparation_Click(object sender, RoutedEventArgs e)
+        {
+            SPcentral.Children.Clear();
+            SPcentral.Children.Add(new Classe.Materiel.UserControls.UCReparation());
+            UpdateButtonStates();
+        }
     }
 }
