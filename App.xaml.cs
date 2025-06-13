@@ -23,6 +23,12 @@ namespace SAE2._01_Loxam
             DataAccess.Instance.CloseConnection();
             Environment.Exit(0);
         }
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            Connexion connexionWindow = new Connexion();
+            connexionWindow.Show();
+        }
+
 
     }
 

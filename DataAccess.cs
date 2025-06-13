@@ -4,7 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 using Npgsql;
 using SAE2._01_Loxam.Classe.Materiel;
 using SAE2._01_Loxam.Classe.Reservation;
@@ -13,6 +12,8 @@ namespace SAE2._01_Loxam
 {
     public class DataAccess
     {
+        private static DataAccess instance;
+        private readonly string connectionString;
 
         private static readonly DataAccess instance = new DataAccess();
         private readonly string connectionString = $"Host=srv-peda-new;" +
@@ -32,41 +33,33 @@ namespace SAE2._01_Loxam
 
         private NpgsqlConnection connection;
 
-
-
-        public DataAccess()
+        private DataAccess(string connectionString)
         {
-            connection = new NpgsqlConnection(connectionString);
+            this.connectionString = connectionString;
+            this.connection = new NpgsqlConnection(connectionString);
         }
 
+        public static void Initialize(string connectionString)
+        {
+            if (instance == null)
+            {
+                instance = new DataAccess(connectionString);
+            }
+        }
 
         public static DataAccess Instance
         {
             get
             {
+                if (instance == null)
+                    throw new InvalidOperationException("DataAccess not initialized. Call Initialize() first.");
                 return instance;
             }
         }
 
-
-        //  Constructeur privé pour empêcher l'instanciation multiple
-        public DataAccess(string login)
-        {
-            try
-            {
-                connection = new NpgsqlConnection(connectionString);
-            }
-            catch (Exception ex)
-            {
-                LogError.Log(ex, "Pb de connexion GetConnection \n" + connectionString);
-                throw;
-            }
-        }
-
-        // pour récupérer la connexion (et l'ouvrir si nécessaire)
         public NpgsqlConnection GetConnection()
         {
-            if (connection.State == ConnectionState.Closed || this.connection.State == ConnectionState.Broken)
+            if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
             {
                 try
                 {
@@ -78,12 +71,9 @@ namespace SAE2._01_Loxam
                     throw;
                 }
             }
-
-
             return connection;
         }
 
-        //  pour requêtes SELECT et retourne un DataTable (table de données en mémoire)
         public DataTable ExecuteSelect(NpgsqlCommand cmd)
         {
             DataTable dataTable = new DataTable();
@@ -103,8 +93,6 @@ namespace SAE2._01_Loxam
             return dataTable;
         }
 
-        //   pour requêtes INSERT et renvoie l'ID généré
-
         public int ExecuteInsert(NpgsqlCommand cmd)
         {
             int nb = 0;
@@ -112,7 +100,6 @@ namespace SAE2._01_Loxam
             {
                 cmd.Connection = GetConnection();
                 nb = (int)cmd.ExecuteScalar();
-
             }
             catch (Exception ex)
             {
@@ -122,10 +109,6 @@ namespace SAE2._01_Loxam
             return nb;
         }
 
-
-
-
-        //  pour requêtes UPDATE, DELETE
         public int ExecuteSet(NpgsqlCommand cmd)
         {
             int nb = 0;
@@ -140,10 +123,8 @@ namespace SAE2._01_Loxam
                 throw;
             }
             return nb;
-
         }
 
-        // pour requêtes avec une seule valeur retour  (ex : COUNT, SUM) 
         public object ExecuteSelectUneValeur(NpgsqlCommand cmd)
         {
             object res = null;
@@ -158,7 +139,6 @@ namespace SAE2._01_Loxam
                 throw;
             }
             return res;
-
         }
 
         public void MettreAJourReservation(Reservation reservation)
@@ -175,6 +155,7 @@ namespace SAE2._01_Loxam
                 }
             }
         }
+
         public void MettreAJourMateriel(Materiel materiel)
         {
             using (var connection = new NpgsqlConnection(connectionString))
@@ -219,6 +200,7 @@ namespace SAE2._01_Loxam
             }
             return null;
         }
+
         public int ExecuteNonQuery(NpgsqlCommand cmd)
         {
             int affectedRows = 0;
@@ -231,8 +213,6 @@ namespace SAE2._01_Loxam
             return affectedRows;
         }
 
-
-        //  Fermer la connexion 
         public void CloseConnection()
         {
             if (connection.State == ConnectionState.Open)

@@ -1,5 +1,6 @@
 ﻿using SAE2._01_Loxam.Classe.Materiel;
 using SAE2._01_Loxam.Classe.Reservation;
+using System;
 using System.Windows;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
@@ -9,7 +10,6 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         private ReservationAffichage reservationCourante;
         private DataAccess dataAccess = DataAccess.Instance;
 
-        // Remplace ici par l’ID exact de l’état "Réparation" dans ta table ETAT
         private const int idEtatReparation = 3;
 
         public DetailReservationWindow(ReservationAffichage reservation)
@@ -40,9 +40,8 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             }
 
             MessageBox.Show("Retour effectué avec succès.");
+            this.DialogResult = true; // ✅ On déclenche le rafraîchissement à la fermeture
             this.Close();
         }
-
-
     }
 }

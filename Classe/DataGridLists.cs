@@ -16,7 +16,7 @@ namespace SAE2._01_Loxam.Classe
 
         public DataGridLists()
         {
-            this.lesReservations = new ObservableCollection<Reservation.Reservation>(new Reservation.Reservation().FindAllResa());
+            this.lesReservations = new ObservableCollection<Reservation.Reservation>();
         }
 
         public DataGridLists(string nom)
