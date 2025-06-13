@@ -136,15 +136,17 @@ namespace SAE2._01_Loxam.Classe.Client
 
             set
             {
-                /*if (String.IsNullOrWhiteSpace(value))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("L'adresse doit être renseigné");
-                }*/
-                if (value.Length > 60)
-                {
-                    throw new ArgumentException("doit avoir moins de 60 caractères");
+                    if (value.Length > 60)
+                        throw new ArgumentException("L'adresse doit avoir moins de 60 caractères");
+
+                    this.adresseClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
                 }
-                this.adresseClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                else
+                {
+                    this.adresseClient = null; 
+                }
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AdresseClient)));
             }
         }
@@ -158,15 +160,20 @@ namespace SAE2._01_Loxam.Classe.Client
 
             set
             {
-                /*if (value != null && (value.Length > 60 || !(Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException($"Le mail : {value} n'est pas une adresse valide");
+                    if (value.Length > 60 || !Regex.IsMatch(value, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+                    {
+                        throw new ArgumentException($"Le mail : {value} n'est pas une adresse valide");
+                    }
+
+                    this.mailClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
                 }
-                if (String.IsNullOrWhiteSpace(value))
+                else
                 {
-                    throw new ArgumentException("Le mail doit être renseigné");
-                }*/
-                this.mailClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                    this.mailClient = null; // ou string.Empty si tu préfères
+                }
+
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MailClient)));
             }
         }
@@ -180,15 +187,19 @@ namespace SAE2._01_Loxam.Classe.Client
 
             set
             {
-                /*if (value.Length > 10 || !(Regex.IsMatch(value, @"^(0\d{9}|\+33\d{9})$")))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException($"Le numéro de téléphone : {value} n'est pas un numéro valide");
+                    if (value.Length > 10 || !Regex.IsMatch(value, @"^(0\d{9}|\+33\d{9})$"))
+                    {
+                        throw new ArgumentException($"Le numéro de téléphone : {value} n'est pas un numéro valide");
+                    }
+
+                    this.numeroTelClient = value; // Pas besoin de ToTitleCase pour un numéro
                 }
-                if (String.IsNullOrWhiteSpace(value))
+                else
                 {
-                    throw new ArgumentException("Le numéro de téléphone doit être renseigné");
-                }*/
-                this.numeroTelClient = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value.ToLower());
+                    this.numeroTelClient = null; // ou string.Empty si tu préfères
+                }
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NumeroTelClient)));
             }
         }
@@ -296,11 +307,11 @@ namespace SAE2._01_Loxam.Classe.Client
         {
             using (var cmdUpdate = new NpgsqlCommand("update client set nomclient =@nomClient ,  prenomclient =@prenomClient, adresseclient =@adresseClient, mailclient =@mailClient, numerotelclient =@numeroTelClient where numclient =@numClient;"))
             {
-                cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient);
-                cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-                cmdUpdate.Parameters.AddWithValue("adresseclient", this.AdresseClient);
-                cmdUpdate.Parameters.AddWithValue("mailclient", this.MailClient);
-                cmdUpdate.Parameters.AddWithValue("numerotelclient", this.NumeroTelClient);
+                cmdUpdate.Parameters.AddWithValue("nomclient", this.NomClient ?? string.Empty);
+                cmdUpdate.Parameters.AddWithValue("prenomclient", this.PrenomClient ?? string.Empty);
+                cmdUpdate.Parameters.AddWithValue("adresseclient", (object?)this.AdresseClient ?? DBNull.Value);
+                cmdUpdate.Parameters.AddWithValue("mailclient", (object?)this.MailClient ?? DBNull.Value);
+                cmdUpdate.Parameters.AddWithValue("numerotelclient", (object?)this.NumeroTelClient ?? DBNull.Value);
                 cmdUpdate.Parameters.AddWithValue("numclient", this.NumClient);
                 return DataAccess.Instance.ExecuteSet(cmdUpdate);
             }

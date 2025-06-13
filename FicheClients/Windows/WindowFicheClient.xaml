@@ -6,8 +6,8 @@
     xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="WindowFicheClient"
-    Width="800"
-    Height="590"
+    Width="442"
+    Height="556"
     ResizeMode="NoResize"
     mc:Ignorable="d">
     <StackPanel x:Name="panelFormClient" Margin="20">
@@ -15,7 +15,6 @@
         <!--  Grille principale à deux colonnes  -->
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -77,67 +76,7 @@
             </StackPanel>
 
             <!--  Réservations  -->
-            <StackPanel Grid.Column="1" Margin="20,0,0,0">
 
-                <TextBlock
-                    Margin="0,0,0,10"
-                    FontSize="18"
-                    FontWeight="Bold"
-                    Text="Réservations en cours/à venir" />
-
-                <TextBlock
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Text="N° de réservation" />
-                <TextBox
-                    Height="35"
-                    Margin="0,5,0,15"
-                    Text="{Binding NumReservation}" />
-
-                <TextBlock
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Text="Matériel" />
-                <TextBox
-                    Height="35"
-                    Margin="0,5,0,15"
-                    Text="{Binding NumMateriel}" />
-
-                <StackPanel Margin="0,0,0,15" Orientation="Horizontal">
-                    <StackPanel Width="100">
-                        <TextBlock
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Text="Du" />
-                        <TextBox
-                            Height="35"
-                            Margin="0,5,0,0"
-                            Text="{Binding DateDebutLocation}" />
-                    </StackPanel>
-                    <StackPanel Width="100" Margin="20,0,0,0">
-                        <TextBlock
-                            FontSize="16"
-                            FontWeight="Bold"
-                            Text="Au" />
-                        <TextBox
-                            Height="35"
-                            Margin="0,5,0,0"
-                            Text="{Binding DateRetourEffectiveLocation}" />
-                    </StackPanel>
-                </StackPanel>
-
-                <TextBlock
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Text="Statut" />
-                <TextBox
-                    Height="35"
-                    Margin="0,5,0,15"
-                    Text="{Binding Statut}" />
-
-                <!--  Boutons  -->
-                <StackPanel Margin="0,10,0,0" Orientation="Horizontal" />
-            </StackPanel>
         </Grid>
 
         <!--  Bouton final en dessous  -->
@@ -145,8 +84,7 @@
             x:Name="butValider"
             Width="300"
             Height="60"
-            Margin="0,30,0,0"
-            HorizontalAlignment="Right"
+            Margin="0,0,3,0"
             Background="Red"
             Click="butValider_Click"
             Content="Valider"

@@ -38,12 +38,12 @@
                     FontSize="22"
                     Text="🔍" />
                 <TextBox
-                    x:Name="textMotClefChien"
+                    x:Name="textMotClefClient"
                     Width="300"
                     Height="50"
                     FontSize="33"
                     Text=""
-                    TextChanged="textMotClefChien_TextChanged"
+                    TextChanged="textMotClefClient_TextChanged"
                     TextWrapping="Wrap" />
             </StackPanel>
 
