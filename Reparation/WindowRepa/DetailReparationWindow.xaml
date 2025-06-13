@@ -8,7 +8,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="Détail de la réparation"
     Width="650"
-    Height="450"
+    Height="520"
     Background="#FAFAFA"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
@@ -57,14 +57,6 @@
                 Margin="0,0,0,10"
                 DisplayMemberPath="Value"
                 SelectedValuePath="Key">
-                <ComboBox.ItemsSource>
-                    <x:Array Type="{x:Type sys:KeyValuePair}">
-                        <sys:KeyValuePair x:Key="5" Value="En attente de réparation" />
-                        <sys:KeyValuePair x:Key="6" Value="En réparation" />
-                        <sys:KeyValuePair x:Key="7" Value="HS" />
-                        <sys:KeyValuePair x:Key="1" Value="Disponible" />
-                    </x:Array>
-                </ComboBox.ItemsSource>
             </ComboBox>
 
             <TextBlock FontWeight="SemiBold" Text="Commentaire :" />

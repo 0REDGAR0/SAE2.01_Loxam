@@ -27,21 +27,22 @@ namespace SAE2._01_Loxam.Reparation.WindowRepa
             materiel = m;
             this.DataContext = materiel;
             cbEtat.ItemsSource = new List<KeyValuePair<int, string>>
-            {
-                new KeyValuePair<int, string>(5, "En attente de réparation"),
-                new KeyValuePair<int, string>(6, "En réparation"),
-                new KeyValuePair<int, string>(7, "HS"),
-                new KeyValuePair<int, string>(1, "Disponible")
-            };
+                {
+                    new KeyValuePair<int, string>(5, "En attente de réparation"),
+                    new KeyValuePair<int, string>(6, "En réparation"),
+                    new KeyValuePair<int, string>(7, "HS"),
+                    new KeyValuePair<int, string>(1, "Disponible")
+                };
 
-            cbEtat.SelectedValue = materiel.NumEtat; // Assure que l'état actuel est pré-sélectionné
+            cbEtat.SelectedValue = materiel.NumEtat; // ou reservation.NumEtat selon ton objet
+
 
         }
 
-        private void Fermer_Click(object sender, RoutedEventArgs e)
+        /*private void Fermer_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
+        }*/
 
         private void butEnregistrer_Click(object sender, RoutedEventArgs e)
         {
@@ -67,6 +68,11 @@ namespace SAE2._01_Loxam.Reparation.WindowRepa
             }
 
             // Tu peux aussi enregistrer le commentaire si tu as une table ou champ dédié
+        }
+
+        private void butFermer_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
