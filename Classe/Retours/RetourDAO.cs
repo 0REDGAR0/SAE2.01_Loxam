@@ -43,12 +43,10 @@ namespace SAE2._01_Loxam.Classe.Retour
                         NumMateriel = Convert.ToInt32(dr["nummateriel"]),
                         Categorie = dr["categorie"].ToString(),
                         NumEtat = Convert.ToInt32(dr["numetat"]),
-
                         DateReservation = (DateTime)(dr["datereservation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["datereservation"])),
                         DateDebutLocation = (DateTime)(dr["datedebutlocation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["datedebutlocation"])),
                         DateRetourEffective = (DateTime)(dr["dateretoureffectivelocation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["dateretoureffectivelocation"])),
                         DateRetourReelle = (DateTime)(dr["dateretourreellelocation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["dateretourreellelocation"])),
-
                         PrixTotal = dr["prixtotal"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["prixtotal"])
                     });
 
