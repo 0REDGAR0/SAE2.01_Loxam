@@ -79,9 +79,16 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void DataGridResa_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (DataGridResa.SelectedItem is ReservationAffichage resaSelectionnee)
+            if (DataGridResa.SelectedItem is ReservationAffichage reservation)
             {
-                DetailReservationWindow detailWindow = new DetailReservationWindow(resaSelectionnee);
+                DetailReservationWindow detailWindow = new DetailReservationWindow(reservation);
+
+                detailWindow.Closed += (s, args) =>
+                {
+                    ChargerReservations();
+                    CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
+                };
+
                 detailWindow.ShowDialog();
             }
         }

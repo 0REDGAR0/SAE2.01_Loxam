@@ -1,5 +1,7 @@
 ﻿using SAE2._01_Loxam.Classe;
+using SAE2._01_Loxam.Classe.Reservation;
 using SAE2._01_Loxam.FicheClients.UserControls;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SAE2._01_Loxam.Classe.Reservation;
 
 namespace SAE2._01_Loxam
 {
@@ -23,23 +26,40 @@ namespace SAE2._01_Loxam
 
         private DataAccess dataAccess;
 
-        public MainWindow()
+        private string login;
+
+        public MainWindow(string login)
         {
-            ChargeData();
             InitializeComponent();
+            this.login = login;
+
+            labConnect.Text = login;
 
             SPcentral.Children.Clear();
             SPcentral.Children.Add(new Bienvenue());
             UpdateButtonStates();
         }
-        public MainWindow(DataAccess dataAccess)
+
+
+        public void LoadData()
         {
-            this.dataAccess = dataAccess;
+            try
+            {
+                GestionResa = new DataGridLists();
+                this.DataContext = GestionResa;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Problème lors de récupération des données, veuillez consulter votre admin\n" + ex);
+                Application.Current.Shutdown();
+            }
         }
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Connexion connexion = new Connexion();
-            connexion.Show();
+            /*Connexion connexion = new Connexion();
+            connexion.Show();*/
         }
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
@@ -74,6 +94,7 @@ namespace SAE2._01_Loxam
             try
             {
                 GestionResa = new DataGridLists();
+                GestionResa.LesReservations = new ObservableCollection<Reservation>(new Reservation().FindAllResa());
                 this.DataContext = GestionResa;
             }
             catch (Exception ex)

@@ -63,10 +63,11 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
                 <TextBlock
+                    x:Name="labConnect"
                     VerticalAlignment="Center"
                     FontSize="16"
                     Foreground="White"
-                    Text="Inconnu " />
+                    Text="Inconnu " Margin="0,0,7,0" FontWeight="Bold" />
                 <TextBlock
                     VerticalAlignment="Center"
                     FontFamily="Segoe MDL2 Assets"
