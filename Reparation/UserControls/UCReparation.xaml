@@ -61,7 +61,7 @@
                     FontSize="16"
                     HeadersVisibility="Column"
                     IsReadOnly="True"
-                    MouseDoubleClick="DataGridResa_MouseDoubleClick"
+                    MouseDoubleClick="DataGridReparation_MouseDoubleClick"
                     RowHeight="25">
 
                     <DataGrid.Columns>

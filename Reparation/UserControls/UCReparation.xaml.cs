@@ -1,5 +1,6 @@
 ﻿using SAE2._01_Loxam.Classe.Reservation;
 using SAE2._01_Loxam.Reparation;
+using SAE2._01_Loxam.Reparation.WindowRepa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,10 +46,22 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
             CollectionViewSource.GetDefaultView(DataGridReparation.ItemsSource).Refresh();
         }
 
-        private void DataGridResa_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DataGridReparation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();  
+            if (DataGridReparation.SelectedItem is ReparationAffichage reparation)
+            {
+                DetailReparationWindow detailWindow = new DetailReparationWindow(reparation);
+
+                detailWindow.Closed += (s, args) =>
+                {
+                    ChargerReparations();
+                    CollectionViewSource.GetDefaultView(DataGridReparation.ItemsSource).Refresh();
+                };
+
+                detailWindow.ShowDialog();
+            }
         }
+
 
         private bool RechercheMotClefReparation(object item)
         {
