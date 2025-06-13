@@ -16,20 +16,24 @@ namespace SAE2._01_Loxam.Classe.Reservation
         public DateTime DateRetourEffective { get; set; }
         public DateTime DateRetourReelle { get; set; }
         public decimal PrixTotal { get; set; }
+        public string Categorie { get; set; }
+        public int NumEtat { get; set; }
+
 
         public string StatutReservation
         {
             get
             {
-                if (DateRetourReelle > DateTime.Now)
+                return NumEtat switch
                 {
-                    if (DateDebutLocation > DateTime.Now)
-                        return "Prévue";
-                    else
-                        return "En cours";
-                }
-                else
-                    return "Terminée";
+                    2 => "Prévue",
+                    3 => "En cours",
+                    4 => "Terminée/Retourne",
+                    5 => "En attente de réparation",
+                    6 => "En réparation",
+                    7 => "HS",
+                    _ => "Disponible"
+                };
             }
         }
 
@@ -37,15 +41,18 @@ namespace SAE2._01_Loxam.Classe.Reservation
         {
             get
             {
-                if (StatutReservation == "Prévue")
-                    return "#3498DB"; // Bleu
-                if (StatutReservation == "En cours")
-                    return "#F39C12"; // Orange
-                return "#2ECC71"; // Vert
+                return NumEtat switch
+                {
+                    1 => "#2ECC71",  // Disponible - Vert
+                    2 => "#3498DB",  // Location prévue - Bleu
+                    3 => "#9B59B6",  // Loué - Violet
+                    4 => "#145A32",  // Retourné - Vert foncé
+                    5 => "#F1C40F",  // En attente de réparation - Jaune
+                    6 => "#E67E22",  // Réparation en cours - Orange
+                    7 => "#E74C3C",  // Hors Service - Rouge
+                    _ => "#7F8C8D"   // Inconnu - Gris
+                };
             }
         }
     }
-
-
-
 }

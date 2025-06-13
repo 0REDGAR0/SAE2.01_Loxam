@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace SAE2._01_Loxam
+namespace SAE2._01_Loxam.Classe.Client
 {
     public class Client : ICrud<Client>, INotifyPropertyChanged
     {
@@ -26,15 +26,14 @@ namespace SAE2._01_Loxam
         public Client()
         {
         }
-
-        public Client(int numClient, string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
+        public Client(int numClient, string nom, string prenom, string adresse, string mail, string tel)
         {
-            this.NumClient = numClient;
-            this.NomClient = nomClient;
-            this.PrenomClient = prenomClient;
-            this.AdresseClient = adresseClient;
-            this.MailClient = mailClient;
-            this.NumeroTelClient = numeroTelClient;
+            NumClient = numClient;
+            NomClient = nom;
+            PrenomClient = prenom;
+            AdresseClient = adresse;
+            MailClient = mail;
+            NumeroTelClient = tel;
         }
 
         public Client(string nomClient, string prenomClient, string adresseClient, string mailClient, string numeroTelClient)
@@ -50,6 +49,13 @@ namespace SAE2._01_Loxam
         {
             this.NomClient = nomClient;
             this.LesClients = new ObservableCollection<Client>(FindAll());
+        }
+
+        public Client(int numClient, string nomClient, string prenomClient)
+        {
+            this.NumClient = numClient;
+            this.NomClient = nomClient;
+            this.PrenomClient = prenomClient;
         }
 
         public int NumClient
@@ -245,10 +251,17 @@ namespace SAE2._01_Loxam
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
-                    lesClients.Add(new Client(dr["numClient"] is DBNull ? 0 : (Int32)dr["numClient"], dr["nomclient"] is DBNull ? "" : (String)dr["nomclient"],
-                   dr["prenomClient"] is DBNull ? "" : (String)dr["prenomClient"], dr["adresseClient"] is DBNull ? "" : (String)dr["adresseClient"], dr["mailClient"] is DBNull ? "" :(String)dr["mailClient"], dr["numeroTelClient"] is DBNull ? "" : (String)dr["numeroTelClient"]));
+                    lesClients.Add(new Client(
+                        dr["numclient"] is DBNull ? 0 : (Int32)dr["numclient"],
+                        dr["nomclient"] is DBNull ? "" : (String)dr["nomclient"],
+                        dr["prenomclient"] is DBNull ? "" : (String)dr["prenomclient"]/*,
+                        dr["adresseclient"] is DBNull ? "" : (String)dr["adresseclient"],
+                        dr["mailclient"] is DBNull ? "" : (String)dr["mailclient"],
+                        dr["numerotelclient"] is DBNull ? "" : (String)dr["numerotelclient"]*/
+                    ));
             }
             return lesClients;
+
         }
 
         List<Client> ICrud<Client>.FindBySelection(string criteres)
