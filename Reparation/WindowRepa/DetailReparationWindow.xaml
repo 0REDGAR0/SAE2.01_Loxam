@@ -1,0 +1,87 @@
+﻿<Window
+    x:Class="SAE2._01_Loxam.Reparation.WindowRepa.DetailReparationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SAE2._01_Loxam.Reparation.WindowRepa"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="Détail de la réparation"
+    Width="650"
+    Height="520"
+    Background="#FAFAFA"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Border
+        Margin="20"
+        Padding="20"
+        Background="White"
+        BorderBrush="Gray"
+        BorderThickness="1"
+        CornerRadius="10">
+        <StackPanel>
+
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="26"
+                FontWeight="Bold"
+                Foreground="#2C3E50"
+                Text="Détail du matériel"
+                TextAlignment="Center" />
+
+            <!--  Statut visuel  -->
+            <Border
+                Margin="0,0,0,20"
+                Padding="10"
+                Background="{Binding CouleurStatut}"
+                CornerRadius="5">
+                <TextBlock
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="{Binding StatutReparation}"
+                    TextAlignment="Center" />
+            </Border>
+
+            <!--  Informations  -->
+            <TextBlock FontWeight="SemiBold" Text="Nom du matériel :" />
+            <TextBlock Margin="0,0,0,10" Text="{Binding NomMateriel}" />
+
+            <TextBlock FontWeight="SemiBold" Text="Référence :" />
+            <TextBlock Margin="0,0,0,10" Text="{Binding Reference}" />
+
+            <TextBlock FontWeight="SemiBold" Text="État actuel :" />
+            <ComboBox
+                x:Name="cbEtat"
+                Margin="0,0,0,10"
+                DisplayMemberPath="Value"
+                SelectedValuePath="Key">
+            </ComboBox>
+
+            <TextBlock FontWeight="SemiBold" Text="Commentaire :" />
+            <TextBox
+                x:Name="txtCommentaire"
+                Height="60"
+                AcceptsReturn="True"
+                TextWrapping="Wrap" />
+
+            <!--  Boutons  -->
+            <StackPanel
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    Width="120"
+                    Margin="10"
+                    Click="butEnregistrer_Click"
+                    Content="Enregistrer" />
+                <Button
+                    Width="40"
+                    Height="40"
+                    Click="butFermer_Click"
+                    Content="❌" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
