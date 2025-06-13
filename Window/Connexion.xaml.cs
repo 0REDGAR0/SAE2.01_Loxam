@@ -14,10 +14,24 @@ namespace SAE2._01_Loxam
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string login = txtLogin.Text;
-            string mdp = txtPassword.Text;
+            string mdp = txtPassword.Password;
 
-            string connectionString = $"Host=srv-peda-new;" +
-                                       $"Port=5433;" +
+            string host;
+            int port;
+
+            if (cmbServeur.SelectedIndex == 0)
+            {
+                host = "srv-peda-new";
+                port = 5433;
+            }
+            else
+            {
+                host = "192.168.1.32";
+                port = 5432;
+            }
+
+            string connectionString = $"Host={host};" +
+                                       $"Port={port};" +
                                        $"Username={login};" +
                                        $"Password={mdp};" +
                                        $"Database=sae_loxam;" +
@@ -44,6 +58,7 @@ namespace SAE2._01_Loxam
                 MessageBox.Show($"Erreur de connexion : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
     }
 }
