@@ -103,5 +103,19 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
         }
 
+        private void butAjoutResa_Click(object sender, RoutedEventArgs e)
+        {
+            CréerReservationWindow creationWindow = new CréerReservationWindow();
+
+            // On recharge la liste uniquement à la fermeture de la fenêtre
+            creationWindow.Closed += (s, args) =>
+            {
+                ChargerReservations(); // ta méthode qui recharge les réservations
+                CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
+            };
+
+            creationWindow.ShowDialog();
+        }
+
     }
 }

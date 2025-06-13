@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System.Collections.Generic;
 using System.Data;
+using SAE2._01_Loxam.Utils;  // important pour utiliser SafeConvert
 
 namespace SAE2._01_Loxam.Classe.Reservation
 {
@@ -28,7 +29,6 @@ namespace SAE2._01_Loxam.Classe.Reservation
                JOIN type t ON m.numtype = t.numtype
                JOIN categorie cat ON t.numcategorie = cat.numcategorie
                WHERE m.numetat IN (1,2,3,4)
-
             "))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
@@ -40,9 +40,9 @@ namespace SAE2._01_Loxam.Classe.Reservation
                         Client = dr["client"].ToString(),
                         Materiel = dr["materiel"].ToString(),
                         DateReservation = DateTime.Parse(dr["datereservation"].ToString()),
-                        DateDebutLocation = DateTime.Parse(dr["datedebutlocation"].ToString()),
-                        DateRetourEffective = DateTime.Parse(dr["dateretoureffectivelocation"].ToString()),
-                        DateRetourReelle = DateTime.Parse(dr["dateretourreellelocation"].ToString()),
+                        DateDebutLocation = SafeConvert.SafeParseDateTime(dr["datedebutlocation"]),
+                        DateRetourEffective = SafeConvert.SafeParseDateTime(dr["dateretoureffectivelocation"]),
+                        DateRetourReelle = SafeConvert.SafeParseDateTime(dr["dateretourreellelocation"]),
                         PrixTotal = decimal.Parse(dr["prixtotal"].ToString()),
                         NumEtat = (int)dr["numetat"]
                     });
@@ -83,6 +83,5 @@ namespace SAE2._01_Loxam.Classe.Reservation
                 DataAccess.Instance.ExecuteNonQuery(cmdInsert);
             }
         }
-
     }
 }

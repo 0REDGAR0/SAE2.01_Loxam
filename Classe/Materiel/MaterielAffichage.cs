@@ -3,6 +3,18 @@
     public int NumMateriel { get; set; }
     public string Reference { get; set; }
     public string NomMateriel { get; set; }
+    public DateTime? DateDebutLocation { get; set; }
+    public DateTime? DateRetourEffective { get; set; }
+    public DateTime? DateRetourReelle { get; set; }
+
+    public string NomComplet
+    {
+        get
+        {
+            return $"{Reference} - {NomMateriel}";
+        }
+    }
+
     public string Descriptif { get; set; }
     public decimal PrixJournee { get; set; }
     public int NumEtat { get; set; }

@@ -65,7 +65,7 @@
                 </StackPanel>
 
                 <Button
-                    x:Name="butAjout"
+                    x:Name="butAjoutResa"
                     Grid.Column="1"
                     Width="32.6"
                     Height="32.6"
@@ -74,7 +74,7 @@
                     Content="➕"
                     FontSize="18"
                     FontWeight="Bold"
-                    Foreground="White" Margin="0,-53,0,0" />
+                    Foreground="White" Margin="0,-53,0,0" Click="butAjoutResa_Click" />
 
                 <!--  DataGrid  -->
                 <DataGrid

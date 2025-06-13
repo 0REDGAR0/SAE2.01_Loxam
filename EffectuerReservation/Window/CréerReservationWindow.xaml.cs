@@ -26,9 +26,15 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             InitializeComponent();
             ChargerDonnees();
+
+            // On remplit directement les listes complètes à l'ouverture
+            listClients.ItemsSource = tousLesClients;
+            listMateriels.ItemsSource = tousLesMateriels;
+
             dpDebut.SelectedDateChanged += CalculerPrixTotal;
             dpRetour.SelectedDateChanged += CalculerPrixTotal;
         }
+
 
         private void ChargerDonnees()
         {
@@ -36,15 +42,21 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             tousLesMateriels = materielDAO.GetMaterielsDisponibles();
         }
 
-        // Recherche dynamique client
         private void txtRechercheClient_TextChanged(object sender, TextChangedEventArgs e)
         {
             string recherche = txtRechercheClient.Text.ToLower();
-            var filtres = tousLesClients
-                .Where(c => c.NomComplet.ToLower().Contains(recherche))
-                .ToList();
 
-            listClients.ItemsSource = filtres;
+            if (string.IsNullOrWhiteSpace(recherche))
+            {
+                listClients.ItemsSource = tousLesClients;
+            }
+            else
+            {
+                var filtres = tousLesClients
+                    .Where(c => c.NomComplet.ToLower().Contains(recherche))
+                    .ToList();
+                listClients.ItemsSource = filtres;
+            }
         }
 
         private void listClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,16 +64,23 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             clientSelectionne = listClients.SelectedItem as Client;
         }
 
-        // Recherche dynamique matériel
         private void txtRechercheMateriel_TextChanged(object sender, TextChangedEventArgs e)
         {
             string recherche = txtRechercheMateriel.Text.ToLower();
-            var filtres = tousLesMateriels
-                .Where(m => m.NomMateriel.ToLower().Contains(recherche) || m.Reference.ToLower().Contains(recherche))
-                .ToList();
 
-            listMateriels.ItemsSource = filtres;
+            if (string.IsNullOrWhiteSpace(recherche))
+            {
+                listMateriels.ItemsSource = tousLesMateriels;
+            }
+            else
+            {
+                var filtres = tousLesMateriels
+                    .Where(m => m.NomComplet.ToLower().Contains(recherche))
+                    .ToList();
+                listMateriels.ItemsSource = filtres;
+            }
         }
+
 
         private void listMateriels_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -1,54 +1,106 @@
-﻿<Window x:Class="SAE2._01_Loxam.FicheClients.UserControls.CréerReservationWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Créer une réservation"
-        Width="650"
-        Height="600"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        Background="#FAFAFA">
+﻿<Window
+    x:Class="SAE2._01_Loxam.FicheClients.UserControls.CréerReservationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Créer une réservation"
+    Width="650"
+    Height="600"
+    Background="#FAFAFA"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen">
 
-    <Border Margin="20" Padding="20" Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="10">
+    <Border
+        Margin="20"
+        Padding="20"
+        Background="White"
+        BorderBrush="Gray"
+        BorderThickness="1"
+        CornerRadius="10">
 
         <StackPanel>
 
-            <TextBlock Text="Créer une réservation" FontSize="26" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="26"
+                FontWeight="Bold"
+                Text="Créer une réservation"
+                TextAlignment="Center" />
 
-            <!-- Recherche Client -->
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Width="150" FontWeight="SemiBold" Text="Rechercher client :" />
-                <TextBox x:Name="txtRechercheClient" Width="350" TextChanged="txtRechercheClient_TextChanged"/>
+            <!--  Recherche Client  -->
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock
+                    Width="150"
+                    FontWeight="SemiBold"
+                    Text="Rechercher client :" />
+                <TextBox
+                    x:Name="txtRechercheClient"
+                    Width="350"
+                    TextChanged="txtRechercheClient_TextChanged" />
             </StackPanel>
 
-            <ListBox x:Name="listClients" Width="500" Height="100" SelectionChanged="listClients_SelectionChanged" DisplayMemberPath="NomComplet" />
+            <ListBox
+                x:Name="listClients"
+                Width="500"
+                Height="100"
+                DisplayMemberPath="NomComplet"
+                SelectionChanged="listClients_SelectionChanged" />
 
-            <!-- Recherche Matériel -->
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Width="150" FontWeight="SemiBold" Text="Rechercher matériel :" />
-                <TextBox x:Name="txtRechercheMateriel" Width="350" TextChanged="txtRechercheMateriel_TextChanged"/>
+            <!--  Recherche Matériel  -->
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock
+                    Width="150"
+                    FontWeight="SemiBold"
+                    Text="Rechercher matériel :" />
+                <TextBox
+                    x:Name="txtRechercheMateriel"
+                    Width="350"
+                    TextChanged="txtRechercheMateriel_TextChanged" />
             </StackPanel>
 
-            <ListBox x:Name="listMateriels" Width="500" Height="100" SelectionChanged="listMateriels_SelectionChanged" DisplayMemberPath="NomMateriel" />
+            <ListBox
+                x:Name="listMateriels"
+                Width="500"
+                Height="100"
+                DisplayMemberPath="NomComplet"
+                SelectionChanged="listMateriels_SelectionChanged" />
 
-            <!-- Dates -->
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Width="150" FontWeight="SemiBold" Text="Début de location :" />
-                <DatePicker x:Name="dpDebut" Width="200"/>
+            <!--  Dates  -->
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock
+                    Width="150"
+                    FontWeight="SemiBold"
+                    Text="Début de location :" />
+                <DatePicker x:Name="dpDebut" Width="200" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Width="150" FontWeight="SemiBold" Text="Retour effectif :" />
-                <DatePicker x:Name="dpRetour" Width="200"/>
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock
+                    Width="150"
+                    FontWeight="SemiBold"
+                    Text="Retour effectif :" />
+                <DatePicker x:Name="dpRetour" Width="200" />
             </StackPanel>
 
-            <!-- Prix total -->
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Width="150" FontWeight="SemiBold" Text="Prix total :" />
-                <TextBlock x:Name="txtPrixTotal" FontWeight="Bold" FontSize="16"/>
+            <!--  Prix total  -->
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock
+                    Width="150"
+                    FontWeight="SemiBold"
+                    Text="Prix total :" />
+                <TextBlock
+                    x:Name="txtPrixTotal"
+                    FontSize="16"
+                    FontWeight="Bold" />
             </StackPanel>
 
-            <!-- Bouton -->
-            <Button x:Name="btnValider" Content="Valider la réservation" Margin="0,20,0,0" Height="50" FontSize="18" Click="btnValider_Click"/>
+            <!--  Bouton  -->
+            <Button
+                x:Name="btnValider"
+                Height="50"
+                Margin="0,20,0,0"
+                Click="btnValider_Click"
+                Content="Valider la réservation"
+                FontSize="18" />
 
         </StackPanel>
     </Border>
