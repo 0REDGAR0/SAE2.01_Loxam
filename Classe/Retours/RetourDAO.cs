@@ -16,7 +16,7 @@ namespace SAE2._01_Loxam.Classe.Retour
                     r.numreservation,
                     c.nomclient || ' ' || c.prenomclient AS client,
                     m.nommateriel AS materiel,
-                    m.nummateriel,  -- ✅ ici on récupère le NumMateriel
+                    m.nummateriel,
                     cat.libellecategorie AS categorie,
                     m.numetat,
                     r.datereservation,
@@ -37,18 +37,21 @@ namespace SAE2._01_Loxam.Classe.Retour
                 {
                     liste.Add(new RetourAffichage
                     {
-                        NumeroReservation = (int)dr["numreservation"],
+                        NumeroReservation = Convert.ToInt32(dr["numreservation"]),
                         Client = dr["client"].ToString(),
                         Materiel = dr["materiel"].ToString(),
-                        NumMateriel = (int)dr["nummateriel"],
+                        NumMateriel = Convert.ToInt32(dr["nummateriel"]),
                         Categorie = dr["categorie"].ToString(),
-                        NumEtat = (int)dr["numetat"],
-                        DateReservation = DateTime.Parse(dr["datereservation"].ToString()),
-                        DateDebutLocation = DateTime.Parse(dr["datedebutlocation"].ToString()),
-                        DateRetourEffective = DateTime.Parse(dr["dateretoureffectivelocation"].ToString()),
-                        DateRetourReelle = DateTime.Parse(dr["dateretourreellelocation"].ToString()),
-                        PrixTotal = decimal.Parse(dr["prixtotal"].ToString())
+                        NumEtat = Convert.ToInt32(dr["numetat"]),
+
+                        DateReservation = (DateTime)(dr["datereservation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["datereservation"])),
+                        DateDebutLocation = (DateTime)(dr["datedebutlocation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["datedebutlocation"])),
+                        DateRetourEffective = (DateTime)(dr["dateretoureffectivelocation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["dateretoureffectivelocation"])),
+                        DateRetourReelle = (DateTime)(dr["dateretourreellelocation"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dr["dateretourreellelocation"])),
+
+                        PrixTotal = dr["prixtotal"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["prixtotal"])
                     });
+
                 }
 
             }
