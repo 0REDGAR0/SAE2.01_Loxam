@@ -46,29 +46,51 @@ namespace SAE2._01_Loxam.Reparation.WindowRepa
 
         private void butEnregistrer_Click(object sender, RoutedEventArgs e)
         {
-            int nouvelEtat = (int)cbEtat.SelectedValue;
-            string commentaire = txtCommentaire.Text;
+            if (materiel == null)
+                return;
 
-            materiel.NumEtat = nouvelEtat;
+            int nouvelEtat = materiel.NumEtat; // Valeur par défaut
+
+            // Vérifie que quelque chose est sélectionné dans le ComboBox
+            if (cbEtat.SelectedValue != null && int.TryParse(cbEtat.SelectedValue.ToString(), out int etatCombo))
+            {
+                nouvelEtat = etatCombo;
+            }
+
+            string nouveauCommentaire = txtCommentaire.Text?.Trim() ?? "";
+
+            bool etatModifie = materiel.NumEtat != nouvelEtat;
+            bool commentaireModifie = (materiel.Commentaire ?? "") != nouveauCommentaire;
+
+            if (!etatModifie && !commentaireModifie)
+            {
+                this.Close(); // Rien à changer
+                return;
+            }
 
             try
             {
-                DataAccess.Instance.MettreAJourMateriel(new Materiel
-                {
-                    NumMateriel = materiel.NumMateriel,
-                    NumEtat = nouvelEtat
-                });
+                // Met à jour l’objet local
+                materiel.NumEtat = nouvelEtat;
+                materiel.Commentaire = nouveauCommentaire;
 
-                MessageBox.Show("État mis à jour avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Close();
+                // Mise à jour en base de données
+                new ReparationDAO().MettreAJourEtatEtCommentaireMateriel(
+                    materiel.NumMateriel,
+                    nouvelEtat,
+                    nouveauCommentaire
+                );
+
+                MessageBox.Show("Modifications enregistrées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur lors de la mise à jour : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            // Tu peux aussi enregistrer le commentaire si tu as une table ou champ dédié
+            this.Close();
         }
+
 
         private void butFermer_Click(object sender, RoutedEventArgs e)
         {

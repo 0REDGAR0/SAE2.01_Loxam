@@ -20,6 +20,7 @@ namespace SAE2._01_Loxam.Reparation
                     m.nummateriel,
                     m.reference,
                     m.nommateriel,
+                    m.commentaire,
                     t.libelletype,
                     c.libellecategorie,
                     e.libelleetat
@@ -36,15 +37,53 @@ namespace SAE2._01_Loxam.Reparation
                     liste.Add(new ReparationAffichage
                     {
                         NumMateriel = (int)dr["nummateriel"],
-                        Reference = (string)dr["reference"],
-                        NomMateriel = (string)dr["nommateriel"],
-                        Libelletype = (string)dr["libelletype"],
-                        Libellecategorie = (string)dr["libellecategorie"],
-                        Libelleetat = (string)dr["libelleetat"]
+                        Reference = dr.IsNull("reference") ? "" : (string)dr["reference"],
+                        NomMateriel = dr.IsNull("nommateriel") ? "" : (string)dr["nommateriel"],
+                        Commentaire = dr.IsNull("commentaire") ? "" : (string)dr["commentaire"],
+                        Libelletype = dr.IsNull("libelletype") ? "" : (string)dr["libelletype"],
+                        Libellecategorie = dr.IsNull("libellecategorie") ? "" : (string)dr["libellecategorie"],
+                        Libelleetat = dr.IsNull("libelleetat") ? "" : (string)dr["libelleetat"],
                     });
                 }
             }
             return liste;
         }
+
+        public void MettreAJourCommentaire(int numMateriel, string commentaire)
+        {
+            using var conn = DataAccess.Instance.GetConnection();
+            string query = "UPDATE materiel SET commentaire = @commentaire WHERE nummateriel = @nummateriel";
+
+            using var cmd = new NpgsqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@commentaire", commentaire ?? (object)DBNull.Value);
+            cmd.Parameters.AddWithValue("@nummateriel", numMateriel);
+
+            cmd.ExecuteNonQuery();
+        }
+
+
+        private readonly string connectionString = $"Host=srv-peda-new;" +
+            $"Port=5433;" +
+            $"Username=beduneye;" +
+            $"Password=WVTvXG;" +
+            $"Database=sae_loxam;" +
+            $"Options='-c " +
+            $"search_path=loxam'";
+        public void MettreAJourEtatEtCommentaireMateriel(int numMateriel, int numEtat, string commentaire)
+        {
+
+            using var connexion = new NpgsqlConnection(connectionString);
+            connexion.Open();
+
+            string query = "UPDATE materiel SET numetat = @etat, commentaire = @commentaire WHERE nummateriel = @num";
+
+            using var cmd = new NpgsqlCommand(query, connexion);
+            cmd.Parameters.AddWithValue("@etat", numEtat);
+            cmd.Parameters.AddWithValue("@commentaire", (object?)commentaire ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@num", numMateriel);
+
+            cmd.ExecuteNonQuery();
+        }
+
     }
 }

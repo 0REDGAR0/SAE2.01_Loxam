@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SAE2._01_Loxam.Classe.Client;
+using SAE2._01_Loxam.Reparation;
 
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
@@ -99,10 +100,6 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         }
 
 
-        private void textMotClefChien_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void butSupp_Click(object sender, RoutedEventArgs e)
         {
@@ -147,5 +144,28 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                 }
             }
         }
+
+        private void textMotClefClient_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string texteRecherche = textMotClefClient.Text?.Trim() ?? "";
+
+            var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
+            if (view == null) return;
+
+            view.Filter = item =>
+            {
+                if (item is not Client client)
+                    return false;
+
+                return (client.NomClient ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                    || (client.PrenomClient ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                    || (client.MailClient ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                    || (client.AdresseClient ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                    || (client.NumeroTelClient ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase);
+            };
+
+            view.Refresh();
+        }
+
     }
 }

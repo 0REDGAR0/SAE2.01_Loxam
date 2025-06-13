@@ -17,8 +17,10 @@ namespace SAE2._01_Loxam.Reparation
         private string libelleetat;
         private int numEtat;
         private int numType;
+        private string commentaire;
 
-        
+
+
 
         public int NumMateriel
         {
@@ -152,6 +154,19 @@ namespace SAE2._01_Loxam.Reparation
                     7 => "#E74C3C", // HS Rouge
                     _ => "#2ECC71"  // Disponible Vert
                 };
+            }
+        }
+
+        public string Commentaire
+        {
+            get
+            {
+                return this.commentaire;
+            }
+
+            set
+            {
+                this.commentaire = value;
             }
         }
 
