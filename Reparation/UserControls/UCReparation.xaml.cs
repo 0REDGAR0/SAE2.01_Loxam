@@ -32,6 +32,12 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
         {
             ReparationDAO reparationDAO = new ReparationDAO();
             DataGridReparation.ItemsSource = reparationDAO.GetReparationAffichage();
+            var liste = reparationDAO.GetReparationAffichage();
+            DataGridReparation.ItemsSource = liste;
+            var view = CollectionViewSource.GetDefaultView(DataGridReparation.ItemsSource);
+            if (view != null)
+                view.Filter = RechercheMotClefReparation;
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,16 +50,18 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
             throw new NotImplementedException();  
         }
 
-        private bool RechercheMotClefReparation(object obj)
+        private bool RechercheMotClefReparation(object item)
         {
-            if (obj is ReparationAffichage reparation)
-            {
-                string texteRecherche = txtRecherche.Text?.ToLower() ?? "";
+            if (item is not ReparationAffichage reparation)
+                return false;
 
-                return reparation.NomMateriel.ToLower().Contains(texteRecherche)
-                    || reparation.NumMateriel.Equals(int.Parse(texteRecherche));
-            }
-            return false;
+            string texteRecherche = txtRecherche.Text ?? string.Empty;
+
+            return (reparation.Reference ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                || (reparation.NomMateriel ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                || (reparation.Libelletype ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+                || (reparation.Libellecategorie ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase);
         }
+
     }
 }

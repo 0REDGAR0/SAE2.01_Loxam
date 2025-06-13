@@ -18,6 +18,7 @@ namespace SAE2._01_Loxam.Reparation
         private int numEtat;
         private int numType;
 
+        
 
         public int NumMateriel
         {
@@ -125,7 +126,7 @@ namespace SAE2._01_Loxam.Reparation
 
 
 
-        public string StatutReparation
+        /*public string StatutReparation
         {
             get
             {
@@ -137,7 +138,7 @@ namespace SAE2._01_Loxam.Reparation
                     _ => "Disponible"
                 };
             }
-        }
+        }*/
 
 
         public string CouleurStatut
@@ -165,7 +166,6 @@ namespace SAE2._01_Loxam.Reparation
                    this.Libelletype == affichage.Libelletype &&
                    this.Libellecategorie == affichage.Libellecategorie &&
                    this.Libelleetat == affichage.Libelleetat &&
-                   this.StatutReparation == affichage.StatutReparation &&
                    this.CouleurStatut == affichage.CouleurStatut;
         }
     }

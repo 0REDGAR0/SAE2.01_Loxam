@@ -79,15 +79,15 @@
                             Header="Nom" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding LibelleType}"
+                            Binding="{Binding Libelletype}"
                             Header="Type" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding LibelleCategorie}"
+                            Binding="{Binding Libellecategorie}"
                             Header="Categorie" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding LibelleEtat}"
+                            Binding="{Binding Libelleetat}"
                             Header="Etat" />
                     </DataGrid.Columns>
                 </DataGrid>

@@ -27,6 +27,7 @@ namespace SAE2._01_Loxam.Reparation
                 JOIN etat e ON m.numetat = e.numetat
                 JOIN type t ON m.numtype = t.numtype
                 JOIN categorie c ON t.numcategorie = c.numcategorie
+                where e.numetat in (5, 6, 7)
             "))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
