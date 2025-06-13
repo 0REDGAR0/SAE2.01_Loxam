@@ -81,5 +81,35 @@ namespace SAE2._01_Loxam.Classe.Materiel
                 DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
             }
         }
+
+        public List<MaterielAffichage> GetMaterielsDisponibles()
+        {
+            List<MaterielAffichage> liste = new List<MaterielAffichage>();
+
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand(
+                @"SELECT m.nummateriel, m.reference, m.nommateriel, m.descriptif, m.prixjournee, m.numetat, cat.libellecategorie
+                     FROM materiel m
+                     JOIN type t ON m.numtype = t.numtype
+                     JOIN categorie cat ON t.numcategorie = cat.numcategorie
+                     WHERE m.numetat = 1"))  // Filtrage : seulement les disponibles
+            {
+                DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    liste.Add(new MaterielAffichage
+                    {
+                        NumMateriel = (int)dr["nummateriel"],
+                        Reference = dr["reference"].ToString(),
+                        NomMateriel = dr["nommateriel"].ToString(),
+                        Descriptif = dr["descriptif"].ToString(),
+                        PrixJournee = Convert.ToDecimal(dr["prixjournee"]),
+                        NumEtat = (int)dr["numetat"],
+                        Categorie = dr["libellecategorie"].ToString()
+                    });
+                }
+            }
+            return liste;
+        }
+
     }
 }

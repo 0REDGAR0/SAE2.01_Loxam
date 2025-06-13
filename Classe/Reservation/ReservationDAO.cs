@@ -64,5 +64,25 @@ namespace SAE2._01_Loxam.Classe.Reservation
                 DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
             }
         }
+
+        public void CreerReservation(int numMateriel, int numClient, int numEmploye, DateTime dateReservation, DateTime debut, DateTime retour, decimal prixTotal)
+        {
+            using (NpgsqlCommand cmdInsert = new NpgsqlCommand(@"
+                INSERT INTO reservation (nummateriel, numclient, numemploye, datereservation, datedebutlocation, dateretoureffectivelocation, dateretourreellelocation, prixtotal)
+                VALUES (@NumMateriel, @NumClient, @NumEmploye, @DateReservation, @DateDebut, @DateRetourEffective, NULL, @PrixTotal);
+            "))
+            {
+                cmdInsert.Parameters.AddWithValue("@NumMateriel", numMateriel);
+                cmdInsert.Parameters.AddWithValue("@NumClient", numClient);
+                cmdInsert.Parameters.AddWithValue("@NumEmploye", numEmploye);
+                cmdInsert.Parameters.AddWithValue("@DateReservation", dateReservation);
+                cmdInsert.Parameters.AddWithValue("@DateDebut", debut);
+                cmdInsert.Parameters.AddWithValue("@DateRetourEffective", retour);
+                cmdInsert.Parameters.AddWithValue("@PrixTotal", prixTotal);
+
+                DataAccess.Instance.ExecuteNonQuery(cmdInsert);
+            }
+        }
+
     }
 }

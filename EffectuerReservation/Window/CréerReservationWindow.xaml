@@ -1,12 +1,55 @@
-﻿<Window x:Class="SAE2._01_Loxam.EffectuerReservation.Window.CréerReservation"
+﻿<Window x:Class="SAE2._01_Loxam.FicheClients.UserControls.CréerReservationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SAE2._01_Loxam.EffectuerReservation.Window"
-        mc:Ignorable="d"
-        Title="CréerReservation" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Créer une réservation"
+        Width="650"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#FAFAFA">
+
+    <Border Margin="20" Padding="20" Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="10">
+
+        <StackPanel>
+
+            <TextBlock Text="Créer une réservation" FontSize="26" FontWeight="Bold" Margin="0,0,0,20" TextAlignment="Center"/>
+
+            <!-- Recherche Client -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Width="150" FontWeight="SemiBold" Text="Rechercher client :" />
+                <TextBox x:Name="txtRechercheClient" Width="350" TextChanged="txtRechercheClient_TextChanged"/>
+            </StackPanel>
+
+            <ListBox x:Name="listClients" Width="500" Height="100" SelectionChanged="listClients_SelectionChanged" DisplayMemberPath="NomComplet" />
+
+            <!-- Recherche Matériel -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Width="150" FontWeight="SemiBold" Text="Rechercher matériel :" />
+                <TextBox x:Name="txtRechercheMateriel" Width="350" TextChanged="txtRechercheMateriel_TextChanged"/>
+            </StackPanel>
+
+            <ListBox x:Name="listMateriels" Width="500" Height="100" SelectionChanged="listMateriels_SelectionChanged" DisplayMemberPath="NomMateriel" />
+
+            <!-- Dates -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Width="150" FontWeight="SemiBold" Text="Début de location :" />
+                <DatePicker x:Name="dpDebut" Width="200"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Width="150" FontWeight="SemiBold" Text="Retour effectif :" />
+                <DatePicker x:Name="dpRetour" Width="200"/>
+            </StackPanel>
+
+            <!-- Prix total -->
+            <StackPanel Orientation="Horizontal" Margin="0,5">
+                <TextBlock Width="150" FontWeight="SemiBold" Text="Prix total :" />
+                <TextBlock x:Name="txtPrixTotal" FontWeight="Bold" FontSize="16"/>
+            </StackPanel>
+
+            <!-- Bouton -->
+            <Button x:Name="btnValider" Content="Valider la réservation" Margin="0,20,0,0" Height="50" FontSize="18" Click="btnValider_Click"/>
+
+        </StackPanel>
+    </Border>
 </Window>

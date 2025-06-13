@@ -119,6 +119,14 @@ namespace SAE2._01_Loxam.Classe.Client
             }
         }
 
+        public string NomComplet
+        {
+            get
+            {
+                return $"{NomClient} {PrenomClient}";
+            }
+        }
+
         public string AdresseClient
         {
             get
@@ -323,5 +331,7 @@ namespace SAE2._01_Loxam.Classe.Client
             }
             return nb;
         }
+
+
     }
 }
