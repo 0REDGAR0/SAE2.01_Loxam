@@ -12,10 +12,10 @@ namespace SAE2._01_Loxam
 {
     public class DataAccess
     {
-        private static DataAccess instance;
-        private readonly string connectionString;
+        //private static DataAccess instance;
+        //private readonly string connectionString;
 
-        private static readonly DataAccess instance = new DataAccess();
+        private static  DataAccess instance = new DataAccess();
         private readonly string connectionString = $"Host=srv-peda-new;" +
             $"Port=5433;" +
             $"Username=beduneye;" +
@@ -44,6 +44,20 @@ namespace SAE2._01_Loxam
             if (instance == null)
             {
                 instance = new DataAccess(connectionString);
+            }
+        }
+
+        private DataAccess()
+        {
+
+            try
+            {
+                connection = new NpgsqlConnection(connectionString);
+            }
+            catch (Exception ex)
+            {
+                LogError.Log(ex, "Pb de connexion GetConnection \n" + connectionString);
+                throw;
             }
         }
 
