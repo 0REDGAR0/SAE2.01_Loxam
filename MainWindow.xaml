@@ -13,6 +13,35 @@
     Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#e74c3c" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#c0392b" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#a93226" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <!--  Bandeau rouge en haut  -->
         <Grid
@@ -53,9 +82,10 @@
                     HorizontalAlignment="Left"
                     Background="Red"
                     BorderBrush="Red"
+                    Click="butReservation_Click"
                     Content="RESERVATION"
                     FontSize="22"
-                    Foreground="White" Click="butReservation_Click" />
+                    Foreground="White" />
             </StackPanel>
 
             <StackPanel
@@ -65,10 +95,12 @@
                 Orientation="Horizontal">
                 <TextBlock
                     x:Name="labConnect"
+                    Margin="0,0,7,0"
                     VerticalAlignment="Center"
                     FontSize="16"
+                    FontWeight="Bold"
                     Foreground="White"
-                    Text="Inconnu " Margin="0,0,7,0" FontWeight="Bold" />
+                    Text="Inconnu " />
                 <TextBlock
                     VerticalAlignment="Center"
                     FontFamily="Segoe MDL2 Assets"
@@ -83,28 +115,36 @@
             Width="200"
             Margin="0,100,0,0"
             HorizontalAlignment="Left"
-            Background="#F0F0F0">
+            Background="#FFD0D0D0">
             <Button
                 x:Name="butRechercheMat"
                 Height="50"
                 Margin="10"
+                Click="butRechercheMat_Click"
                 Content="🔍 Recherche matériel"
-                FontSize="16" Click="butRechercheMat_Click" />
+                FontSize="16"
+                Style="{StaticResource ModernButtonStyle}" />
             <Button
                 x:Name="butFicheClient"
                 Height="50"
                 Margin="10"
                 Click="butFicheClient_Click"
                 Content="👤 Fiche client"
-                FontSize="16" />
-            <Button x:Name="butReparation"
+                FontSize="16"
+                Style="{StaticResource ModernButtonStyle}" />
+            <Button
+                x:Name="butReparation"
                 Height="50"
                 Margin="10"
+                Click="butReparation_Click"
                 Content="🔧 Réparation"
-                FontSize="16" Click="butReparation_Click" />
+                FontSize="16"
+                Style="{StaticResource ModernButtonStyle}" />
         </StackPanel>
 
         <!--  Zone centrale  -->
         <StackPanel x:Name="SPcentral" Margin="226,108,20,20" />
     </Grid>
+
 </Window>
+

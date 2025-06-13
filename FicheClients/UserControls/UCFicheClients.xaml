@@ -14,11 +14,6 @@
         <!--  Titre avec flèche  -->
         <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
             <TextBlock
-                Margin="0,0,10,0"
-                FontSize="24"
-                FontWeight="Bold"
-                Text="←" />
-            <TextBlock
                 FontSize="22"
                 FontWeight="Bold"
                 Text="Infos clients" />
