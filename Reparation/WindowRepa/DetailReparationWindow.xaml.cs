@@ -1,4 +1,5 @@
 ﻿using SAE2._01_Loxam.Classe.Materiel;
+using SAE2._01_Loxam.Classe.Reparation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

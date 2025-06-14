@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAE2._01_Loxam.Reparation
+namespace SAE2._01_Loxam.Classe.Reparation
 {
     public class ReparationDAO
     {

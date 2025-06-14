@@ -1,5 +1,5 @@
-﻿using SAE2._01_Loxam.Classe.Reservation;
-using SAE2._01_Loxam.Reparation;
+﻿using SAE2._01_Loxam.Classe.Reparation;
+using SAE2._01_Loxam.Classe.Reservation;
 using SAE2._01_Loxam.Reparation.WindowRepa;
 using System;
 using System.Collections.Generic;
