@@ -27,6 +27,7 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
         {
             InitializeComponent();
             ChargerReparations();
+            ChargerFiltres();
         }
 
         private void ChargerReparations()
@@ -61,6 +62,15 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
                 detailWindow.ShowDialog();
             }
         }
+        private void cmbEtat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridReparation.ItemsSource).Refresh();
+        }
+
+        private void cmbCategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(DataGridReparation.ItemsSource).Refresh();
+        }
 
 
         private bool RechercheMotClefReparation(object item)
@@ -70,11 +80,47 @@ namespace SAE2._01_Loxam.Classe.Materiel.UserControls
 
             string texteRecherche = txtRecherche.Text ?? string.Empty;
 
-            return (reparation.Reference ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
+            // Filtre texte
+            bool texteOk = (reparation.Reference ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
                 || (reparation.NomMateriel ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
                 || (reparation.Libelletype ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase)
                 || (reparation.Libellecategorie ?? "").Contains(texteRecherche, StringComparison.OrdinalIgnoreCase);
-        }
 
+            // Filtre État
+            bool etatOk = cmbEtat.SelectedItem?.ToString() == "Tous"
+                || reparation.Libelleetat == cmbEtat.SelectedItem?.ToString();
+
+            // Filtre Catégorie
+            bool categorieOk = cmbCategorie.SelectedItem?.ToString() == "Toutes"
+                || reparation.Libellecategorie == cmbCategorie.SelectedItem?.ToString();
+
+            return texteOk && etatOk && categorieOk;
+        }
+    
+
+        private void ChargerFiltres()
+        {
+            // Filtre Statut
+            cmbEtat.Items.Clear();
+            cmbEtat.Items.Add("Tous");
+            cmbEtat.Items.Add("En attente de réparation");
+            cmbEtat.Items.Add("Réparation en cours");
+            cmbEtat.Items.Add("Hors Service");
+            cmbEtat.SelectedIndex = 0;
+
+            // Filtre Catégorie
+            var listeCategories = ((List<ReparationAffichage>)DataGridReparation.ItemsSource)
+                .Select(m => m.Libellecategorie)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+            cmbCategorie.Items.Clear();
+            cmbCategorie.Items.Add("Toutes");
+            foreach (var categorie in listeCategories)
+                cmbCategorie.Items.Add(categorie);
+
+            cmbCategorie.SelectedIndex = 0;
+        }
     }
 }

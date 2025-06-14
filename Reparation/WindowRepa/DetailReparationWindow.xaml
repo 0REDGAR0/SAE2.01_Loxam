@@ -37,7 +37,7 @@
                 Background="{Binding CouleurStatut}"
                 CornerRadius="5">
                 <TextBlock
-                    FontSize="18"
+                    FontSize="20"
                     FontWeight="Bold"
                     Foreground="White"
                     Text="{Binding StatutReparation}"

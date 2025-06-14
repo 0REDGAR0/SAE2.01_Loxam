@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SAE2._01_Loxam.Reparation
+namespace SAE2._01_Loxam.Classe.Reparation
 {
     public class ReparationAffichage
     {
@@ -125,10 +125,7 @@ namespace SAE2._01_Loxam.Reparation
                 this.libelleetat = value;
             }
         }
-
-
-
-        /*public string StatutReparation
+        public string StatutReparation
         {
             get
             {
@@ -140,8 +137,7 @@ namespace SAE2._01_Loxam.Reparation
                     _ => "Disponible"
                 };
             }
-        }*/
-
+        }
 
         public string CouleurStatut
         {

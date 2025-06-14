@@ -20,10 +20,10 @@ namespace SAE2._01_Loxam.Classe.Reparation
                     m.nummateriel,
                     m.reference,
                     m.nommateriel,
-                    m.commentaire,
                     t.libelletype,
                     c.libellecategorie,
-                    e.libelleetat
+                    e.libelleetat,
+                    m.numetat
                 FROM materiel m
                 JOIN etat e ON m.numetat = e.numetat
                 JOIN type t ON m.numtype = t.numtype
@@ -39,10 +39,10 @@ namespace SAE2._01_Loxam.Classe.Reparation
                         NumMateriel = (int)dr["nummateriel"],
                         Reference = dr.IsNull("reference") ? "" : (string)dr["reference"],
                         NomMateriel = dr.IsNull("nommateriel") ? "" : (string)dr["nommateriel"],
-                        Commentaire = dr.IsNull("commentaire") ? "" : (string)dr["commentaire"],
                         Libelletype = dr.IsNull("libelletype") ? "" : (string)dr["libelletype"],
                         Libellecategorie = dr.IsNull("libellecategorie") ? "" : (string)dr["libellecategorie"],
                         Libelleetat = dr.IsNull("libelleetat") ? "" : (string)dr["libelleetat"],
+                        NumEtat = (int)dr["numetat"]
                     });
                 }
             }
