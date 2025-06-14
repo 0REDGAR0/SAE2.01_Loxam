@@ -5,128 +5,95 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SAE2._01_Loxam.FicheClients.UserControls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="665"
+    d:DesignHeight="686"
     d:DesignWidth="1040"
     mc:Ignorable="d">
 
-    <StackPanel Margin="20">
+    <StackPanel>
 
-        <!--  Titre avec flèche  -->
-        <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
-            <TextBlock
-                FontSize="22"
-                FontWeight="Bold"
-                Text="Infos clients" />
+        <!-- Titre -->
+        <StackPanel Margin="0,0,0,20" Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <TextBlock VerticalAlignment="Center" FontSize="22" FontWeight="Bold" Text="Gestion des clients" />
         </StackPanel>
 
-        <!--  Barre de recherche et boutons à droite  -->
-        <Grid Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+        <Border Padding="20" BorderBrush="LightGray" BorderThickness="1" CornerRadius="10">
+            <StackPanel>
 
-            <!--  Recherche  -->
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <TextBlock
-                    VerticalAlignment="Center"
-                    FontSize="22"
-                    Text="🔍" />
-                <TextBox
-                    x:Name="textMotClefClient"
-                    Width="300"
-                    Height="50"
-                    FontSize="33"
-                    Text=""
-                    TextChanged="textMotClefClient_TextChanged"
-                    TextWrapping="Wrap" />
+                <!-- Barre de recherche et boutons -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Recherche à gauche -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock FontSize="20" FontWeight="Bold" Text="Recherche client" Margin="0,0,10,0" />
+                        <TextBlock VerticalAlignment="Center" FontSize="20" Text="🔍" />
+                        <TextBox x:Name="txtRecherche" Margin="0,0,10,0" Width="300" Height="30" FontSize="20" TextChanged="txtRecherche_TextChanged" TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!-- Boutons à droite -->
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button
+                            x:Name="butCréerFicheClient"
+                            Width="32.6"
+                            Height="32.6"
+                            Background="Red"
+                            Click="butCréerFicheClient_Click"
+                            Content="➕"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White" />
+                        <Button
+                            x:Name="butEdit"
+                            Width="32.6"
+                            Height="32.6"
+                            Background="Red"
+                            Click="butEdit_Click"
+                            Content="📝"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White" Margin="10,0,10,0" />
+                        <Button
+                            x:Name="butSupp"
+                            Width="32.6"
+                            Height="32.6"
+                            Background="Red"
+                            Click="butSupp_Click"
+                            Content="🗑️"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- DataGrid -->
+                <DataGrid
+                    x:Name="dgClients"
+                    MaxHeight="550"
+                    Margin="0,10,0,0"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    ColumnHeaderHeight="50"
+                    FontSize="16"
+                    HeadersVisibility="Column"
+                    IsReadOnly="True"
+                    MouseDoubleClick="DataGridClients_MouseDoubleClick"
+                    RowHeight="25">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Binding="{Binding NumClient}" Header="Numéro" />
+                        <DataGridTextColumn Width="*" Binding="{Binding NomClient}" Header="Nom" />
+                        <DataGridTextColumn Width="*" Binding="{Binding PrenomClient}" Header="Prénom" />
+                        <DataGridTextColumn Width="*" Binding="{Binding AdresseClient}" Header="Adresse" />
+                        <DataGridTextColumn Width="*" Binding="{Binding MailClient}" Header="Mail" />
+                        <DataGridTextColumn Width="*" Binding="{Binding NumeroTelClient}" Header="Téléphone" />
+                        <DataGridTextColumn Width="*" Binding="{Binding NbMaterielEnReservation}" Header="Réservations en cours" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
             </StackPanel>
-
-            <!--  Boutons d'action à droite  -->
-            <StackPanel
-                Grid.Column="1"
-                Margin="8,0,0,0"
-                Orientation="Horizontal">
-                <Button
-                    x:Name="butAjout"
-                    Width="50"
-                    Height="50"
-                    Margin="0,0,20,0"
-                    Background="Red"
-                    Click="butCréerFicheClient_Click"
-                    Content="➕"
-                    FontSize="25"
-                    FontWeight="Bold"
-                    Foreground="White" />
-                <Button
-                    x:Name="butEdit"
-                    Width="50"
-                    Height="50"
-                    Margin="0,0,20,0"
-                    Background="Red"
-                    Click="butEdit_Click"
-                    Content="📝"
-                    FontSize="25"
-                    FontWeight="Bold"
-                    Foreground="White" />
-                <Button
-                    x:Name="butSupp"
-                    Width="50"
-                    Height="50"
-                    Background="Red"
-                    Click="butSupp_Click"
-                    Content="🗑️"
-                    FontSize="25"
-                    FontWeight="Bold"
-                    Foreground="White" />
-            </StackPanel>
-        </Grid>
-
-        <!--  Tableau DataGrid  -->
-        <Border
-            Padding="20"
-            BorderBrush="LightGray"
-            BorderThickness="1"
-            CornerRadius="10">
-            <DataGrid
-                x:Name="dgClients"
-                AutoGenerateColumns="False"
-                ColumnHeaderHeight="50"
-                FontSize="16"
-                HeadersVisibility="Column"
-                IsReadOnly="True"
-                ItemsSource="{Binding LesClients}"
-                RowHeight="25">
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding NumClient}"
-                        Header="NumClient" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding NomClient}"
-                        Header="Nom" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding PrenomClient}"
-                        Header="Prénom" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding AdresseClient}"
-                        Header="Adresse" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding MailClient}"
-                        Header="Mail" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding NumeroTelClient}"
-                        Header="Numéro" />
-                </DataGrid.Columns>
-
-            </DataGrid>
         </Border>
-
     </StackPanel>
 </UserControl>

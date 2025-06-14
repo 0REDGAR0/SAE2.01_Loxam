@@ -65,23 +65,47 @@ namespace SAE2._01_Loxam.Classe.Reservation
             }
         }
 
-        public void CreerReservation(int numMateriel, int numClient, int numEmploye, DateTime dateReservation, DateTime debut, DateTime retour, decimal prixTotal)
+        public int CreerReservation(int numMateriel, int numClient, int numEmploye, DateTime dateReservation, DateTime dateDebut, DateTime dateRetourEffective, decimal prixTotal)
         {
+            int numReservationGenere = 0;
+
             using (NpgsqlCommand cmdInsert = new NpgsqlCommand(@"
-                INSERT INTO reservation (nummateriel, numclient, numemploye, datereservation, datedebutlocation, dateretoureffectivelocation, dateretourreellelocation, prixtotal)
-                VALUES (@NumMateriel, @NumClient, @NumEmploye, @DateReservation, @DateDebut, @DateRetourEffective, NULL, @PrixTotal);
+                INSERT INTO reservation 
+                (nummateriel, numclient, numemploye, datereservation, datedebutlocation, dateretoureffectivelocation, dateretourreellelocation, prixtotal)
+                VALUES 
+                (@NumMateriel, @NumClient, @NumEmploye, @DateReservation, @DateDebut, @DateRetourEffective, NULL, @PrixTotal)
+                RETURNING numreservation;
             "))
             {
                 cmdInsert.Parameters.AddWithValue("@NumMateriel", numMateriel);
                 cmdInsert.Parameters.AddWithValue("@NumClient", numClient);
                 cmdInsert.Parameters.AddWithValue("@NumEmploye", numEmploye);
                 cmdInsert.Parameters.AddWithValue("@DateReservation", dateReservation);
-                cmdInsert.Parameters.AddWithValue("@DateDebut", debut);
-                cmdInsert.Parameters.AddWithValue("@DateRetourEffective", retour);
+                cmdInsert.Parameters.AddWithValue("@DateDebut", dateDebut);
+                cmdInsert.Parameters.AddWithValue("@DateRetourEffective", dateRetourEffective);
                 cmdInsert.Parameters.AddWithValue("@PrixTotal", prixTotal);
 
-                DataAccess.Instance.ExecuteNonQuery(cmdInsert);
+                numReservationGenere = (int)DataAccess.Instance.ExecuteSelectUneValeur(cmdInsert);
             }
+
+            int nouvelEtat = (dateDebut > DateTime.Now.Date) ? 2 : 3;
+
+            using (NpgsqlCommand cmdUpdateEtat = new NpgsqlCommand(@"
+                UPDATE materiel
+                SET numetat = @NumEtat
+                WHERE nummateriel = @NumMateriel;
+            "))
+            {
+                cmdUpdateEtat.Parameters.AddWithValue("@NumEtat", nouvelEtat);
+                cmdUpdateEtat.Parameters.AddWithValue("@NumMateriel", numMateriel);
+
+                DataAccess.Instance.ExecuteNonQuery(cmdUpdateEtat);
+            }
+
+            return numReservationGenere;
         }
+
+
+
     }
 }

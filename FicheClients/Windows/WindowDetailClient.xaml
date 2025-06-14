@@ -1,0 +1,83 @@
+﻿<Window
+    x:Class="SAE2._01_Loxam.FicheClients.Windows.WindowDetailClient"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Détail du client"
+    Width="800"
+    Height="700"
+    Background="#FAFAFA"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen">
+
+    <Border
+        Margin="20"
+        Padding="20"
+        Background="White"
+        BorderBrush="Gray"
+        BorderThickness="1"
+        CornerRadius="10">
+
+        <StackPanel>
+
+            <TextBlock
+                Margin="0,0,0,20"
+                FontSize="26"
+                FontWeight="Bold"
+                Foreground="#2C3E50"
+                Text="Détails du client"
+                TextAlignment="Center" />
+
+            <!-- Bloc informations complètes -->
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Numéro client :" />
+                <TextBlock Text="{Binding NumClient}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Nom :" />
+                <TextBlock Text="{Binding NomClient}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Prénom :" />
+                <TextBlock Text="{Binding PrenomClient}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Adresse :" />
+                <TextBlock Text="{Binding AdresseClient}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Email :" />
+                <TextBlock Text="{Binding MailClient}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Téléphone :" />
+                <TextBlock Text="{Binding NumeroTelClient}" />
+            </StackPanel>
+
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <TextBlock Width="200" FontWeight="SemiBold" Text="Matériel en réservation :" />
+                <TextBlock Text="{Binding NbMaterielEnReservation}" />
+            </StackPanel>
+
+            <!-- Liste des réservations -->
+            <TextBlock Margin="0,20,0,10" FontSize="20" FontWeight="Bold" Text="Réservations :" />
+
+            <ListView x:Name="ListReservations" Height="300">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="N° Réservation" Width="100" DisplayMemberBinding="{Binding Path=numreservation}" />
+                        <GridViewColumn Header="Matériel" Width="200" DisplayMemberBinding="{Binding Path=nommateriel}" />
+                        <GridViewColumn Header="Date Début" Width="120" DisplayMemberBinding="{Binding Path=datedebutlocation, StringFormat={}{0:dd/MM/yyyy}}" />
+                        <GridViewColumn Header="Prix Total" Width="100" DisplayMemberBinding="{Binding Path=prixtotal}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
+        </StackPanel>
+    </Border>
+</Window>

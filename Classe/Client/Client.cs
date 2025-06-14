@@ -22,6 +22,8 @@ namespace SAE2._01_Loxam.Classe.Client
         private string mailClient;
         private string numeroTelClient;
         private ObservableCollection<Client> lesClients;
+        private int nbMaterielEnReservation;
+
 
         public Client()
         {
@@ -217,6 +219,20 @@ namespace SAE2._01_Loxam.Classe.Client
             }
         }
 
+        public int NbMaterielEnReservation
+        {
+            get
+            {
+                return this.nbMaterielEnReservation;
+            }
+
+            set
+            {
+                this.nbMaterielEnReservation = value;
+            }
+        }
+        public DataTable ReservationsClient { get; set; } = new DataTable();
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public override bool Equals(object? obj)
@@ -341,6 +357,19 @@ namespace SAE2._01_Loxam.Classe.Client
                 return (int)(Int64)DataAccess.Instance.ExecuteSelectUneValeur(cmdSelect);
             }
             return nb;
+        }
+        public void LoadReservations()
+        {
+            using (var cmd = new NpgsqlCommand(@"
+                SELECT r.numreservation, m.nommateriel, r.datedebutlocation, r.prixtotal
+                FROM reservation r
+                JOIN materiel m ON r.nummateriel = m.nummateriel
+                WHERE r.numclient = @numClient
+                ORDER BY r.datedebutlocation DESC"))
+            {
+                cmd.Parameters.AddWithValue("numClient", this.NumClient);
+                ReservationsClient = DataAccess.Instance.ExecuteSelect(cmd);
+            }
         }
 
 

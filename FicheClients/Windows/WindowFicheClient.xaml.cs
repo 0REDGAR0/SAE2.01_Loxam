@@ -57,5 +57,10 @@ namespace SAE2._01_Loxam.FicheClients.Windows
             }
             DialogResult = true;
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

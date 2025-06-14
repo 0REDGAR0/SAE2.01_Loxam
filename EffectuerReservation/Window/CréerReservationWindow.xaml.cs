@@ -62,7 +62,13 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         private void listClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             clientSelectionne = listClients.SelectedItem as Client;
+
+            if (clientSelectionne != null)
+            {
+                txtRechercheClient.Text = clientSelectionne.NomComplet;
+            }
         }
+
 
         private void txtRechercheMateriel_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -86,6 +92,11 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             materielSelectionne = listMateriels.SelectedItem as MaterielAffichage;
             CalculerPrixTotal(null, null);
+
+            if (materielSelectionne != null)
+            {
+                txtRechercheMateriel.Text = materielSelectionne.NomComplet;
+            }
         }
 
         private void CalculerPrixTotal(object sender, EventArgs e)

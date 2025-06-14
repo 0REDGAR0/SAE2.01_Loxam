@@ -86,12 +86,20 @@ namespace SAE2._01_Loxam.Classe.Materiel
         {
             List<MaterielAffichage> liste = new List<MaterielAffichage>();
 
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand(
-                @"SELECT m.nummateriel, m.reference, m.nommateriel, m.descriptif, m.prixjournee, m.numetat, cat.libellecategorie
-                     FROM materiel m
-                     JOIN type t ON m.numtype = t.numtype
-                     JOIN categorie cat ON t.numcategorie = cat.numcategorie
-                     WHERE m.numetat = 1"))  // Filtrage : seulement les disponibles
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand(@"
+                SELECT 
+                    m.nummateriel, 
+                    m.reference, 
+                    m.nommateriel, 
+                    m.descriptif, 
+                    m.prixjournee, 
+                    m.numetat, 
+                    cat.libellecategorie
+                FROM materiel m
+                JOIN type t ON m.numtype = t.numtype
+                JOIN categorie cat ON t.numcategorie = cat.numcategorie
+                WHERE m.numetat = 1
+            "))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
@@ -110,6 +118,7 @@ namespace SAE2._01_Loxam.Classe.Materiel
             }
             return liste;
         }
+
 
     }
 }

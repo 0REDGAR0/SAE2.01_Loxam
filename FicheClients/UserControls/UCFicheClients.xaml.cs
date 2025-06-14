@@ -35,16 +35,18 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             try
             {
-                LeClient = new Client("Client n1");
-                this.DataContext = LeClient;
+                ClientDAO dao = new ClientDAO();
+                List<Client> listeClients = dao.GetTousLesClients();
+
+                dgClients.ItemsSource = listeClients;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Problème lors de récupération des données,veuillez consulter votre admin" + ex);
-
+                MessageBox.Show("Problème lors de la récupération des données : " + ex.Message);
                 Application.Current.Shutdown();
             }
         }
+
 
         private void butCréerFicheClient_Click(object sender, RoutedEventArgs e)
         {
@@ -145,9 +147,9 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             }
         }
 
-        private void textMotClefClient_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtRecherche_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string texteRecherche = textMotClefClient.Text?.Trim() ?? "";
+            string texteRecherche = txtRecherche.Text?.Trim() ?? "";
 
             var view = CollectionViewSource.GetDefaultView(dgClients.ItemsSource);
             if (view == null) return;
@@ -167,5 +169,17 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             view.Refresh();
         }
 
+        private void DataGridClients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgClients.SelectedItem is Client selectedClient)
+            {
+                // On charge les réservations
+                selectedClient.LoadReservations();
+
+                // On ouvre la nouvelle fenêtre
+                WindowDetailClient detailWindow = new WindowDetailClient(selectedClient);
+                detailWindow.ShowDialog();
+            }
+        }
     }
 }
