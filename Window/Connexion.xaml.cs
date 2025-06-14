@@ -61,12 +61,25 @@ namespace SAE2._01_Loxam
 
         private void butFlemme_Click(object sender, RoutedEventArgs e)
         {
-            string connectionString = $"Host=srv-peda-new;" +
+            string connectionString = "";
+            if (cmbServeur.SelectedIndex == 0)
+            {
+                connectionString = $"Host=srv-peda-new;" +
                                        $"Port=5433;" +
                                        $"Username=beduneye;" +
                                        $"Password=WVTvXG;" +
                                        $"Database=sae_loxam;" +
                                        $"Options='-c search_path=loxam'";
+            }
+            else
+            {
+                connectionString = $"Host=192.168.1.32;" +
+                                       $"Port=5432;" +
+                                       $"Username=postgres;" +
+                                       $"Password=postgres;" +
+                                       $"Database=sae_loxam;" +
+                                       $"Options='-c search_path=loxam'";
+            }
 
             try
             {

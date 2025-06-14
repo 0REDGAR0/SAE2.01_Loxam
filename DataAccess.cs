@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Npgsql;
 using SAE2._01_Loxam.Classe.Materiel;
 using SAE2._01_Loxam.Classe.Reservation;
@@ -12,25 +8,8 @@ namespace SAE2._01_Loxam
 {
     public class DataAccess
     {
-        //private static DataAccess instance;
-        //private readonly string connectionString;
-
-        private static  DataAccess instance = new DataAccess();
-        private readonly string connectionString = $"Host=srv-peda-new;" +
-            $"Port=5433;" +
-            $"Username=beduneye;" +
-            $"Password=WVTvXG;" +
-            $"Database=sae_loxam;" +
-            $"Options='-c " +
-            $"search_path=loxam'";
-            /*$"Host=192.168.1.32;" +
-            $"Port=5432;" +
-            $"Username=postgres;" +
-            $"Password=postgres;" +
-            $"Database=sae_loxam;" +
-            $"Options='-c " +
-            $"search_path=loxam'";*/
-
+        private static DataAccess instance;
+        private readonly string connectionString;
         private NpgsqlConnection connection;
 
         private DataAccess(string connectionString)
@@ -44,20 +23,6 @@ namespace SAE2._01_Loxam
             if (instance == null)
             {
                 instance = new DataAccess(connectionString);
-            }
-        }
-
-        private DataAccess()
-        {
-
-            try
-            {
-                connection = new NpgsqlConnection(connectionString);
-            }
-            catch (Exception ex)
-            {
-                LogError.Log(ex, "Pb de connexion GetConnection \n" + connectionString);
-                throw;
             }
         }
 
@@ -81,7 +46,7 @@ namespace SAE2._01_Loxam
                 }
                 catch (Exception ex)
                 {
-                    LogError.Log(ex, "Pb de connexion GetConnection \n" + connectionString);
+                    LogError.Log(ex, "Erreur lors de l'ouverture de la connexion : \n" + connectionString);
                     throw;
                 }
             }
@@ -101,7 +66,7 @@ namespace SAE2._01_Loxam
             }
             catch (Exception ex)
             {
-                LogError.Log(ex, "Erreur SQL");
+                LogError.Log(ex, "Erreur SQL (SELECT)");
                 throw;
             }
             return dataTable;
@@ -109,34 +74,34 @@ namespace SAE2._01_Loxam
 
         public int ExecuteInsert(NpgsqlCommand cmd)
         {
-            int nb = 0;
+            int id = 0;
             try
             {
                 cmd.Connection = GetConnection();
-                nb = (int)cmd.ExecuteScalar();
+                id = (int)cmd.ExecuteScalar();
             }
             catch (Exception ex)
             {
-                LogError.Log(ex, "Pb avec une requete insert " + cmd.CommandText);
+                LogError.Log(ex, "Erreur SQL (INSERT) : " + cmd.CommandText);
                 throw;
             }
-            return nb;
+            return id;
         }
 
         public int ExecuteSet(NpgsqlCommand cmd)
         {
-            int nb = 0;
+            int rows = 0;
             try
             {
                 cmd.Connection = GetConnection();
-                nb = cmd.ExecuteNonQuery();
+                rows = cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                LogError.Log(ex, "Pb avec une requete set " + cmd.CommandText);
+                LogError.Log(ex, "Erreur SQL (UPDATE/DELETE) : " + cmd.CommandText);
                 throw;
             }
-            return nb;
+            return rows;
         }
 
         public object ExecuteSelectUneValeur(NpgsqlCommand cmd)
@@ -149,7 +114,7 @@ namespace SAE2._01_Loxam
             }
             catch (Exception ex)
             {
-                LogError.Log(ex, "Pb avec une requete select " + cmd.CommandText);
+                LogError.Log(ex, "Erreur SQL (SELECT scalar) : " + cmd.CommandText);
                 throw;
             }
             return res;
@@ -160,11 +125,11 @@ namespace SAE2._01_Loxam
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "UPDATE RESERVATION SET dateretourreellelocation = @dateretourreellelocation WHERE numreservation = @numreservation";
+                string query = "UPDATE reservation SET dateretourreellelocation = @DateRetourReelle WHERE numreservation = @NumReservation";
                 using (var cmd = new NpgsqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@dateretourreellelocation", reservation.DateRetourReelleLocation);
-                    cmd.Parameters.AddWithValue("@numreservation", reservation.NumReservation);
+                    cmd.Parameters.AddWithValue("@DateRetourReelle", reservation.DateRetourReelleLocation);
+                    cmd.Parameters.AddWithValue("@NumReservation", reservation.NumReservation);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -175,11 +140,11 @@ namespace SAE2._01_Loxam
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "UPDATE MATERIEL SET numetat = @numetat WHERE nummateriel = @nummateriel";
+                string query = "UPDATE materiel SET numetat = @NumEtat WHERE nummateriel = @NumMateriel";
                 using (var cmd = new NpgsqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@numetat", materiel.NumEtat);
-                    cmd.Parameters.AddWithValue("@nummateriel", materiel.NumMateriel);
+                    cmd.Parameters.AddWithValue("@NumEtat", materiel.NumEtat);
+                    cmd.Parameters.AddWithValue("@NumMateriel", materiel.NumMateriel);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -190,10 +155,10 @@ namespace SAE2._01_Loxam
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT * FROM MATERIEL WHERE nummateriel = @nummateriel";
+                string query = "SELECT * FROM materiel WHERE nummateriel = @NumMateriel";
                 using (var cmd = new NpgsqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@nummateriel", numMateriel);
+                    cmd.Parameters.AddWithValue("@NumMateriel", numMateriel);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())

@@ -74,8 +74,7 @@
                                 Click="butFlemme_Click"
                                 Content="Flemme"
                                 FontWeight="SemiBold"
-                                Foreground="Black"
-                                IsDefault="True" />
+                                Foreground="Black" />
 
                             <Button
                                 x:Name="butValider"
