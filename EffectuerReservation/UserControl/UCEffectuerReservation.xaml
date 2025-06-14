@@ -73,7 +73,18 @@
                     Content="➕"
                     FontSize="18"
                     FontWeight="Bold"
-                    Foreground="White" Margin="0,-53,0,0" Click="butAjoutResa_Click" />
+                    Foreground="White" Margin="0,-53,45,0" Click="butAjoutResa_Click" />
+                <Button
+                    x:Name="butSupprResa"
+                    Grid.Column="1"
+                    Width="32.6"
+                    Height="32.6"
+                    HorizontalAlignment="Right"
+                    Background="Red"
+                    Content="🗑️"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="White" Margin="0,-53,0,0" Click="butSupprResa_Click" />
 
                 <!--  DataGrid  -->
                 <DataGrid

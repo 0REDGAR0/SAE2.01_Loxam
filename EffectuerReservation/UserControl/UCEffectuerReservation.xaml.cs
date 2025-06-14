@@ -117,5 +117,28 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             creationWindow.ShowDialog();
         }
 
+        private void butSupprResa_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridResa.SelectedItem is ReservationAffichage reservation)
+            {
+                var result = MessageBox.Show("Confirmer la suppression de la réservation ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    ReservationDAO reservationDAO = new ReservationDAO();
+                    bool success = reservationDAO.SupprimerReservation(reservation.NumeroReservation, reservation.NumMateriel);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Réservation supprimée avec succès.");
+                        ChargerReservations();
+                        CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur lors de la suppression.");
+                    }
+                }
+            }
+        }
     }
 }

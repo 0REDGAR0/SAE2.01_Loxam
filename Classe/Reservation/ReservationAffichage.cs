@@ -13,6 +13,7 @@ namespace SAE2._01_Loxam.Classe.Reservation
         public DateTime? DateRetourReelle { get; set; }
         public decimal PrixTotal { get; set; }
         public string Categorie { get; set; }
+        public int NumMateriel { get; set; }
         public int NumEtat { get; set; }
 
         public string StatutReservation

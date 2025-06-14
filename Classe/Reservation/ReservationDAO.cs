@@ -16,6 +16,7 @@ namespace SAE2._01_Loxam.Classe.Reservation
                    r.numreservation,
                    c.nomclient || ' ' || c.prenomclient AS client,
                    m.nommateriel AS materiel,
+                   m.nummateriel,
                    cat.libellecategorie AS categorie,
                    m.numetat,
                    r.datereservation,
@@ -39,6 +40,7 @@ namespace SAE2._01_Loxam.Classe.Reservation
                         NumeroReservation = (int)dr["numreservation"],
                         Client = dr["client"].ToString(),
                         Materiel = dr["materiel"].ToString(),
+                        NumMateriel = (int)dr["nummateriel"],
                         DateReservation = DateTime.Parse(dr["datereservation"].ToString()),
                         DateDebutLocation = SafeConvert.SafeParseDateTime(dr["datedebutlocation"]),
                         DateRetourEffective = SafeConvert.SafeParseDateTime(dr["dateretoureffectivelocation"]),
@@ -105,6 +107,36 @@ namespace SAE2._01_Loxam.Classe.Reservation
             return numReservationGenere;
         }
 
+        public bool SupprimerReservation(int numReservation, int numMateriel)
+        {
+            try
+            {
+                using (NpgsqlCommand cmdDelete = new NpgsqlCommand(@"
+                    DELETE FROM reservation
+                    WHERE numreservation = @NumReservation;
+                "))
+                {
+                    cmdDelete.Parameters.AddWithValue("@NumReservation", numReservation);
+                    DataAccess.Instance.ExecuteNonQuery(cmdDelete);
+                }
+
+                using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(@"
+                    UPDATE materiel
+                    SET numetat = 1
+                    WHERE nummateriel = @NumMateriel;
+                "))
+                {
+                    cmdUpdate.Parameters.AddWithValue("@NumMateriel", numMateriel);
+                    DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
     }
