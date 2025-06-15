@@ -12,7 +12,21 @@ namespace SAE2._01_Loxam.Classe.Client
         {
             List<Client> liste = new List<Client>();
 
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("SELECT numclient, nomclient, prenomclient FROM client"))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand(@"
+        SELECT 
+            c.numclient, 
+            c.nomclient, 
+            c.prenomclient, 
+            c.adresseclient, 
+            c.mailclient, 
+            c.numerotelclient,
+            (
+                SELECT COUNT(*)
+                FROM reservation r
+                JOIN materiel m ON r.nummateriel = m.nummateriel
+                WHERE r.numclient = c.numclient AND m.numetat IN (2, 3)
+            ) AS nbMaterielEnReservation
+        FROM client c"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)
@@ -22,7 +36,10 @@ namespace SAE2._01_Loxam.Classe.Client
                         NumClient = (int)dr["numclient"],
                         NomClient = dr["nomclient"].ToString(),
                         PrenomClient = dr["prenomclient"].ToString(),
-                        NbMaterielEnReservation = GetNbMaterielEnReservation((int)dr["numclient"])
+                        AdresseClient = dr["adresseclient"]?.ToString(),
+                        MailClient = dr["mailclient"]?.ToString(),
+                        NumeroTelClient = dr["numerotelclient"]?.ToString(),
+                        NbMaterielEnReservation = Convert.ToInt32(dr["nbMaterielEnReservation"])
                     };
 
                     liste.Add(client);
@@ -30,6 +47,7 @@ namespace SAE2._01_Loxam.Classe.Client
             }
             return liste;
         }
+
 
         private int GetNbMaterielEnReservation(int numClient)
         {

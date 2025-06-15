@@ -23,12 +23,13 @@ namespace SAE2._01_Loxam.Classe.Reparation
                     t.libelletype,
                     c.libellecategorie,
                     e.libelleetat,
-                    m.numetat
+                    m.numetat,
+                    m.commentaire
                 FROM materiel m
                 JOIN etat e ON m.numetat = e.numetat
                 JOIN type t ON m.numtype = t.numtype
                 JOIN categorie c ON t.numcategorie = c.numcategorie
-                where e.numetat in (5, 6, 7)
+                WHERE e.numetat IN (5, 6, 7)
             "))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
@@ -42,7 +43,8 @@ namespace SAE2._01_Loxam.Classe.Reparation
                         Libelletype = dr.IsNull("libelletype") ? "" : (string)dr["libelletype"],
                         Libellecategorie = dr.IsNull("libellecategorie") ? "" : (string)dr["libellecategorie"],
                         Libelleetat = dr.IsNull("libelleetat") ? "" : (string)dr["libelleetat"],
-                        NumEtat = (int)dr["numetat"]
+                        NumEtat = (int)dr["numetat"],
+                        Commentaire = dr.IsNull("commentaire") ? "" : (string)dr["commentaire"],
                     });
                 }
             }
@@ -62,28 +64,21 @@ namespace SAE2._01_Loxam.Classe.Reparation
         }
 
 
-        private readonly string connectionString = $"Host=srv-peda-new;" +
-            $"Port=5433;" +
-            $"Username=beduneye;" +
-            $"Password=WVTvXG;" +
-            $"Database=sae_loxam;" +
-            $"Options='-c " +
-            $"search_path=loxam'";
         public void MettreAJourEtatEtCommentaireMateriel(int numMateriel, int numEtat, string commentaire)
         {
-
-            using var connexion = new NpgsqlConnection(connectionString);
-            connexion.Open();
-
-            string query = "UPDATE materiel SET numetat = @etat, commentaire = @commentaire WHERE nummateriel = @num";
-
-            using var cmd = new NpgsqlCommand(query, connexion);
-            cmd.Parameters.AddWithValue("@etat", numEtat);
-            cmd.Parameters.AddWithValue("@commentaire", (object?)commentaire ?? DBNull.Value);
-            cmd.Parameters.AddWithValue("@num", numMateriel);
-
-            cmd.ExecuteNonQuery();
+            using (NpgsqlCommand cmdUpdate = new NpgsqlCommand(@"
+                UPDATE materiel
+                SET numetat = @NumEtat, commentaire = @Commentaire
+                WHERE nummateriel = @NumMateriel;
+            "))
+            {
+                cmdUpdate.Parameters.AddWithValue("@NumEtat", numEtat);
+                cmdUpdate.Parameters.AddWithValue("@Commentaire", commentaire);
+                cmdUpdate.Parameters.AddWithValue("@NumMateriel", numMateriel);
+                DataAccess.Instance.ExecuteNonQuery(cmdUpdate);
+            }
         }
+
 
     }
 }

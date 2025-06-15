@@ -62,18 +62,14 @@ namespace SAE2._01_Loxam.Classe.Client
 
         public int NumClient
         {
-            get
-            {
-                return this.numClient;
+            get 
+            { 
+                return numClient; 
             }
 
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException("Le numéro client ne peut pas être négatif");
-                }
-                this.numClient = value;
+            set 
+            { 
+                numClient = value; 
             }
         }
 
@@ -173,7 +169,7 @@ namespace SAE2._01_Loxam.Classe.Client
                 }
                 else
                 {
-                    this.mailClient = null; // ou string.Empty si tu préfères
+                    this.mailClient = null;
                 }
 
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MailClient)));
@@ -196,11 +192,11 @@ namespace SAE2._01_Loxam.Classe.Client
                         throw new ArgumentException($"Le numéro de téléphone : {value} n'est pas un numéro valide");
                     }
 
-                    this.numeroTelClient = value; // Pas besoin de ToTitleCase pour un numéro
+                    this.numeroTelClient = value;
                 }
                 else
                 {
-                    this.numeroTelClient = null; // ou string.Empty si tu préfères
+                    this.numeroTelClient = null;
                 }
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NumeroTelClient)));
             }
@@ -253,12 +249,6 @@ namespace SAE2._01_Loxam.Classe.Client
             int nb = 0;
             using (var cmdInsert = new NpgsqlCommand("insert into client (nomclient, prenomclient, adresseclient, mailclient, numerotelclient) values (@nomClient, @prenomClient, @adresseClient, @mailClient, @numeroTelClient) RETURNING numClient"))
             {
-                /*
-                cmdInsert.Parameters.AddWithValue("prenomclient", this.PrenomClient);
-                cmdInsert.Parameters.AddWithValue("adresseclient", this.AdresseClient);
-                cmdInsert.Parameters.AddWithValue("mailclient", this.MailClient);
-                cmdInsert.Parameters.AddWithValue("numerotelclient", this.NumeroTelClient);
-                nb = DataAccess.Instance.ExecuteInsert(cmdInsert);*/
                 cmdInsert.Parameters.AddWithValue("nomclient", (object?)this.NomClient ?? DBNull.Value);
                 cmdInsert.Parameters.AddWithValue("prenomclient", (object?)this.PrenomClient ?? DBNull.Value);
                 cmdInsert.Parameters.AddWithValue("adresseclient", (object?)this.AdresseClient ?? DBNull.Value);
@@ -289,10 +279,10 @@ namespace SAE2._01_Loxam.Classe.Client
                     lesClients.Add(new Client(
                         dr["numclient"] is DBNull ? 0 : (Int32)dr["numclient"],
                         dr["nomclient"] is DBNull ? "" : (String)dr["nomclient"],
-                        dr["prenomclient"] is DBNull ? "" : (String)dr["prenomclient"]/*,
+                        dr["prenomclient"] is DBNull ? "" : (String)dr["prenomclient"],
                         dr["adresseclient"] is DBNull ? "" : (String)dr["adresseclient"],
                         dr["mailclient"] is DBNull ? "" : (String)dr["mailclient"],
-                        dr["numerotelclient"] is DBNull ? "" : (String)dr["numerotelclient"]*/
+                        dr["numerotelclient"] is DBNull ? "" : (String)dr["numerotelclient"]
                     ));
             }
             return lesClients;
@@ -351,7 +341,7 @@ namespace SAE2._01_Loxam.Classe.Client
         public int FindNbDispose()
         {
             int nb = 0;
-            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select count(*) from dispose where numclient = @numClient; "))
+            using (NpgsqlCommand cmdSelect = new NpgsqlCommand("select count(*) from reservation where numclient = @numClient; "))
             {
                 cmdSelect.Parameters.AddWithValue("numclient", this.NumClient);
                 return (int)(Int64)DataAccess.Instance.ExecuteSelectUneValeur(cmdSelect);

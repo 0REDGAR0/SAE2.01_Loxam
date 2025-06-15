@@ -16,9 +16,7 @@ using SAE2._01_Loxam.Classe.Client;
 
 namespace SAE2._01_Loxam.FicheClients.Windows
 {
-    /// <summary>
-    /// Logique d'interaction pour WindowFicheClient.xaml
-    /// </summary>
+
     public partial class WindowFicheClient : Window
     {
         public enum Action { Modifier, Créer, Supprimer };
@@ -56,11 +54,6 @@ namespace SAE2._01_Loxam.FicheClients.Windows
                     ok = false;
             }
             DialogResult = true;
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

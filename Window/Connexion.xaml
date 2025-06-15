@@ -38,13 +38,13 @@
                     Background="White"
                     CornerRadius="4">
                     <StackPanel>
-                        <TextBlock Margin="0,0,0,5" Text="Identifiant ou adresse e-mail                   Login: beduneye" />
+                        <TextBlock Margin="0,0,0,5" Text="Identifiant ou adresse e-mail" />
                         <TextBox
                             x:Name="txtLogin"
                             Height="30"
                             FontSize="18" />
 
-                        <TextBlock Margin="0,10,0,5" Text="Mot de passe                                               MDP: WVTvXG" />
+                        <TextBlock Margin="0,10,0,5" Text="Mot de passe" />
                         <PasswordBox
                             x:Name="txtPassword"
                             Height="30"

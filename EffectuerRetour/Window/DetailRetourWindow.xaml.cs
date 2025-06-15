@@ -19,7 +19,7 @@ namespace SAE2._01_Loxam.EffectuerRetour.Window
                 if (success)
                 {
                     MessageBox.Show("Matériel envoyé en réparation.");
-                    this.DialogResult = true;   // ✅ permet au parent de savoir qu’il faut refresh
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else
@@ -38,7 +38,7 @@ namespace SAE2._01_Loxam.EffectuerRetour.Window
                 if (success)
                 {
                     MessageBox.Show("Matériel disponible.");
-                    this.DialogResult = true;   // ✅ pareil ici
+                    this.DialogResult = true;
                     this.Close();
                 }
                 else

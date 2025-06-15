@@ -10,12 +10,11 @@ namespace SAE2._01_Loxam
     {
         private static DataAccess instance;
         private readonly string connectionString;
-        private NpgsqlConnection connection;
+        /*private NpgsqlConnection connection;*/
 
         private DataAccess(string connectionString)
         {
             this.connectionString = connectionString;
-            this.connection = new NpgsqlConnection(connectionString);
         }
 
         public static void Initialize(string connectionString)
@@ -38,30 +37,23 @@ namespace SAE2._01_Loxam
 
         public NpgsqlConnection GetConnection()
         {
-            if (connection.State == ConnectionState.Closed || connection.State == ConnectionState.Broken)
-            {
-                try
-                {
-                    connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    LogError.Log(ex, "Erreur lors de l'ouverture de la connexion : \n" + connectionString);
-                    throw;
-                }
-            }
-            return connection;
+            return new NpgsqlConnection(connectionString);
         }
+
 
         public DataTable ExecuteSelect(NpgsqlCommand cmd)
         {
             DataTable dataTable = new DataTable();
             try
             {
-                cmd.Connection = GetConnection();
-                using (var adapter = new NpgsqlDataAdapter(cmd))
+                using (var connection = GetConnection())
                 {
-                    adapter.Fill(dataTable);
+                    connection.Open();
+                    cmd.Connection = connection;
+                    using (var adapter = new NpgsqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dataTable);
+                    }
                 }
             }
             catch (Exception ex)
@@ -77,8 +69,12 @@ namespace SAE2._01_Loxam
             int id = 0;
             try
             {
-                cmd.Connection = GetConnection();
-                id = (int)cmd.ExecuteScalar();
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    cmd.Connection = connection;
+                    id = (int)cmd.ExecuteScalar();
+                }
             }
             catch (Exception ex)
             {
@@ -93,8 +89,12 @@ namespace SAE2._01_Loxam
             int rows = 0;
             try
             {
-                cmd.Connection = GetConnection();
-                rows = cmd.ExecuteNonQuery();
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    cmd.Connection = connection;
+                    rows = cmd.ExecuteNonQuery();
+                }
             }
             catch (Exception ex)
             {
@@ -109,8 +109,12 @@ namespace SAE2._01_Loxam
             object res = null;
             try
             {
-                cmd.Connection = GetConnection();
-                res = cmd.ExecuteScalar();
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    cmd.Connection = connection;
+                    res = cmd.ExecuteScalar();
+                }
             }
             catch (Exception ex)
             {
@@ -119,6 +123,7 @@ namespace SAE2._01_Loxam
             }
             return res;
         }
+
 
         public void MettreAJourReservation(Reservation reservation)
         {
@@ -182,22 +187,23 @@ namespace SAE2._01_Loxam
 
         public int ExecuteNonQuery(NpgsqlCommand cmd)
         {
-            int affectedRows = 0;
-            using (NpgsqlConnection connection = new NpgsqlConnection(this.connectionString))
+            int rowsAffected = 0;
+            try
             {
-                connection.Open();
-                cmd.Connection = connection;
-                affectedRows = cmd.ExecuteNonQuery();
+                using (var connection = GetConnection())
+                {
+                    connection.Open();
+                    cmd.Connection = connection;
+                    rowsAffected = cmd.ExecuteNonQuery();
+                }
             }
-            return affectedRows;
+            catch (Exception ex)
+            {
+                LogError.Log(ex, "Erreur SQL (NonQuery) : " + cmd.CommandText);
+                throw;
+            }
+            return rowsAffected;
         }
 
-        public void CloseConnection()
-        {
-            if (connection.State == ConnectionState.Open)
-            {
-                connection.Close();
-            }
-        }
     }
 }

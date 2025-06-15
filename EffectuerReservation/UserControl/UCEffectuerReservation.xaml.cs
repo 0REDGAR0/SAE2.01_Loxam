@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
-    /// <summary>
-    /// Logique d'interaction pour UCEffectuerReservation.xaml
-    /// </summary>
     public partial class UCEffectuerReservation : UserControl
     {
         public UCEffectuerReservation()
@@ -107,10 +104,9 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             CréerReservationWindow creationWindow = new CréerReservationWindow();
 
-            // On recharge la liste uniquement à la fermeture de la fenêtre
             creationWindow.Closed += (s, args) =>
             {
-                ChargerReservations(); // ta méthode qui recharge les réservations
+                ChargerReservations();
                 CollectionViewSource.GetDefaultView(DataGridResa.ItemsSource).Refresh();
             };
 

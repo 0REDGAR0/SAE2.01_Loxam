@@ -59,19 +59,20 @@
                 SelectedValuePath="Key" />
 
             <TextBlock FontWeight="SemiBold" Text="Commentaire :" />
-            <TextBlock
+            <!-- <TextBlock
                 x:Name="txtCommentaireExistant"
                 Margin="0,0,0,10"
                 FontStyle="Italic"
                 Foreground="Gray"
                 Text="{Binding Commentaire}"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap" /> -->
 
             <TextBox
                 x:Name="txtCommentaire"
                 Height="60"
                 AcceptsReturn="True"
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap" 
+                Text="{Binding Commentaire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <!--  Boutons  -->
             <StackPanel

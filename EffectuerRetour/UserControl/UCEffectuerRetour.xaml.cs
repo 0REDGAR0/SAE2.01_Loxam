@@ -78,10 +78,8 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                 DetailRetourWindow detailWindow = new DetailRetourWindow();
                 detailWindow.DataContext = retour;
 
-                // Ici on abonne un handler à l'événement Closed de la fenêtre
                 detailWindow.Closed += (s, args) =>
                 {
-                    // On recharge la DataGrid dès que la fenêtre de détail est fermée
                     ChargerReservationsRetour();
                     CollectionViewSource.GetDefaultView(DataGridRetour.ItemsSource).Refresh();
                 };
@@ -89,9 +87,6 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                 detailWindow.ShowDialog();
             }
         }
-
-
-
 
         private void cmbCategorie_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

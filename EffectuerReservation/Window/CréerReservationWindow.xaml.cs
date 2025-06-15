@@ -27,7 +27,6 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             InitializeComponent();
             ChargerDonnees();
 
-            // On remplit directement les listes complètes à l'ouverture
             listClients.ItemsSource = tousLesClients;
             listMateriels.ItemsSource = tousLesMateriels;
 
@@ -119,7 +118,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             if (clientSelectionne != null && materielSelectionne != null
                 && dpDebut.SelectedDate.HasValue && dpRetour.SelectedDate.HasValue)
             {
-                int numEmploye = 1; // Par défaut
+                int numEmploye = 1;
                 DateTime dateReservation = DateTime.Now;
                 decimal prixTotal = decimal.Parse(txtPrixTotal.Text.Replace("€", "").Trim());
 

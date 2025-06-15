@@ -19,9 +19,6 @@ using SAE2._01_Loxam.Reparation;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
-    /// <summary>
-    /// Logique d'interaction pour UCFicheClients.xaml
-    /// </summary>
     public partial class UCFicheClients : UserControl
     {
         public Client LeClient { get; set; }
@@ -50,19 +47,19 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
 
         private void butCréerFicheClient_Click(object sender, RoutedEventArgs e)
         {
-            Client unClient = new Client();
-            WindowFicheClient wClient = new WindowFicheClient(unClient, WindowFicheClient.Action.Créer);
+            WindowFicheClient wClient = new WindowFicheClient(new Client(), WindowFicheClient.Action.Créer);
             bool? result = wClient.ShowDialog();
             if (result == true)
             {
                 try
                 {
+                    Client unClient = (Client)wClient.DataContext;
                     unClient.NumClient = unClient.Create();
-                    LeClient.LesClients.Add(unClient);
+                    ChargeData();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Le client n'a pas pu être créé.", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Le client n'a pas pu être créé.\n\nDétail : " + ex.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -97,7 +94,6 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                         MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                //CollectionViewSource.GetDefaultView(dgChiens.ItemsSource)?.Refresh();
             }
         }
 
@@ -113,19 +109,12 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                 Client clientSellectionner = (Client)dgClients.SelectedItem;
                 Client clientASupprimer = new Client(clientSellectionner.NumClient, clientSellectionner.NomClient,
                 clientSellectionner.PrenomClient, clientSellectionner.AdresseClient, clientSellectionner.MailClient, clientSellectionner.NumeroTelClient);
-                /*if (clientASupprimer.FindNbDispose() > 0)
-                {
-                    MessageBox.Show($"Attention, ce client est lié à {clientASupprimer.FindNbDispose()} certification. Désirez-vous tout de même supprimer ce client et ces {clientASupprimer.FindNbDispose()} certifications", "Attention",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                }
-                //WindowFicheClient wClient = new WindowFicheClient(clientASupprimer, WindowFicheClient.Action.Supprimer);
-                //bool? result = wClient.ShowDialog();*/
                 int nbCertif = clientASupprimer.FindNbDispose();
 
                 // Message de confirmation
                 MessageBoxResult result = MessageBox.Show(
                     nbCertif > 0
-                        ? $"Ce client est lié à {nbCertif} certification(s).\nVoulez-vous tout de même le supprimer ?"
+                        ? $"Ce client est lié à {nbCertif} reservation(s).\nVoulez-vous tout de même le supprimer ?"
                         : "Êtes-vous sûr de vouloir supprimer ce client ?",
                     "Confirmation de suppression",
                     MessageBoxButton.YesNo,
@@ -173,10 +162,8 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
         {
             if (dgClients.SelectedItem is Client selectedClient)
             {
-                // On charge les réservations
                 selectedClient.LoadReservations();
 
-                // On ouvre la nouvelle fenêtre
                 WindowDetailClient detailWindow = new WindowDetailClient(selectedClient);
                 detailWindow.ShowDialog();
             }

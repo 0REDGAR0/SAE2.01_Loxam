@@ -51,6 +51,9 @@ create table CLIENT (
    NUMCLIENT            SERIAL               not null,
    NOMCLIENT            VARCHAR(30)          null,
    PRENOMCLIENT         VARCHAR(30)          null,
+   ADDRESSECLIENT       VARCHAR(120)         null,
+   MAILCLIENT           VARCHAR(120)         null,
+   NUMEROTELCLIENT      VARCHAR(12)          null,
    constraint PK_CLIENT primary key (NUMCLIENT)
 );
 

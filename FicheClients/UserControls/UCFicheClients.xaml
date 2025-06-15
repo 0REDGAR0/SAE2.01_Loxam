@@ -86,9 +86,9 @@
                         <DataGridTextColumn Width="*" Binding="{Binding NumClient}" Header="Numéro" />
                         <DataGridTextColumn Width="*" Binding="{Binding NomClient}" Header="Nom" />
                         <DataGridTextColumn Width="*" Binding="{Binding PrenomClient}" Header="Prénom" />
-                        <DataGridTextColumn Width="*" Binding="{Binding AdresseClient}" Header="Adresse" />
+                        <!-- <DataGridTextColumn Width="*" Binding="{Binding AdresseClient}" Header="Adresse" />
                         <DataGridTextColumn Width="*" Binding="{Binding MailClient}" Header="Mail" />
-                        <DataGridTextColumn Width="*" Binding="{Binding NumeroTelClient}" Header="Téléphone" />
+                        <DataGridTextColumn Width="*" Binding="{Binding NumeroTelClient}" Header="Téléphone" /> -->
                         <DataGridTextColumn Width="*" Binding="{Binding NbMaterielEnReservation}" Header="Réservations en cours" />
                     </DataGrid.Columns>
 

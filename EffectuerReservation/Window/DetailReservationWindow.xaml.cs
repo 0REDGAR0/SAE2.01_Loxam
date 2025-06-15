@@ -40,7 +40,7 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
             }
 
             MessageBox.Show("Retour effectué avec succès.");
-            this.DialogResult = true; // ✅ On déclenche le rafraîchissement à la fermeture
+            this.DialogResult = true;
             this.Close();
         }
     }
