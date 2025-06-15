@@ -59,13 +59,6 @@
                 SelectedValuePath="Key" />
 
             <TextBlock FontWeight="SemiBold" Text="Commentaire :" />
-            <!-- <TextBlock
-                x:Name="txtCommentaireExistant"
-                Margin="0,0,0,10"
-                FontStyle="Italic"
-                Foreground="Gray"
-                Text="{Binding Commentaire}"
-                TextWrapping="Wrap" /> -->
 
             <TextBox
                 x:Name="txtCommentaire"

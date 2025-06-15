@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace SAE2._01_Loxam.Reparation.WindowRepa
 {
-    /// <summary>
-    /// Logique d'interaction pour DetailReparationWindow.xaml
-    /// </summary>
     public partial class DetailReparationWindow : Window
     {
         private ReparationAffichage materiel;
@@ -35,24 +32,16 @@ namespace SAE2._01_Loxam.Reparation.WindowRepa
                     new KeyValuePair<int, string>(1, "Disponible")
                 };
 
-            cbEtat.SelectedValue = materiel.NumEtat; // ou reservation.NumEtat selon ton objet
-
-
+            cbEtat.SelectedValue = materiel.NumEtat; 
         }
-
-        /*private void Fermer_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }*/
 
         private void butEnregistrer_Click(object sender, RoutedEventArgs e)
         {
             if (materiel == null)
                 return;
 
-            int nouvelEtat = materiel.NumEtat; // Valeur par défaut
+            int nouvelEtat = materiel.NumEtat;
 
-            // Vérifie que quelque chose est sélectionné dans le ComboBox
             if (cbEtat.SelectedValue != null && int.TryParse(cbEtat.SelectedValue.ToString(), out int etatCombo))
             {
                 nouvelEtat = etatCombo;
@@ -65,17 +54,15 @@ namespace SAE2._01_Loxam.Reparation.WindowRepa
 
             if (!etatModifie && !commentaireModifie)
             {
-                this.Close(); // Rien à changer
+                this.Close();
                 return;
             }
 
             try
             {
-                // Met à jour l’objet local
                 materiel.NumEtat = nouvelEtat;
                 materiel.Commentaire = nouveauCommentaire;
 
-                // Mise à jour en base de données
                 new ReparationDAO().MettreAJourEtatEtCommentaireMateriel(
                     materiel.NumMateriel,
                     nouvelEtat,

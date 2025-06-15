@@ -111,7 +111,6 @@ namespace SAE2._01_Loxam.FicheClients.UserControls
                 clientSellectionner.PrenomClient, clientSellectionner.AdresseClient, clientSellectionner.MailClient, clientSellectionner.NumeroTelClient);
                 int nbCertif = clientASupprimer.FindNbDispose();
 
-                // Message de confirmation
                 MessageBoxResult result = MessageBox.Show(
                     nbCertif > 0
                         ? $"Ce client est lié à {nbCertif} reservation(s).\nVoulez-vous tout de même le supprimer ?"

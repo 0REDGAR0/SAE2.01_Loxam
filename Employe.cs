@@ -114,7 +114,6 @@ namespace SAE2._01_Loxam
         {
             var cmd = new NpgsqlCommand("SELECT * FROM Employe WHERE login = @login AND mdp = @mdp AND numrole = 1");
             
-            //Ces deux lignes servent à attribuer les réponses de l'utilisateur aux attributs de la table dans la bdd
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@mdp", mdp);
 
@@ -122,7 +121,7 @@ namespace SAE2._01_Loxam
 
             if (table.Rows.Count == 0)
             {
-                return null; // Aucun résultat → mauvais identifiants OU pas un employé (peut-être un responsable atelier)
+                return null; 
             }
 
             DataRow row = table.Rows[0];

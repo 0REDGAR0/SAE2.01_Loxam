@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace SAE2._01_Loxam.FicheClients.UserControls
 {
-    /// <summary>
-    /// Logique d'interaction pour UCReservationMateriel.xaml
-    /// </summary>
     public partial class UCReservationMateriel : UserControl
     {
         public UCReservationMateriel()

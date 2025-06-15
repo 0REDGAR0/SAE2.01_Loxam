@@ -17,9 +17,6 @@ using SAE2._01_Loxam.Classe.Reservation;
 
 namespace SAE2._01_Loxam
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public DataGridLists GestionResa { get; set; }
@@ -55,12 +52,6 @@ namespace SAE2._01_Loxam
             }
         }
 
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            /*Connexion connexion = new Connexion();
-            connexion.Show();*/
-        }
         private void butFicheClient_Click(object sender, RoutedEventArgs e)
         {
             SPcentral.Children.Clear();
@@ -107,7 +98,6 @@ namespace SAE2._01_Loxam
 
         private void UpdateButtonStates()
         {
-            // Aucun contrôle chargé, tout redevient "petit"
             if (SPcentral.Children.Count == 0)
             {
                 SetButtonState(butRetour, false);
@@ -129,7 +119,6 @@ namespace SAE2._01_Loxam
             }
             else
             {
-                // Cas où un autre UserControl est chargé => tout petit
                 SetButtonState(butRetour, false);
                 SetButtonState(butReservation, false);
             }

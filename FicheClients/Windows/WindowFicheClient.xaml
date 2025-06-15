@@ -75,8 +75,6 @@
                     Text="{Binding MailClient, ValidatesOnExceptions=true}" />
             </StackPanel>
 
-            <!--  Réservations  -->
-
         </Grid>
 
         <!--  Bouton final en dessous  -->

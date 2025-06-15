@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 using System.Collections.Generic;
 using System.Data;
-using SAE2._01_Loxam.Utils;  // important pour utiliser SafeConvert
+using SAE2._01_Loxam.Utils;
 
 namespace SAE2._01_Loxam.Classe.Reservation
 {

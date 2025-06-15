@@ -13,20 +13,20 @@ namespace SAE2._01_Loxam.Classe.Client
             List<Client> liste = new List<Client>();
 
             using (NpgsqlCommand cmdSelect = new NpgsqlCommand(@"
-        SELECT 
-            c.numclient, 
-            c.nomclient, 
-            c.prenomclient, 
-            c.adresseclient, 
-            c.mailclient, 
-            c.numerotelclient,
-            (
-                SELECT COUNT(*)
-                FROM reservation r
-                JOIN materiel m ON r.nummateriel = m.nummateriel
-                WHERE r.numclient = c.numclient AND m.numetat IN (2, 3)
-            ) AS nbMaterielEnReservation
-        FROM client c"))
+            SELECT 
+                c.numclient, 
+                c.nomclient, 
+                c.prenomclient, 
+                c.adresseclient, 
+                c.mailclient, 
+                c.numerotelclient,
+                (
+                    SELECT COUNT(*)
+                    FROM reservation r
+                    JOIN materiel m ON r.nummateriel = m.nummateriel
+                    WHERE r.numclient = c.numclient AND m.numetat IN (2, 3)
+                ) AS nbMaterielEnReservation
+            FROM client c"))
             {
                 DataTable dt = DataAccess.Instance.ExecuteSelect(cmdSelect);
                 foreach (DataRow dr in dt.Rows)

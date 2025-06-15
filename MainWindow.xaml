@@ -10,7 +10,6 @@
     Title="MainWindow"
     Width="1280"
     Height="830"
-    Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>

@@ -43,7 +43,6 @@ namespace SAE2._01_Loxam
                 {
                     conn.Open();
 
-                    // Initialise le DataAccess une fois connecté
                     DataAccess.Initialize(connectionString);
 
                     MessageBox.Show("Connexion réussie !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -87,10 +86,7 @@ namespace SAE2._01_Loxam
                 {
                     conn.Open();
 
-                    // Initialise le DataAccess une fois connecté
                     DataAccess.Initialize(connectionString);
-
-                    // MessageBox.Show("Connexion réussie !", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     MainWindow mainWindow = new MainWindow("flemme");
                     mainWindow.Show();

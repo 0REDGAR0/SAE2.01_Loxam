@@ -16,9 +16,6 @@ using SAE2._01_Loxam.Classe.Client;
 
 namespace SAE2._01_Loxam.FicheClients.Windows
 {
-    /// <summary>
-    /// Logique d'interaction pour WindowModificationClient.xaml
-    /// </summary>
     public partial class WindowModificationClient : Window
     {
         public enum Action { Modifier, Créer, Supprimer };
