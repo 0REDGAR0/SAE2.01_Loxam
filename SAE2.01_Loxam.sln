@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAE2.01_Loxam", "SAE2.01_Loxam.csproj", "{CA1F7D18-FCA9-4A70-A1AF-73BD9890E22D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsLoxam", "..\TestsLoxam\TestsLoxam.csproj", "{46332AEC-6038-4A40-8282-496BE4FE2E8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CA1F7D18-FCA9-4A70-A1AF-73BD9890E22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA1F7D18-FCA9-4A70-A1AF-73BD9890E22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA1F7D18-FCA9-4A70-A1AF-73BD9890E22D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46332AEC-6038-4A40-8282-496BE4FE2E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46332AEC-6038-4A40-8282-496BE4FE2E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46332AEC-6038-4A40-8282-496BE4FE2E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46332AEC-6038-4A40-8282-496BE4FE2E8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
