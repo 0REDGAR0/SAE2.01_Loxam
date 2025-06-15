@@ -11,12 +11,15 @@
     <Grid>
         <Label
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Background="#00000000"
-            Content="Bienvenue sur l'application de LOXAM"
+            Content="Bienvenue sur LOXAM"
             FontSize="48"
             FontWeight="Bold"
-            Foreground="Red" />
-
+            Foreground="Red" Margin="0,23,0,0" />
+        <Image Source="pack://application:,,,/Images/accueil_loxam.png" Width="356" HorizontalAlignment="Right" Margin="0,174,73,159"/>
+        <Image x:Name="img_logo" Source="pack://application:,,,/Images/logo_loxam.png" Width="58" HorizontalAlignment="Left" Margin="142,35,0,601"/>
+        <TextBlock HorizontalAlignment="Left" Margin="49,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="274" Width="512" FontSize="20" FontFamily="Arial Rounded MT Bold"><Run Text="Bienvenue sur LOXAM, votre partenaire de confiance pour la location de matériel professionnel."/><LineBreak/><Run/><LineBreak/><Run Text="Depuis plus de 50 ans, LOXAM accompagne les entreprises et les particuliers dans tous leurs projets grâce à un large choix d’équipements fiables, performants et disponibles partout en France."/><LineBreak/><Run/><LineBreak/><Run Text="Notre mission : vous offrir un service rapide, sécurisé et adapté à vos besoins, pour que vous puissiez travailler en toute sérénité.LOXAM, la puissance du matériel au service de vos chantiers."/></TextBlock>
+        <Label Content="Location matériel, professionnel, location BTP" HorizontalAlignment="Center" Margin="0,102,0,0" VerticalAlignment="Top" FontSize="18" FontFamily="Arial Rounded MT Bold"/>
     </Grid>
 </UserControl>

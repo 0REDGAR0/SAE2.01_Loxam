@@ -41,6 +41,35 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="TopBarButtonStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="10,5"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#d10000"/>
+                                <!-- Rouge plus foncé -->
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#d10000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <!--  Bandeau rouge en haut  -->
@@ -50,7 +79,7 @@
             Background="Red">
             <Button
                 x:Name="butLoxam"
-                Width="141"
+                Width="153"
                 Margin="10,20,0,20"
                 HorizontalAlignment="Left"
                 Background="Red"
@@ -59,7 +88,8 @@
                 Content="LOXAM"
                 FontSize="36"
                 FontWeight="Bold"
-                Foreground="White" />
+                Foreground="White"
+                Style="{StaticResource TopBarButtonStyle}"/>
 
             <StackPanel
                 x:Name="SPRetourResa"
@@ -75,7 +105,9 @@
                     Click="butRetour_Click"
                     Content="RETOUR"
                     FontSize="22"
-                    Foreground="White" />
+                    Foreground="White"
+                    Style="{StaticResource TopBarButtonStyle}"
+                    ToolTip="Gérer les retours de matériel"/>
                 <Button
                     x:Name="butReservation"
                     Margin="40,0"
@@ -85,7 +117,10 @@
                     Click="butReservation_Click"
                     Content="RESERVATION"
                     FontSize="22"
-                    Foreground="White" />
+                    Foreground="White"
+                    Style="{StaticResource TopBarButtonStyle}"
+                    ToolTip="Accéder aux réservations"
+                    />
             </StackPanel>
 
             <StackPanel
@@ -123,7 +158,8 @@
                 Click="butRechercheMat_Click"
                 Content="🔍 Recherche matériel"
                 FontSize="16"
-                Style="{StaticResource ModernButtonStyle}" />
+                Style="{StaticResource ModernButtonStyle}"
+                ToolTip="Rechercher un matériel dans le stock"/>
             <Button
                 x:Name="butFicheClient"
                 Height="50"
@@ -131,7 +167,8 @@
                 Click="butFicheClient_Click"
                 Content="👤 Fiche client"
                 FontSize="16"
-                Style="{StaticResource ModernButtonStyle}" />
+                Style="{StaticResource ModernButtonStyle}"
+                ToolTip="Consulter les informations d’un client"/>
             <Button
                 x:Name="butReparation"
                 Height="50"
@@ -139,7 +176,8 @@
                 Click="butReparation_Click"
                 Content="🔧 Réparation"
                 FontSize="16"
-                Style="{StaticResource ModernButtonStyle}" />
+                Style="{StaticResource ModernButtonStyle}"
+                ToolTip="Gérer les réparations de matériel"/>
         </StackPanel>
 
         <!--  Zone centrale  -->
